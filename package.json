@@ -12,7 +12,7 @@
       "import": "./dist/v12-ui.js",
       "require": "./dist/v12-ui.umd.cjs"
     },
-    "./style.css": "./dist/v12-ui.css"
+    "./v12-ui.css": "./dist/v12-ui.css"
   },
   "scripts": {
     "dev": "vite",
