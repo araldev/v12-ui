@@ -1,7 +1,12 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import type { Ref, ComponentPropsWithRef, ReactElement } from 'react'
 
+type HexColor = `#${string}`
+
 type PropsAnimatedBackground = {
+  bubbleGradiant1?: [HexColor, HexColor]
+  bubbleGradiant2?: [HexColor, HexColor]
+  bubbleGradiant3?: [HexColor, HexColor]
   zIndex?: number
 } & ComponentPropsWithRef<'div'>
 
@@ -11,6 +16,9 @@ interface PropsCanvasSize {
 }
 
 export const AnimatedBackground = forwardRef<HTMLDivElement, PropsAnimatedBackground>(({
+  bubbleGradiant1 = ['#004e92', '#000428'],
+  bubbleGradiant2 = ['#00C9FF', '#92FE9D'],
+  bubbleGradiant3 = ['#e0f7f4', '#a3e9ff'],
   zIndex = -999,
   className = '',
   ...props
@@ -35,9 +43,9 @@ ref: Ref<HTMLDivElement>): ReactElement => {
     height = (canvas.height = window.innerHeight)
 
     const colors = [
-      ['#004e92', '#000428'],
-      ['#00C9FF', '#92FE9D'],
-      ['#e0f7f4', '#a3e9ff']
+      bubbleGradiant1,
+      bubbleGradiant2,
+      bubbleGradiant3
     ]
 
     const shadow = {
