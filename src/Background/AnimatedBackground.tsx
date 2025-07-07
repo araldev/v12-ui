@@ -190,7 +190,7 @@ ref: Ref<HTMLDivElement>): ReactElement => {
   }, [canvasSize])
 
   return (
-    <div className={`fixed top-0 left-0 pointer-events-none z-[${zIndex}] w-full h-screen ${className}`} {...props} ref={ref}>
+    <div style={{ zIndex }} className={`fixed top-0 left-0 pointer-events-none w-full h-screen ${className}`} {...props} ref={ref}>
       <canvas
         className='w-full h-full'
         ref={canvasRef}
