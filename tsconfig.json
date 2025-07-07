@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "types": ["node"],
-    "composite": true,
     "target": "es2022",
     "useDefineForClassFields": true,
     "module": "ESNext",
