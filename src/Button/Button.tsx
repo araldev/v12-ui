@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 import type { Ref, ComponentPropsWithRef, ElementType, ReactElement, ReactNode } from 'react'
+import type { WithoutAs } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -39,16 +40,18 @@ const button = cva('', {
 
 type AllowedTags = 'button' | 'a'
 
-type PolymorphicProps<T extends ElementType> = {
+type PolymorphicProps<T extends ElementType = 'button'> = {
   as?: T
   children?: ReactNode
-} & ComponentPropsWithRef<T> & VariantProps<typeof button>
+  className?: string
+} & WithoutAs<ComponentPropsWithRef<T>> & VariantProps<typeof button>
 
 function ButtonInner<T extends ElementType = 'button'> (
   { as, children, variant, colVariant, size, className, ...props }: PolymorphicProps<T>,
   ref: Ref<T>
 ): ReactElement {
   const Component = as || 'button'
+
   return (
     <Component
       ref={ref}
@@ -60,6 +63,6 @@ function ButtonInner<T extends ElementType = 'button'> (
   )
 }
 
-export const Button = forwardRef(ButtonInner) as <T extends AllowedTags = 'button'>(
+export const Button = forwardRef(ButtonInner) as <T extends AllowedTags = 'button'> (
   props: PolymorphicProps<T> & { ref?: Ref<T> }
 ) => ReactElement<T>
