@@ -1,4 +1,5 @@
-import { forwardRef, type ComponentPropsWithRef, type ElementType, type ReactElement, type ReactNode } from 'react'
+import { forwardRef } from 'react'
+import type { Ref, ComponentPropsWithRef, ElementType, ReactElement, ReactNode } from 'react'
 
 type AllowedTextTags =
   'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -16,9 +17,9 @@ export const Text = forwardRef(<Tag extends AllowedTextTags = 'p'>({
   as,
   children,
   className = '',
-  ref,
   ...props
-}: PropsText<Tag>): ReactElement => {
+}: PropsText<Tag>,
+  ref: Ref<AllowedTextTags>): ReactElement => {
   const Component = (as || 'p') as ElementType
 
   return (

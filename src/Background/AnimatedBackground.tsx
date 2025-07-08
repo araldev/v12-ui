@@ -1,38 +1,70 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import type { Ref, ComponentPropsWithRef, ReactElement } from 'react'
+import { cn } from '../utils/utils'
+import { cva, type VariantProps } from 'class-variance-authority'
+
+const div = cva("overflow-hidden fixed top-0 left-0 pointer-events-none w-full h-screen before:content-[''] before:absolute before:inset-0 before:w-full before:h-full before:bg-black/30", {
+  variants: {
+    theme: {
+      dark: 'bg-[#111117]',
+      light: 'bg-[#ddd]',
+      transparent: 'bg-transparent'
+    }
+  },
+  defaultVariants: {
+    theme: 'dark'
+  }
+})
+
+const canvas = cva('absolute inset-0 w-full h-full', {
+  variants: {
+    theme: {
+      dark: 'bg-[radial-gradient(circle,_#111117_0%,_rgba(17,17,23,0)_100%)]',
+      light: 'bg-[radial-gradient(circle,_#ddd_0%,_rgba(17,17,23,0)_100%)]',
+      transparent: 'bg-transparent'
+    }
+  },
+  defaultVariants: {
+    theme: 'dark'
+  }
+})
 
 type HexColor = `#${string}`
 
-type PropsAnimatedBackground = {
+interface PropsAnimatedBackground extends
+  ComponentPropsWithRef<'div'>,
+  VariantProps<typeof div>,
+  VariantProps<typeof canvas> {
   bubbleGradiant1?: [HexColor, HexColor]
   bubbleGradiant2?: [HexColor, HexColor]
   bubbleGradiant3?: [HexColor, HexColor]
   zIndex?: number
-} & ComponentPropsWithRef<'div'>
+}
 
 interface PropsCanvasSize {
-  width: number | null
-  height: number | null
+  width: number
+  height: number
 }
 
 export const AnimatedBackground = forwardRef<HTMLDivElement, PropsAnimatedBackground>(({
+  theme,
   bubbleGradiant1 = ['#004e92', '#000428'],
   bubbleGradiant2 = ['#00C9FF', '#92FE9D'],
   bubbleGradiant3 = ['#e0f7f4', '#a3e9ff'],
-  zIndex = -999,
+  zIndex = -9999,
   className = '',
   ...props
 }: PropsAnimatedBackground,
 ref: Ref<HTMLDivElement>): ReactElement => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const [canvasSize, setCanvasSize] = useState<PropsCanvasSize>({
-    width: null,
-    height: null
+    width: window.innerWidth,
+    height: window.innerHeight
   })
   const idTimeoutRef = useRef< ReturnType<typeof setTimeout> | null>(null)
+  const idAnimationFrameRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(null)
 
   useEffect(() => {
-    let idTimeout = idTimeoutRef.current
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
     if (!canvas || !ctx) return
@@ -69,8 +101,7 @@ ref: Ref<HTMLDivElement>): ReactElement => {
         scale: 0,
         speed: height / (duration * 60), // speed per frame
         duration,
-        colorIndex: Math.floor(Math.random() * colors.length),
-        shadowIndex: Math.floor(Math.random() * shadow.colors.length)
+        colorIndex: Math.floor(Math.random() * colors.length)
       }
     })
 
@@ -139,6 +170,9 @@ ref: Ref<HTMLDivElement>): ReactElement => {
 
         ctx.beginPath()
         ctx.arc(p.x, p.y, Math.abs(p.r * p.scale), 0, Math.PI * 2)
+
+        const gradientColors = colors[p.colorIndex]
+        if (!gradientColors) return
         ctx.fillStyle = createRadialGradient(
           ctx,
           p.x,
@@ -147,8 +181,8 @@ ref: Ref<HTMLDivElement>): ReactElement => {
           p.x,
           p.y,
           p.r,
-          colors[p.colorIndex][0],
-          colors[p.colorIndex][1]
+          gradientColors[0],
+          gradientColors[1]
         )
         ctx.fill()
         ctx.closePath()
@@ -162,15 +196,15 @@ ref: Ref<HTMLDivElement>): ReactElement => {
           p.colorIndex)
       })
 
-      requestAnimationFrame(draw)
+      idAnimationFrameRef.current = requestAnimationFrame(draw)
     }
 
     draw()
 
     const handleResize = (): void => {
-      if (idTimeout) clearTimeout(idTimeout)
+      if (idTimeoutRef.current) clearTimeout(idTimeoutRef.current)
 
-      idTimeout = setTimeout(() => {
+      idTimeoutRef.current = setTimeout(() => {
         setCanvasSize(prevState => {
           const newWidth = canvas.width = window.innerWidth
           const newHeight = canvas.height = window.innerHeight
@@ -186,16 +220,24 @@ ref: Ref<HTMLDivElement>): ReactElement => {
     }
 
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [canvasSize])
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      if (idAnimationFrameRef.current) cancelAnimationFrame(idAnimationFrameRef.current)
+      if (idTimeoutRef.current) clearTimeout(idTimeoutRef.current)
+    }
+  }, [canvasSize, bubbleGradiant1, bubbleGradiant2, bubbleGradiant3])
 
   return (
-    <div style={{ zIndex }} className={`fixed top-0 left-0 pointer-events-none w-full h-screen ${className}`} {...props} ref={ref}>
+    <div
+      ref={ref}
+      style={{ zIndex }}
+      className={cn(div({ theme }), className)}
+      {...props}
+    >
       <canvas
-        className='w-full h-full'
         ref={canvasRef}
+        className={cn(canvas({ theme }))}
       />
     </div>
   )
-}
-)
+})
