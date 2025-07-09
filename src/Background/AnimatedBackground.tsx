@@ -2,6 +2,9 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import type { Ref, ComponentPropsWithRef, ReactElement } from 'react'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { useDataTheme } from '../Hooks/useDataTheme'
+
+type ThemeProps = {} & VariantProps<typeof div>['theme']
 
 const div = cva("overflow-hidden fixed top-0 left-0 pointer-events-none w-full h-screen before:content-[''] before:absolute before:inset-0 before:w-full before:h-full before:bg-black/30", {
   variants: {
@@ -35,6 +38,7 @@ interface PropsAnimatedBackground extends
   ComponentPropsWithRef<'div'>,
   VariantProps<typeof div>,
   VariantProps<typeof canvas> {
+  theme?: ThemeProps
   bubbleGradiant1?: [HexColor, HexColor]
   bubbleGradiant2?: [HexColor, HexColor]
   bubbleGradiant3?: [HexColor, HexColor]
@@ -47,7 +51,7 @@ interface PropsCanvasSize {
 }
 
 export const AnimatedBackground = forwardRef<HTMLDivElement, PropsAnimatedBackground>(({
-  theme,
+  theme: themeParam,
   bubbleGradiant1 = ['#004e92', '#000428'],
   bubbleGradiant2 = ['#00C9FF', '#92FE9D'],
   bubbleGradiant3 = ['#e0f7f4', '#a3e9ff'],
@@ -56,11 +60,14 @@ export const AnimatedBackground = forwardRef<HTMLDivElement, PropsAnimatedBackgr
   ...props
 }: PropsAnimatedBackground,
 ref: Ref<HTMLDivElement>): ReactElement => {
+  const { theme } = useDataTheme(themeParam)
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const [canvasSize, setCanvasSize] = useState<PropsCanvasSize>({
     width: window.innerWidth,
     height: window.innerHeight
   })
+
   const idTimeoutRef = useRef< ReturnType<typeof setTimeout> | null>(null)
   const idAnimationFrameRef = useRef<ReturnType<typeof requestAnimationFrame> | null>(null)
 
