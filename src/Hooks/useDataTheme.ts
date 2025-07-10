@@ -12,7 +12,6 @@ export function useDataTheme (themeParam?: ValidThemes): { theme: ValidThemes } 
     const rootTheme = document.documentElement.getAttribute('data-theme') as ValidThemes | null
 
     if (rootTheme && validThemes.includes(rootTheme)) return rootTheme
-    else if (!rootTheme || !validThemes.includes(rootTheme)) return 'dark'
 
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })
@@ -43,7 +42,6 @@ export function useDataTheme (themeParam?: ValidThemes): { theme: ValidThemes } 
         const rootTheme = document.documentElement.getAttribute('data-theme') as ValidThemes | null
 
         if (rootTheme && validThemes.includes(rootTheme)) setTheme(rootTheme)
-        else if (!rootTheme || !validThemes.includes(rootTheme)) return theme
       }
     })
 
