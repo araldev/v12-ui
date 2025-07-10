@@ -2,6 +2,8 @@
 
 @layer base {
   :root {
+    color-scheme: light dark;
+
     --brand-primary-50: hsl(227 100% 96%);
     --brand-primary-100: hsl(227 96% 91%);
     --brand-primary-200: hsl(227 94% 82%);
@@ -25,134 +27,243 @@
     --brand-secondary-900: hsl(210 18% 12%);
 
     --background: hsl(0 0% 100%);
-    --foreground: hsl(210 18% 12%);
+    --foreground: hsl(222 84% 4%);
+
     --card: hsl(0 0% 100%);
-    --card-foreground: hsl(210 18% 12%);
+    --card-hover: hsl(210 40% 98%);
+    --card-foreground: hsl(222 84% 4%);
+    --card-hover-foreground: hsl(222 84% 4%);
+    --card-border: hsl(214 32% 91%);
+    --card-hover-border: hsl(214 32% 86%);
+
     --popover: hsl(0 0% 100%);
-    --popover-foreground: hsl(210 18% 12%);
-    --primary: hsl(227 100% 50%);
-    --primary-foreground: hsl(0 0% 100%);
-    --secondary: hsl(210 20% 95%);
-    --secondary-foreground: hsl(210 18% 12%);
-    --muted: hsl(210 20% 95%);
-    --muted-foreground: hsl(210 12% 42%);
-    --accent: hsl(210 16% 88%);
-    --accent-foreground: hsl(210 18% 12%);
-    --destructive: hsl(0 72% 51%);
-    --destructive-foreground: hsl(0 0% 100%);
-    --border: hsl(210 16% 88%);
-    --input: hsl(210 16% 88%);
-    --ring: hsl(227 100% 50%);
+    --popover-hover: hsl(210 40% 98%);
+    --popover-foreground: hsl(222 84% 4%);
+    --popover-hover-foreground: hsl(222 84% 4%);
+    --popover-border: hsl(214 32% 91%);
+    --popover-hover-border: hsl(214 32% 86%);
 
-    --success: hsl(142 69% 58%);
+    --primary: hsl(221 83% 53%);
+    --primary-hover: hsl(221 83% 48%);
+    --primary-foreground: hsl(210 40% 98%);
+    --primary-hover-foreground: hsl(210 40% 98%);
+    --primary-border: hsl(221 83% 53%);
+    --primary-hover-border: hsl(221 83% 48%);
+
+    --secondary: hsl(210 40% 96%);
+    --secondary-hover: hsl(210 40% 92%);
+    --secondary-foreground: hsl(222 84% 4%);
+    --secondary-hover-foreground: hsl(222 84% 4%);
+    --secondary-border: hsl(214 32% 91%);
+    --secondary-hover-border: hsl(214 32% 86%);
+
+    --muted: hsl(210 40% 96%);
+    --muted-foreground: hsl(215 16% 47%);
+
+    --accent: hsl(210 40% 96%);
+    --accent-hover: hsl(210 40% 92%);
+    --accent-foreground: hsl(222 84% 4%);
+    --accent-hover-foreground: hsl(222 84% 4%);
+
+    --destructive: hsl(0 84% 60%);
+    --destructive-hover: hsl(0 84% 55%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --destructive-hover-foreground: hsl(210 40% 98%);
+
+    --input: hsl(0 0% 100%);
+    --input-hover: hsl(210 40% 98%);
+    --input-foreground: hsl(222 84% 4%);
+    --input-hover-foreground: hsl(222 84% 4%);
+    --input-border: hsl(214 32% 91%);
+    --input-hover-border: hsl(214 32% 86%);
+
+    --ring: hsl(221 83% 53%);
+
+    --success: hsl(142 76% 36%);
+    --success-hover: hsl(142 76% 31%);
+    --success-foreground: hsl(210 40% 98%);
+    --success-hover-foreground: hsl(210 40% 98%);
+    --success-border: hsl(142, 86%, 20%);
+    --success-hover-border: hsl(143, 89%, 14%);
+    --success-shadow: hsl(142 76% 36% / 0.2);
+
     --warning: hsl(38 92% 50%);
-    --error: hsl(0 72% 51%);
-    --info: hsl(199 89% 48%);
-    --hover: hsl(227 84% 55%);
-    --disabled: hsl(210 12% 65%);
-    --focus: hsl(227 100% 50%);
-    --active: hsl(232 75% 43%);
-    --radius: 0.5rem;
+    --warning-hover: hsl(38 92% 45%);
+    --warning-foreground: hsl(0 0% 100%);
+    --warning-hover-foreground: hsl(0 0% 100%);
+    --warning-border: hsl(38, 93%, 27%);
+    --warning-hover-border: hsl(38, 93%, 17%);
+    --warning-shadow: hsl(38 92% 50% / 0.2);
 
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4), 0 1px 2px -1px rgb(0 0 0 / 0.4);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
-    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-    --shadow-3xl: 0 35px 60px -12px rgb(0 0 0 / 0.5);
+    --error: hsl(0 84% 60%);
+    --error-hover: hsl(0 84% 55%);
+    --error-foreground: hsl(210 40% 98%);
+    --error-hover-foreground: hsl(210 40% 98%);
+    --error-border: hsl(0, 57%, 32%);
+    --error-hover-border: hsl(0, 58%, 23%);
+    --error-shadow: hsla(0, 80%, 63%, 0.2);
+
+    --info: hsl(199 89% 48%);
+    --info-hover: hsl(199 89% 43%);
+    --info-foreground: hsl(210 40% 98%);
+    --info-hover-foreground: hsl(210 40% 98%);
+    --info-border: hsl(199, 82%, 29%);
+    --info-hover-border: hsl(199, 79%, 19%);
+    --info-shadow: hsl(199 89% 48% / 0.2);
+
+    --disabled: hsl(215 20% 65%);
+    --focus: hsl(221 83% 53%);
+    --active: hsl(221 83% 58%);
+
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.15);
+    --shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.15);
+    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.05);
   }
 
   [data-theme="dark"] {
-    --background: hsl(210 18% 8%);
-    --foreground: hsl(210 20% 95%);
-    --card: hsl(210 16% 10%);
-    --card-foreground: hsl(210 20% 95%);
-    --popover: hsl(210 16% 10%);
-    --popover-foreground: hsl(210 20% 95%);
-    --primary: hsl(227 84% 55%);
-    --primary-foreground: hsl(210 18% 8%);
-    --secondary: hsl(210 16% 15%);
-    --secondary-foreground: hsl(210 20% 95%);
-    --muted: hsl(210 16% 15%);
-    --muted-foreground: hsl(210 12% 65%);
-    --accent: hsl(210 14% 20%);
-    --accent-foreground: hsl(210 20% 95%);
-    --destructive: hsl(0 62% 30%);
-    --destructive-foreground: hsl(210 20% 95%);
-    --border: hsl(210 14% 20%);
-    --input: hsl(210 14% 20%);
-    --ring: hsl(227 84% 55%);
+    --background: hsl(222 84% 4%);
+    --foreground: hsl(210 40% 98%);
 
-    --success: hsl(142 69% 45%);
-    --warning: hsl(38 92% 40%);
-    --error: hsl(0 62% 30%);
-    --info: hsl(199 89% 35%);
-    --hover: hsl(227 90% 69%);
-    --disabled: hsl(210 12% 25%);
-    --focus: hsl(227 84% 55%);
-    --active: hsl(227 100% 50%);
+    --card: hsl(222 84% 5%);
+    --card-hover: hsl(222 84% 7%);
+    --card-foreground: hsl(210 40% 98%);
+    --card-hover-foreground: hsl(210 40% 98%);
+    --card-border: hsl(217 32% 17%);
+    --card-hover-border: hsl(217 32% 22%);
 
-    --shadow-sm: 0 1px 2px 0 rgb(255 255 255 / 0.3);
-    --shadow: 0 1px 3px 0 rgb(255 255 255 / 0.4), 0 1px 2px -1px rgb(255 255 255 / 0.4);
-    --shadow-md: 0 4px 6px -1px rgb(255 255 255 / 0.4), 0 2px 4px -2px rgb(255 255 255 / 0.4);
-    --shadow-lg: 0 10px 15px -3px rgb(255 255 255 / 0.4), 0 4px 6px -4px rgb(255 255 255 / 0.4);
-    --shadow-xl: 0 20px 25px -5px rgb(255 255 255 / 0.4), 0 8px 10px -6px rgb(255 255 255 / 0.4);
-    --shadow-2xl: 0 25px 50px -12px rgb(255 255 255 / 0.5);
-    --shadow-3xl: 0 35px 60px -12px rgb(255 255 255 / 0.5);
+    --popover: hsl(222 84% 5%);
+    --popover-hover: hsl(222 84% 7%);
+    --popover-foreground: hsl(210 40% 98%);
+    --popover-hover-foreground: hsl(210 40% 98%);
+    --popover-border: hsl(217 32% 17%);
+    --popover-hover-border: hsl(217 32% 22%);
+
+    --primary: hsl(221 83% 53%);
+    --primary-hover: hsl(221 83% 58%);
+    --primary-foreground: hsl(210 40% 98%);
+    --primary-hover-foreground: hsl(210 40% 98%);
+    --primary-border: hsl(221 83% 53%);
+    --primary-hover-border: hsl(221 83% 58%);
+    
+    --secondary: hsl(217 32% 17%);
+    --secondary-hover: hsl(217 32% 22%);
+    --secondary-foreground: hsl(210 40% 98%);
+    --secondary-hover-foreground: hsl(210 40% 98%);
+    --secondary-border: hsl(217 32% 17%);
+    --secondary-hover-border: hsl(217 32% 22%);
+
+    --muted: hsl(217 32% 17%);
+    --muted-foreground: hsl(215 20% 65%);
+
+    --accent: hsl(217 32% 22%);
+    --accent-hover: hsl(217 32% 27%);
+    --accent-foreground: hsl(210 40% 98%);
+    --accent-hover-foreground: hsl(210 40% 98%);
+
+    --destructive: hsl(0 84% 60%);
+    --destructive-hover: hsl(0 84% 65%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --destructive-hover-foreground: hsl(210 40% 98%);
+
+    --input: hsl(217 32% 17%);
+    --input-hover: hsl(217 32% 22%);
+    --input-foreground: hsl(210 40% 98%);
+    --input-hover-foreground: hsl(210 40% 98%);
+    --input-border: hsl(217 32% 17%);
+    --input-hover-border: hsl(217 32% 22%);
+
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.5);
+    --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.6), 0 1px 2px -1px hsl(0 0% 0% / 0.6);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.6), 0 2px 4px -2px hsl(0 0% 0% / 0.6);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.6), 0 4px 6px -4px hsl(0 0% 0% / 0.6);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6), 0 8px 10px -6px hsl(0 0% 0% / 0.6);
+    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
+    --shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
+    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-      --background: hsl(210 18% 8%);
-      --foreground: hsl(210 20% 95%);
-      --card: hsl(210 16% 10%);
-      --card-foreground: hsl(210 20% 95%);
-      --popover: hsl(210 16% 10%);
-      --popover-foreground: hsl(210 20% 95%);
-      --primary: hsl(227 84% 55%);
-      --primary-foreground: hsl(210 18% 8%);
-      --secondary: hsl(210 16% 15%);
-      --secondary-foreground: hsl(210 20% 95%);
-      --muted: hsl(210 16% 15%);
-      --muted-foreground: hsl(210 12% 65%);
-      --accent: hsl(210 14% 20%);
-      --accent-foreground: hsl(210 20% 95%);
-      --destructive: hsl(0 62% 30%);
-      --destructive-foreground: hsl(210 20% 95%);
-      --border: hsl(210 14% 20%);
-      --input: hsl(210 14% 20%);
-      --ring: hsl(227 84% 55%);
+    --background: hsl(222 84% 4%);
+    --foreground: hsl(210 40% 98%);
 
-      --success: hsl(142 69% 45%);
-      --warning: hsl(38 92% 40%);
-      --error: hsl(0 62% 30%);
-      --info: hsl(199 89% 35%);
-      --hover: hsl(227 90% 69%);
-      --disabled: hsl(210 12% 25%);
-      --focus: hsl(227 84% 55%);
-      --active: hsl(227 100% 50%);
+    --card: hsl(222 84% 5%);
+    --card-hover: hsl(222 84% 7%);
+    --card-foreground: hsl(210 40% 98%);
+    --card-hover-foreground: hsl(210 40% 98%);
+    --card-border: hsl(217 32% 17%);
+    --card-hover-border: hsl(217 32% 22%);
 
-      --shadow-sm: 0 1px 2px 0 rgba(255, 255, 255, 0.3);
-      --shadow: 0 1px 3px 0 rgb(255 255 255 / 0.4), 0 1px 2px -1px rgb(255 255 255 / 0.4);
-      --shadow-md: 0 4px 6px -1px rgb(255 255 255 / 0.4), 0 2px 4px -2px rgb(255 255 255 / 0.4);
-      --shadow-lg: 0 10px 15px -3px rgb(255 255 255 / 0.4), 0 4px 6px -4px rgb(255 255 255 / 0.4);
-      --shadow-xl: 0 20px 25px -5px rgb(255 255 255 / 0.4), 0 8px 10px -6px rgb(255 255 255 / 0.4);
-      --shadow-2xl: 0 25px 50px -12px rgb(255 255 255 / 0.5);
-      --shadow-3xl: 0 35px 60px -12px rgb(255 255 255 / 0.5);
+    --popover: hsl(222 84% 5%);
+    --popover-hover: hsl(222 84% 7%);
+    --popover-foreground: hsl(210 40% 98%);
+    --popover-hover-foreground: hsl(210 40% 98%);
+    --popover-border: hsl(217 32% 17%);
+    --popover-hover-border: hsl(217 32% 22%);
+
+    --primary: hsl(221 83% 53%);
+    --primary-hover: hsl(221 83% 58%);
+    --primary-foreground: hsl(210 40% 98%);
+    --primary-hover-foreground: hsl(210 40% 98%);
+    --primary-border: hsl(221 83% 53%);
+    --primary-hover-border: hsl(221 83% 58%);
+
+    --secondary: hsl(217 32% 17%);
+    --secondary-hover: hsl(217 32% 22%);
+    --secondary-foreground: hsl(210 40% 98%);
+    --secondary-hover-foreground: hsl(210 40% 98%);
+    --secondary-border: hsl(217 32% 17%);
+    --secondary-hover-border: hsl(217 32% 22%);
+
+    --muted: hsl(217 32% 17%);
+    --muted-foreground: hsl(215 20% 65%);
+
+    --accent: hsl(217 32% 22%);
+    --accent-hover: hsl(217 32% 27%);
+    --accent-foreground: hsl(210 40% 98%);
+    --accent-hover-foreground: hsl(210 40% 98%);
+
+    --destructive: hsl(0 84% 60%);
+    --destructive-hover: hsl(0 84% 65%);
+    --destructive-foreground: hsl(210 40% 98%);
+    --destructive-hover-foreground: hsl(210 40% 98%);
+
+    --input: hsl(217 32% 17%);
+    --input-hover: hsl(217 32% 22%);
+    --input-foreground: hsl(210 40% 98%);
+    --input-hover-foreground: hsl(210 40% 98%);
+    --input-border: hsl(217 32% 17%);
+    --input-hover-border: hsl(217 32% 22%);
+
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.5);
+    --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.6), 0 1px 2px -1px hsl(0 0% 0% / 0.6);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.6), 0 2px 4px -2px hsl(0 0% 0% / 0.6);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.6), 0 4px 6px -4px hsl(0 0% 0% / 0.6);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6), 0 8px 10px -6px hsl(0 0% 0% / 0.6);
+    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
+    --shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
+    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
     }
   }
 
   * {
-    border-color: var(--border);
+    border-color: var(--color-border-default);
   }
 
   body {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
     background-color: var(--background);
     color: var(--foreground);
-    font-feature-settings: "rlig" 1, "calt" 1;
-    font-synthesis-weight: none;
-    text-rendering: optimizeLegibility;
   }
 
   body,
@@ -184,38 +295,88 @@
   --color-brand-secondary-700: var(--brand-secondary-700);
   --color-brand-secondary-800: var(--brand-secondary-800);
   --color-brand-secondary-900: var(--brand-secondary-900);
-
+  
   --color-text-default: var(--foreground);
   --color-text-muted: var(--muted-foreground);
   --color-text-inverse: var(--background);
   --color-text-primary: var(--primary-foreground);
+  --color-text-primary-hover: var(--primary-hover-foreground);
   --color-text-secondary: var(--secondary-foreground);
+  --color-text-secondary-hover: var(--secondary-hover-foreground);
   --color-text-destructive: var(--destructive-foreground);
-  --color-text-success: var(--success);
-  --color-text-warning: var(--warning);
-  --color-text-error: var(--error);
-  --color-text-info: var(--info);
+  --color-text-destructive-hover: var(--destructive-hover-foreground);
+  --color-text-accent: var(--accent-foreground);
+  --color-text-accent-hover: var(--accent-hover-foreground);
+  --color-text-card: var(--card-foreground);
+  --color-text-card-hover: var(--card-hover-foreground);
+  --color-text-popover: var(--popover-foreground);
+  --color-text-popover-hover: var(--popover-hover-foreground);
+  --color-text-input: var(--input-foreground);
+  --color-text-input-hover: var(--input-hover-foreground);
+  --color-text-success: var(--success-foreground);
+  --color-text-success-hover: var(--success-hover-foreground);
+  --color-text-warning: var(--warning-foreground);
+  --color-text-warning-hover: var(--warning-hover-foreground);
+  --color-text-error: var(--error-foreground);
+  --color-text-error-hover: var(--error-hover-foreground);
+  --color-text-info: var(--info-foreground);
+  --color-text-info-hover: var(--info-hover-foreground);
+  
   --color-bg-default: var(--background);
   --color-bg-card: var(--card);
+  --color-bg-card-hover: var(--card-hover);
   --color-bg-popover: var(--popover);
+  --color-bg-popover-hover: var(--popover-hover);
   --color-bg-primary: var(--primary);
+  --color-bg-primary-hover: var(--primary-hover);
   --color-bg-secondary: var(--secondary);
+  --color-bg-secondary-hover: var(--secondary-hover);
   --color-bg-muted: var(--muted);
   --color-bg-accent: var(--accent);
+  --color-bg-accent-hover: var(--accent-hover);
   --color-bg-destructive: var(--destructive);
-  --color-bg-hover: var(--hover);
+  --color-bg-destructive-hover: var(--destructive-hover);
+  --color-bg-input: var(--input);
+  --color-bg-input-hover: var(--input-hover);
   --color-bg-disabled: var(--disabled);
   --color-bg-focus: var(--focus);
   --color-bg-active: var(--active);
-
-  --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-error: var(--error);
-  --color-info: var(--info);
-  --color-border-default: var(--border);
-  --color-input-bg: var(--input);
-  --color-ring-color: var(--ring);
+  --color-bg-success: var(--success);
+  --color-bg-success-hover: var(--success-hover);
+  --color-bg-warning: var(--warning);
+  --color-bg-warning-hover: var(--warning-hover);
+  --color-bg-error: var(--error);
+  --color-bg-error-hover: var(--error-hover);
+  --color-bg-info: var(--info);
+  --color-bg-info-hover: var(--info-hover);
   
+  --color-border-default: var(--card-border);
+  --color-border-card: var(--card-border);
+  --color-border-card-hover: var(--card-hover-border);
+  --color-border-popover: var(--popover-border);
+  --color-border-popover-hover: var(--popover-hover-border);
+  --color-border-primary: var(--primary-border);
+  --color-border-primary-hover: var(--primary-hover-border);
+  --color-border-secondary: var(--secondary-border);
+  --color-border-secondary-hover: var(--secondary-hover-border);
+  --color-border-input: var(--input-border);
+  --color-border-input-hover: var(--input-hover-border);
+  --color-border-success: var(--success-border);
+  --color-border-success-hover: var(--success-hover-border);
+  --color-border-warning: var(--warning-border);
+  --color-border-warning-hover: var(--warning-hover-border);
+  --color-border-error: var(--error-border);
+  --color-border-error-hover: var(--error-hover-border);
+  --color-border-info: var(--info-border);
+  --color-border-info-hover: var(--info-hover-border);
+  
+  --color-ring-color: var(--ring);
+  --color-ring-focus: var(--focus);
+  
+  --shadow-success: var(--success-shadow);
+  --shadow-warning: var(--warning-shadow);
+  --shadow-error: var(--error-shadow);
+  --shadow-info: var(--info-shadow);
   --shadow-custom-sm: var(--shadow-sm);
   --shadow-custom: var(--shadow);
   --shadow-custom-md: var(--shadow-md);
@@ -223,4 +384,5 @@
   --shadow-custom-xl: var(--shadow-xl);
   --shadow-custom-2xl: var(--shadow-2xl);
   --shadow-custom-3xl: var(--shadow-3xl);
+  --shadow-custom-inner: var(--shadow-inner);
 }
