@@ -4,7 +4,7 @@ import type { WithoutAs } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const button = cva('flex justify-center items-center hover:cursor-pointer', {
+const button = cva('flex justify-center items-center hover:cursor-pointer whitespace-nowrap transition-colors ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-focus ', {
   variants: {
     variant: {
       primary: 'bg-bg-primary hover:bg-bg-primary-hover',
@@ -14,8 +14,7 @@ const button = cva('flex justify-center items-center hover:cursor-pointer', {
       success: 'bg-bg-success hover:bg-bg-success-hover',
       warning: 'bg-bg-warning hover:bg-bg-warning-hover',
       error: 'bg-bg-error hover:bg-bg-error-hover',
-      info: 'bg-bg-info hover:bg-bg-info-hover',
-      disabled: 'bg-bg-disabled hover:cursor-not-allowed'
+      info: 'bg-bg-info hover:bg-bg-info-hover'
     },
     border: {
       true: 'border-1'
@@ -39,6 +38,7 @@ const button = cva('flex justify-center items-center hover:cursor-pointer', {
       sm: 'px-3 py-1 w-20 h-9',
       md: 'px-6 py-2 w-30 h-11',
       lg: 'px-10 py-3 w-35 h-14',
+      fit: 'px-8 py-3 w-fit h-fit',
       full: 'px-10 py-3 w-full h-14'
     }
   },
@@ -50,15 +50,14 @@ const button = cva('flex justify-center items-center hover:cursor-pointer', {
     { variant: 'success', border: true, className: 'border-border-success hover:border-success-hover' },
     { variant: 'warning', border: true, className: 'border-border-warning hover:border-warning-hover' },
     { variant: 'error', border: true, className: 'border-border-error hover:border-error-hover' },
-    { variant: 'info', border: true, className: 'border-border-info hover:border-info-hover' },
-    { variant: 'disabled', border: true, className: 'border-border-disabled' }
+    { variant: 'info', border: true, className: 'border-border-info hover:border-info-hover' }
   ],
   defaultVariants: {
     variant: 'primary',
     border: true,
     shadow: 'default',
     rounded: 'pill',
-    size: 'md'
+    size: 'fit'
   }
 })
 
@@ -66,12 +65,13 @@ type AllowedTags = 'button' | 'a'
 
 type PolymorphicProps<T extends ElementType = 'button'> = {
   as?: T
+  disabled?: boolean
   children?: ReactNode
   className?: string
 } & WithoutAs<ComponentPropsWithRef<T>> & VariantProps<typeof button>
 
 function ButtonInner<T extends ElementType = 'button'> (
-  { as, children, variant, border, shadow, rounded, size, className, ...props }: PolymorphicProps<T>,
+  { as, disabled, children, variant, border, shadow, rounded, size, className, ...props }: PolymorphicProps<T>,
   ref: Ref<T>
 ): ReactElement {
   const Component = as || 'button'
@@ -79,7 +79,10 @@ function ButtonInner<T extends ElementType = 'button'> (
   return (
     <Component
       ref={ref}
-      className={cn(button({ variant, border, shadow, rounded, size }), className, '')}
+      disabled={disabled}
+      className={cn(button({ variant, border, shadow, rounded, size }),
+        disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
+        className)}
       {...props}
     >
       {children}
