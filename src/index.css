@@ -76,11 +76,6 @@
     --accent-foreground: hsl(0 0% 12%);
     --accent-hover-foreground: hsl(0 0% 12%);
 
-    --destructive: hsl(0 84% 60%);
-    --destructive-hover: hsl(0 84% 55%);
-    --destructive-foreground: hsl(210 40% 98%);
-    --destructive-hover-foreground: hsl(210 40% 98%);
-
     --input: hsl(0 0% 100%);
     --input-hover: hsl(0 0% 98%);
     --input-foreground: hsl(0 0% 12%);
@@ -174,11 +169,6 @@
     --accent-foreground: hsl(0 0% 96%);
     --accent-hover-foreground: hsl(0 0% 96%);
 
-    --destructive: hsl(0 84% 60%);
-    --destructive-hover: hsl(0 84% 65%);
-    --destructive-foreground: hsl(210 40% 98%);
-    --destructive-hover-foreground: hsl(210 40% 98%);
-
     --input: hsl(0 0% 18%);
     --input-hover: hsl(0 0% 24%);
     --input-foreground: hsl(0 0% 96%);
@@ -237,11 +227,6 @@
       --accent-foreground: hsl(0 0% 96%);
       --accent-hover-foreground: hsl(0 0% 96%);
 
-      --destructive: hsl(0 84% 60%);
-      --destructive-hover: hsl(0 84% 65%);
-      --destructive-foreground: hsl(210 40% 98%);
-      --destructive-hover-foreground: hsl(210 40% 98%);
-
       --input: hsl(0 0% 18%);
       --input-hover: hsl(0 0% 24%);
       --input-foreground: hsl(0 0% 96%);
@@ -261,6 +246,7 @@
   }
 
   * {
+    box-sizing: border-box;
     border-color: var(--color-border-default);
   }
 
@@ -323,8 +309,6 @@
   --color-text-primary-hover: var(--primary-hover-foreground);
   --color-text-secondary: var(--secondary-foreground);
   --color-text-secondary-hover: var(--secondary-hover-foreground);
-  --color-text-destructive: var(--destructive-foreground);
-  --color-text-destructive-hover: var(--destructive-hover-foreground);
   --color-text-accent: var(--accent-foreground);
   --color-text-accent-hover: var(--accent-hover-foreground);
   --color-text-card: var(--card-foreground);
@@ -354,8 +338,6 @@
   --color-bg-muted: var(--muted);
   --color-bg-accent: var(--accent);
   --color-bg-accent-hover: var(--accent-hover);
-  --color-bg-destructive: var(--destructive);
-  --color-bg-destructive-hover: var(--destructive-hover);
   --color-bg-input: var(--input);
   --color-bg-input-hover: var(--input-hover);
   --color-bg-disabled: var(--disabled);
@@ -379,8 +361,14 @@
   --color-border-primary-hover: var(--primary-hover-border);
   --color-border-secondary: var(--secondary-border);
   --color-border-secondary-hover: var(--secondary-hover-border);
+  --color-border-muted: var(--muted);
+  --color-border-accent: var(--accent);
+  --color-border-accent-hover: var(--accent-hover);
   --color-border-input: var(--input-border);
   --color-border-input-hover: var(--input-hover-border);
+  --color-border-disabled: var(--disabled);
+  --color-border-focus: var(--focus);
+  --color-border-active: var(--active);
   --color-border-success: var(--success-border);
   --color-border-success-hover: var(--success-hover-border);
   --color-border-warning: var(--warning-border);
@@ -390,20 +378,17 @@
   --color-border-info: var(--info-border);
   --color-border-info-hover: var(--info-hover-border);
 
-  --color-ring-focus: var(--focus);
-  --color-ring-focus: var(--active);
-
-  --shadow-success: var(--success-shadow);
-  --shadow-warning: var(--warning-shadow);
-  --shadow-error: var(--error-shadow);
-  --shadow-info: var(--info-shadow);
+  --shadow-shadow-success: var(--success-shadow);
+  --shadow-shadow-warning: var(--warning-shadow);
+  --shadow-shadow-error: var(--error-shadow);
+  --shadow-shadow-info: var(--info-shadow);
   
-  --shadow-custom-sm: var(--shadow-sm);
-  --shadow-custom: var(--shadow);
-  --shadow-custom-md: var(--shadow-md);
-  --shadow-custom-lg: var(--shadow-lg);
-  --shadow-custom-xl: var(--shadow-xl);
-  --shadow-custom-2xl: var(--shadow-2xl);
-  --shadow-custom-3xl: var(--shadow-3xl);
-  --shadow-custom-inner: var(--shadow-inner);
+  --shadow-shadow-sm: var(--shadow-sm);
+  --shadow-shadow: var(--shadow);
+  --shadow-shadow-md: var(--shadow-md);
+  --shadow-shadow-lg: var(--shadow-lg);
+  --shadow-shadow-xl: var(--shadow-xl);
+  --shadow-shadow-2xl: var(--shadow-2xl);
+  --shadow-shadow-3xl: var(--shadow-3xl);
+  --shadow-shadow-inner: var(--shadow-inner);
 }
