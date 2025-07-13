@@ -4,36 +4,60 @@ import type { WithoutAs } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const button = cva('', {
+const button = cva('flex justify-center items-center hover:cursor-pointer', {
   variants: {
     variant: {
-      default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-      outline: 'border border-input hover:bg-accent hover:text-accent-foreground',
-      rounded: 'rounded-full',
-      pill: 'rounded-full px-6',
-      ghost: 'hover:bg-accent hover:text-accent-foreground',
-      destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90'
+      primary: 'bg-bg-primary hover:bg-bg-primary-hover',
+      secondary: 'bg-bg-secondary hover:bg-bg-secondary-hover',
+      muted: 'bg-bg-muted hover:bg-bg-muted-hover',
+      accent: 'bg-bg-accent hover:bg-bg-accent-hover',
+      success: 'bg-bg-success hover:bg-bg-success-hover',
+      warning: 'bg-bg-warning hover:bg-bg-warning-hover',
+      error: 'bg-bg-error hover:bg-bg-error-hover',
+      info: 'bg-bg-info hover:bg-bg-info-hover',
+      disabled: 'bg-bg-disabled hover:cursor-not-allowed'
     },
-    colVariant: {
-      green: 'bg-green-600 text-white hover:bg-green-700',
-      warning: 'bg-yellow-600 text-white hover:bg-yellow-700'
+    border: {
+      true: 'border-1'
+    },
+    shadow: {
+      default: 'shadow-custom-lg',
+      success: 'shadow-shadow-success',
+      warning: 'shadow-shadow-warning',
+      error: 'shadow-shadow-error',
+      info: 'shadow-shadow-info'
+    },
+    rounded: {
+      none: 'rounded-none',
+      sm: 'rounded-sm',
+      md: 'rounded-md',
+      lg: 'rounded-lg',
+      pill: 'rounded-4xl',
+      circle: 'rounded-full aspect-square'
     },
     size: {
-      sm: 'h-9 px-3 text-xs',
-      md: 'h-10 py-2 px-4',
-      lg: 'h-11 px-8',
-      full: 'w-full h-10 px-4'
+      sm: 'px-3 py-1 w-20 h-9',
+      md: 'px-6 py-2 w-30 h-11',
+      lg: 'px-10 py-3 w-35 h-14',
+      full: 'px-10 py-3 w-full h-14'
     }
   },
   compoundVariants: [
-    {
-      variant: 'outline',
-      colVariant: 'green',
-      className: 'border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
-    }
+    { variant: 'primary', border: true, className: 'border-border-primary hover:border-primary-hover' },
+    { variant: 'secondary', border: true, className: 'border-border-secondary hover:border-secondary-hover' },
+    { variant: 'muted', border: true, className: 'border-border-muted' },
+    { variant: 'accent', border: true, className: 'border-border-accent hover:border-accent-hover' },
+    { variant: 'success', border: true, className: 'border-border-success hover:border-success-hover' },
+    { variant: 'warning', border: true, className: 'border-border-warning hover:border-warning-hover' },
+    { variant: 'error', border: true, className: 'border-border-error hover:border-error-hover' },
+    { variant: 'info', border: true, className: 'border-border-info hover:border-info-hover' },
+    { variant: 'disabled', border: true, className: 'border-border-disabled' }
   ],
   defaultVariants: {
-    variant: 'default',
+    variant: 'primary',
+    border: true,
+    shadow: 'default',
+    rounded: 'pill',
     size: 'md'
   }
 })
@@ -47,7 +71,7 @@ type PolymorphicProps<T extends ElementType = 'button'> = {
 } & WithoutAs<ComponentPropsWithRef<T>> & VariantProps<typeof button>
 
 function ButtonInner<T extends ElementType = 'button'> (
-  { as, children, variant, colVariant, size, className, ...props }: PolymorphicProps<T>,
+  { as, children, variant, border, shadow, rounded, size, className, ...props }: PolymorphicProps<T>,
   ref: Ref<T>
 ): ReactElement {
   const Component = as || 'button'
@@ -55,7 +79,7 @@ function ButtonInner<T extends ElementType = 'button'> (
   return (
     <Component
       ref={ref}
-      className={cn(button({ variant, colVariant, size }), className)}
+      className={cn(button({ variant, border, shadow, rounded, size }), className, '')}
       {...props}
     >
       {children}
