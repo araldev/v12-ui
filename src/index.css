@@ -101,11 +101,11 @@
 
     --error: hsl(0 84% 60%);
     --error-hover: hsl(0 84% 55%);
-    --error-foreground: hsl(210 40% 98%);
+    --error-foreground: hsl(0, 52%, 82%);
     --error-hover-foreground: hsl(210 40% 98%);
     --error-border: hsl(0, 57%, 32%);
     --error-hover-border: hsl(0, 58%, 23%);
-    --error-shadow: 0 4px 10px -2px hsla(0, 80%, 63%, 0.2);
+    --error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.2);
 
     --info: hsl(199 89% 48%);
     --info-hover: hsl(199 89% 43%);
@@ -127,6 +127,31 @@
     --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.15);
     --shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.15);
     --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.05);
+
+    --text-shadow-black-p: 0px 1px 2px rgba(0, 0, 0, .2);
+    --text-shadow-black-title: 0px 2px 4px rgba(0, 0, 0, .3);
+    --text-shadow-white-p: 0px 1px 2px rgba(255, 255, 255, .2);
+    --text-shadow-white-title: 0px 2px 4px rgba(255, 255, 255, .3);
+    --text-shadow-success-p: 0px 1px 2px hsl(142 76% 36% / 0.2);
+    --text-shadow-success-title: 0px 2px 4px hsl(142 76% 36% / 0.3);
+    --text-shadow-warning-p: 0px 1px 2px hsl(38 92% 50% / 0.2);
+    --text-shadow-warning-title: 0px 2px 4px hsl(38 92% 50% / 0.3);
+    --text-shadow-error-p: 0px 1px 2px hsl(0 80% 63% / 0.2);
+    --text-shadow-error-title: 0px 2px 4px hsl(0 80% 63% / 0.3);
+    --text-shadow-info-p: 0px 1px 2px hsl(199 89% 48% / 0.2);
+    --text-shadow-info-title: 0px 2px 4px hsl(199 89% 48% / 0.3);
+
+    --font-size-small-responsive: clamp(.5rem, .9vw + 0.3rem, 0.75rem);
+    --font-weight-small: 400;
+    --font-size-paragraph-responsive: clamp(1rem, 1.2vw + 0.5rem, 1.25rem);
+    --font-weight-paragraph: 400;
+    --font-size-subtitle-responsive: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+    --font-weight-subtitle: 500;
+    --font-size-title-responsive: clamp(2rem, 5vw + 1rem, 4rem);
+    --font-weight-title: 700;
+
+    --font-size-button-responsive: clamp(1rem, 1vw + 0.5rem, 1.125rem);
+    --font-weight-button: 700;
   }
 
   [data-theme="dark"] {
@@ -391,4 +416,42 @@
   --shadow-shadow-2xl: var(--shadow-2xl);
   --shadow-shadow-3xl: var(--shadow-3xl);
   --shadow-shadow-inner: var(--shadow-inner);
+
+  --text-shadow-shadow-black-p: var(--text-shadow-black-p);
+  --text-shadow-shadow-black-title: var(--text-shadow-black-title);
+  --text-shadow-shadow-white-p: var(--text-shadow-white-p);
+  --text-shadow-shadow-white-title: var(--text-shadow-white-title);
+  --text-shadow-shadow-success-p: var(--text-shadow-success-p);
+  --text-shadow-shadow-success-title: var(--text-shadow-success-title);
+  --text-shadow-shadow-warning-p: var(--text-shadow-warning-p);
+  --text-shadow-shadow-warning-title: var(--text-shadow-warning-title);
+  --text-shadow-shadow-error-p: var(--text-shadow-error-p);
+  --text-shadow-shadow-error-title: var(--text-shadow-error-title);
+  --text-shadow-shadow-info-p: var(--text-shadow-info-p);
+  --text-shadow-shadow-info-title: var(--text-shadow-info-title);
+
+  --font-weight-weight-small: var(--font-weight-small);
+  --font-weight-weight-paragraph: var(--font-weight-paragraph);
+  --font-weight-weight-subtitle: var(--font-weight-subtitle);
+  --font-weight-weight-title: var(--font-weight-title);
+  --font-weight-weight-button: var(--font-weight-button);
+}
+
+@layer utilities {
+  .size-text-button {
+    font-size: var(--font-size-button-responsive);
+  }
+
+  .size-text-small {
+    font-size: var(--font-size-small-responsive);
+  }
+  .size-text-paragraph {
+    font-size: var(--font-size-paragraph-responsive);
+  }
+  .size-text-subtitle {
+    font-size: var(--font-size-subtitle-responsive);
+  }
+  .size-text-title {
+    font-size: var(--font-size-title-responsive);
+  }
 }

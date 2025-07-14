@@ -4,7 +4,7 @@ import type { WithoutAs } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const button = cva('flex justify-center items-center hover:cursor-pointer whitespace-nowrap transition-colors ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-focus ', {
+const button = cva('size-text-button font-weight-button flex justify-center items-center hover:cursor-pointer whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-focus focus-visible:ring-offset-2  ring-offset-background', {
   variants: {
     variant: {
       primary: 'bg-bg-primary hover:bg-bg-primary-hover',
@@ -76,10 +76,24 @@ function ButtonInner<T extends ElementType = 'button'> (
 ): ReactElement {
   const Component = as || 'button'
 
+  function handleKeyDown (e: KeyboardEvent): void {
+    const target = e.currentTarget as HTMLElement | null
+
+    if (!target || target.tagName === 'BUTTON') return
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      target.click()
+    }
+  }
+
   return (
     <Component
+      role='button'
+      tabIndex={0}
+      onKeyDown={handleKeyDown}
       ref={ref}
-      disabled={disabled}
+      aria-disabled={disabled}
       className={cn(button({ variant, border, shadow, rounded, size }),
         disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
         className)}
