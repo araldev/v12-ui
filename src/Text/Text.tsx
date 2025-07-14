@@ -65,7 +65,7 @@ const text = cva('', {
   ],
   defaultVariants: {
     variant: 'default',
-    hover: true,
+    hover: false,
     textShadow: 'none',
     fontSize: 'paragraph_responsive',
     fontWeight: 'auto'
