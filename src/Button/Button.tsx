@@ -4,17 +4,18 @@ import type { WithoutAs } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const button = cva('size-text-button font-weight-button flex justify-center items-center hover:cursor-pointer whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-border-focus focus-visible:ring-offset-2  ring-offset-background', {
+const button = cva('size-text-button font-weight-button flex justify-center items-center hover:cursor-pointer disabled:opacity-50 whitespace-nowrap transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-inherit active:ring-active', {
   variants: {
     variant: {
-      primary: 'bg-bg-primary hover:bg-bg-primary-hover',
-      secondary: 'bg-bg-secondary hover:bg-bg-secondary-hover',
-      muted: 'bg-bg-muted hover:bg-bg-muted-hover',
-      accent: 'bg-bg-accent hover:bg-bg-accent-hover',
-      success: 'bg-bg-success hover:bg-bg-success-hover',
-      warning: 'bg-bg-warning hover:bg-bg-warning-hover',
-      error: 'bg-bg-error hover:bg-bg-error-hover',
-      info: 'bg-bg-info hover:bg-bg-info-hover'
+      primary: 'text-text-primary bg-bg-primary hover:bg-bg-primary-hover focus-visible:ring-border-primary',
+      secondary: 'text-text-secondary bg-bg-secondary hover:bg-bg-secondary-hover focus-visible:ring-border-secondary',
+      muted: 'text-text-muted bg-bg-muted hover:bg-bg-muted-hover focus-visible:ring-border-muted',
+      accent: 'text-text-accent bg-bg-accent hover:bg-bg-accent-hover focus-visible:ring-border-accent',
+      success: 'text-text-success bg-bg-success hover:bg-bg-success-hover focus-visible:ring-border-success',
+      warning: 'text-text-warning bg-bg-warning hover:bg-bg-warning-hover focus-visible:ring-border-warning',
+      error: 'text-text-error bg-bg-error hover:bg-bg-error-hover focus-visible:ring-border-error',
+      info: 'text-text-info bg-bg-info hover:bg-bg-info-hover focus-visible:ring-border-info',
+      ghost: 'text-text-ghost bg-bg-ghost hover:bg-bg-ghost-hover focus-visible:ring-border-ghost'
     },
     border: {
       true: 'border-1'
@@ -50,7 +51,8 @@ const button = cva('size-text-button font-weight-button flex justify-center item
     { variant: 'success', border: true, className: 'border-border-success hover:border-success-hover' },
     { variant: 'warning', border: true, className: 'border-border-warning hover:border-warning-hover' },
     { variant: 'error', border: true, className: 'border-border-error hover:border-error-hover' },
-    { variant: 'info', border: true, className: 'border-border-info hover:border-info-hover' }
+    { variant: 'info', border: true, className: 'border-border-info hover:border-info-hover' },
+    { variant: 'ghost', border: true, className: 'border-border-ghost hover:border-ghost-hover' }
   ],
   defaultVariants: {
     variant: 'primary',
@@ -96,6 +98,7 @@ function ButtonInner<T extends ElementType = 'button'> (
       aria-disabled={disabled}
       className={cn(button({ variant, border, shadow, rounded, size }),
         disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
+        '',
         className)}
       {...props}
     >
