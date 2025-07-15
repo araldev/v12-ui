@@ -19,7 +19,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --sourcemap",
     "preview": "vite preview",
     "lint": "standard",
     "lint:fix": "standard --fix"

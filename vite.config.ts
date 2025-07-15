@@ -15,6 +15,7 @@ export default defineConfig({
     dts({ rollupTypes: true })
   ],
   build: {
+    sourcemap: true,
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'v12-ui',
