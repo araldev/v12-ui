@@ -1,15 +1,19 @@
 {
   "name": "v12-ui",
-  "version": "0.0.13",
+  "version": "0.0.12",
   "type": "module",
   "files": [
     "dist",
+    "!dist/**/*.map",
     "!dist/node_modules/**"
   ],
   "sideEffects": false,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --sourcemap",
+    "build": "tsc && vite build",
+    "watch-pack": "pack --dry-run",
+    "build-map": "tsc && vite build --sourcemap",
+    "source-map": "npx source-map-explorer dist/**/*.map --json --only-mapped",
     "preview": "vite preview",
     "lint": "standard",
     "lint:fix": "standard --fix"
