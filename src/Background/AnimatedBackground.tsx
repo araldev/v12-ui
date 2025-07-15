@@ -1,3 +1,4 @@
+import '../index.css'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import type { Ref, ComponentPropsWithRef, ReactElement } from 'react'
 import { cn } from '../utils/utils'

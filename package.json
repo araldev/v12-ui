@@ -3,21 +3,10 @@
   "version": "0.0.12",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "!dist/node_modules/**"
   ],
   "sideEffects": false,
-  "main": "./dist/v12-ui.umd.cjs",
-  "module": "./dist/v12-ui.js",
-  "exports": {
-    ".": {
-      "types": "./dist/v12-ui.d.ts",
-      "import": "./dist/v12-ui.js",
-      "require": "./dist/v12-ui.umd.cjs"
-    },
-    "./style.css": {
-      "default": "./dist/v12-ui.css"
-    }
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build --sourcemap",
@@ -55,6 +44,31 @@
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/strict-boolean-expressions": "off",
       "@typescript-eslint/prefer-nullish-coalescing": "off"
+    }
+  },
+  "exports": {
+    "./useDataTheme": {
+      "types": "./dist/Hooks/useDataTheme.d.ts",
+      "import": "./dist/Hooks/useDataTheme.js",
+      "require": "./dist/Hooks/useDataTheme.cjs"
+    },
+    "./Button": {
+      "types": "./dist/Button/Button.d.ts",
+      "import": "./dist/Button/Button.js",
+      "require": "./dist/Button/Button.cjs"
+    },
+    "./Text": {
+      "types": "./dist/Text/Text.d.ts",
+      "import": "./dist/Text/Text.js",
+      "require": "./dist/Text/Text.cjs"
+    },
+    "./AnimatedBackground": {
+      "types": "./dist/Background/AnimatedBackground.d.ts",
+      "import": "./dist/Background/AnimatedBackground.js",
+      "require": "./dist/Background/AnimatedBackground.cjs"
+    },
+    "./styles.css": {
+      "default": "./dist/styles.css"
     }
   }
 }
