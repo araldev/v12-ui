@@ -18,21 +18,27 @@ export default defineConfig({
     react(),
     tailwindcss(),
     dts({
-      rollupTypes: true,
       exclude: ['vite.config.ts', '**/*.test.ts', '**/*.test.tsx']
     })
   ],
   build: {
     sourcemap: true,
     lib: {
-      entry: resolve(__dirname, 'src/index.tsx'),
+      entry: [
+        resolve(__dirname, 'src/index.ts')
+      ],
       name: 'v12-ui',
-      fileName: 'v12-ui',
+      formats: ['es', 'cjs'],
+      // Con preserveModules: true esta función se llama para cada chunk
+      fileName: (format, entryName) => {
+        return entryName.replace(/^src\//, '') + (format === 'cjs' ? '.cjs' : '.js')
+      },
       cssFileName: 'styles'
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
+        preserveModules: true,
         exports: 'named',
         globals: {
           react: 'React',
