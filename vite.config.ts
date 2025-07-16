@@ -36,14 +36,24 @@ export default defineConfig({
       cssFileName: 'styles'
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'class-variance-authority',
+        'clsx',
+        'tailwind-merge'
+      ],
       output: {
         preserveModules: true,
         exports: 'named',
         globals: {
           react: 'React',
           'react-dom': 'ReactDom',
-          'react/jsx-runtime': 'jsxRuntime'
+          'react/jsx-runtime': 'jsxRuntime',
+          'class-variance-authority': 'classVarianceAuthority',
+          clsx: 'clsx',
+          'tailwind-merge': 'tailwindMerge'
         }
       }
     }
