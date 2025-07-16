@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import type { Ref, ComponentPropsWithRef, ElementType, ReactElement, ReactNode } from 'react'
-import type { WithoutAs } from '@/utils/polymorphicTypes'
+import type { WithoutAs } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 

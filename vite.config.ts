@@ -4,7 +4,6 @@ import tailwindcss from '@tailwindcss/vite'
 import dts from 'vite-plugin-dts'
 import path, { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { copyFileSync } from 'node:fs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -21,15 +20,7 @@ export default defineConfig({
     dts({
       rollupTypes: true,
       exclude: ['vite.config.ts', '**/*.test.ts', '**/*.test.tsx']
-    }),
-    {
-      name: 'copy-polymorphic-types',
-      writeBundle () {
-        const src = resolve(__dirname, 'src/utils/polymorphicTypes.d.ts')
-        const dir = resolve(__dirname, 'dist/')
-        copyFileSync(src, resolve(dir, 'polymorphicTypes.d.ts'))
-      }
-    }
+    })
   ],
   build: {
     sourcemap: true,
@@ -37,8 +28,7 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.tsx'),
       name: 'v12-ui',
       fileName: 'v12-ui',
-      cssFileName: 'styles',
-      formats: ['es', 'umd']
+      cssFileName: 'styles'
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime'],
