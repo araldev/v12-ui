@@ -34,14 +34,16 @@
     "ts-standard": "12.0.2",
     "typescript": "5.8.3",
     "vite": "7.0.0",
-    "vite-plugin-dts": "4.5.4",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "tailwind-merge": "^3.3.1"
+    "vite-plugin-dts": "4.5.4"
   },
   "peerDependencies": {
     "react": "19.1.0",
     "react-dom": "19.1.0"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.1"
   },
   "eslintConfig": {
     "extends": "./node_modules/ts-standard/eslintrc.json",
@@ -61,26 +63,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./useDataTheme": {
-      "types": "./dist/Hooks/useDataTheme.d.ts",
-      "import": "./dist/Hooks/useDataTheme.js",
-      "require": "./dist/Hooks/useDataTheme.cjs"
-    },
-    "./Button": {
-      "types": "./dist/Button/Button.d.ts",
-      "import": "./dist/Button/Button.js",
-      "require": "./dist/Button/Button.cjs"
-    },
-    "./Text": {
-      "types": "./dist/Text/Text.d.ts",
-      "import": "./dist/Text/Text.js",
-      "require": "./dist/Text/Text.cjs"
-    },
-    "./AnimatedBackground": {
-      "types": "./dist/Background/AnimatedBackground.d.ts",
-      "import": "./dist/Background/AnimatedBackground.js",
-      "require": "./dist/Background/AnimatedBackground.cjs"
     },
     "./styles.css": {
       "default": "./dist/styles.css"
