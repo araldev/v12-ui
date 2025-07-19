@@ -1,7 +1,7 @@
 import './index.css'
 
-export { useDataTheme } from './Hooks/useDataTheme.ts'
+export { useDataTheme } from './Hooks/useDataTheme'
 
-export { AnimatedBackground } from './Background/AnimatedBackground.tsx'
-export { Button } from './Button/Button.tsx'
-export { Text } from './Text/Text.tsx'
+export { AnimatedBackground } from './Background/AnimatedBackground'
+export { Button } from './Button/Button'
+export { Text } from './Text/Text'
