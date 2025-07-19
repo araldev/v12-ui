@@ -8,6 +8,8 @@
     "!dist/node_modules/**",
     "!dist/index.{map}"
   ],
+  "main": "./dist/index/cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
@@ -55,6 +57,11 @@
     }
   },
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
     "./useDataTheme": {
       "types": "./dist/Hooks/useDataTheme.d.ts",
       "import": "./dist/Hooks/useDataTheme.js",
