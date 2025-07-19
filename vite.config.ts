@@ -15,14 +15,15 @@ export default defineConfig({
     }
   },
   plugins: [
-    react(),
+    react({ tsDecorators: true }),
     tailwindcss(),
     dts({
       exclude: ['vite.config.ts', '**/*.test.ts', '**/*.test.tsx']
     })
   ],
   build: {
-    sourcemap: true,
+    minify: true,
+    // sourcemap: true,
     lib: {
       entry: [
         resolve(__dirname, 'src/index.ts')

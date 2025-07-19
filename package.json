@@ -6,15 +6,19 @@
     "dist",
     "!dist/**/*.map",
     "!dist/node_modules/**",
-    "!dist/index.*"
+    "!dist/index.{js,cjs,map}"
   ],
+  "types": "./dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "dev": "vite",
+    "dev": "tsc && vite build --watch",
+    "link:demo": "cd ../tester-projects/testing-library rm -rf node_modules/v12-ui ln -s ../../v12-ui/dist node_modules/v12-ui",
+    "prepare": "tsc && vite build",
     "build": "tsc && vite build",
-    "watch-pack": "pack --dry-run",
-    "build-map": "tsc && vite build --sourcemap",
-    "source-map": "npx source-map-explorer dist/**/*.map --json --only-mapped",
+    "build:watch": "tsc && vite build --watch",
+    "watch:pack": "pack --dry-run",
+    "build:map": "tsc && vite build --sourcemap",
+    "source:map": "npx source-map-explorer dist/**/*.map --json --only-mapped",
     "preview": "vite preview",
     "lint": "standard",
     "lint:fix": "standard --fix"
