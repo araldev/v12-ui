@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "v12-ui/*": ["dist/*"],
       "@/*": ["src/*"]
     },
     "types": ["node"],

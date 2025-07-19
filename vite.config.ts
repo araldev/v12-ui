@@ -18,6 +18,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
     dts({
+      insertTypesEntry: true,
+      rollupTypes: false,
       exclude: ['vite.config.ts', '**/*.test.ts', '**/*.test.tsx']
     })
   ],
