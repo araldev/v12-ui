@@ -15,7 +15,7 @@ export default defineConfig({
     }
   },
   plugins: [
-    react({ tsDecorators: true }),
+    react(),
     tailwindcss(),
     dts({
       exclude: ['vite.config.ts', '**/*.test.ts', '**/*.test.tsx']
