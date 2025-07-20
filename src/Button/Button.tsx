@@ -98,7 +98,6 @@ function ButtonInner<T extends ElementType = 'button'> (
       aria-disabled={disabled}
       className={cn(button({ variant, border, shadow, rounded, size }),
         disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
-        '',
         className)}
       {...props}
     >
@@ -109,4 +108,4 @@ function ButtonInner<T extends ElementType = 'button'> (
 
 export const Button = forwardRef(ButtonInner) as <T extends AllowedTags = 'button'> (
   props: PolymorphicProps<T> & { ref?: Ref<T> }
-) => ReactElement<T>
+) => ReactElement
