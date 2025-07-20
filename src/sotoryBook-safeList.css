@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+/* Esto es para que no purgue estas clases y se reflejen los cambios en StoryBook */
+@source inline("gap-{0..96}");
+@source inline("-gap-{0..96}");
