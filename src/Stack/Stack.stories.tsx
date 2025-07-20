@@ -31,7 +31,7 @@ const meta = {
     direction: {
       type: 'string',
       description: 'Chose the direction of inner items',
-      options: ['row', 'column', 'row-reverse', 'column-reverse'],
+      options: ['row', 'col', 'row-reverse', 'col-reverse'],
       control: 'select',
       defaultValue: 'row'
     },

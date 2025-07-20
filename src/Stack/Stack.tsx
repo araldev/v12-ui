@@ -8,7 +8,7 @@ type AllowedTags = 'div' | 'span' | 'section' | 'article' | 'nav' | 'aside'
 type PolymorphicProps<T extends ElementType = 'div'> = {
   as?: T
   children?: ReactElement | ReactElement[]
-  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse'
+  direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse'
   spacing?: number
   className?: string
 } & WithoutAs<ComponentPropsWithRef<T>>
