@@ -1,4 +1,3 @@
-import '../index.css'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Button } from './Button'
@@ -25,33 +24,41 @@ const meta = {
       type: 'string',
       options: ['primary', 'secondary', 'muted', 'accent', 'success', 'warning', 'error', 'info', 'ghost'],
       control: 'select',
-      description: 'Colors variants'
+      description: 'Colors variants',
+      defaultValue: 'primary'
     },
     border: {
       type: 'boolean',
-      description: 'Button border'
+      description: 'Button border',
+      control: 'boolean',
+      defaultValue: true
     },
     shadow: {
       type: 'string',
       description: 'box-shadow',
       options: ['default', 'success', 'warning', 'error', 'info'],
-      control: 'select'
+      control: 'select',
+      defaultValue: 'default'
     },
     rounded: {
       type: 'string',
       description: 'border-radius',
       options: ['none', 'sm', 'md', 'lg', 'pill', 'circle'],
-      control: 'select'
+      control: 'select',
+      defaultValue: 'pill'
     },
     size: {
       type: 'string',
       description: 'Button size',
       options: ['sm', 'md', 'lg', 'fit', 'full'],
-      control: 'select'
+      control: 'select',
+      defaultValue: 'fit'
     },
     disabled: {
       type: 'boolean',
-      description: 'To disable the button'
+      description: 'To disable the button',
+      control: 'boolean',
+      defaultValue: false
     },
     className: {
       type: 'string',

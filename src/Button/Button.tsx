@@ -96,9 +96,11 @@ function ButtonInner<T extends ElementType = 'button'> (
       onKeyDown={handleKeyDown}
       ref={ref}
       aria-disabled={disabled}
-      className={cn(button({ variant, border, shadow, rounded, size }),
+      className={cn(
+        button({ variant, border, shadow, rounded, size }),
         disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
-        className)}
+        className
+      )}
       {...props}
     >
       {children}
