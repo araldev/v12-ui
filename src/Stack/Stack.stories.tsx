@@ -14,32 +14,29 @@ const meta = {
     childrenQuantity: {
       type: 'number',
       description: 'Number of children to render',
-      control: 'number',
-      defaultValue: 3
+      control: 'number'
     },
     children: {
       type: 'symbol',
       description: 'The Stack content',
-      control: false,
-      defaultValue: 'div'
+      control: false
     },
     as: {
       type: 'string',
       description: 'HTMLElement',
-      control: 'text'
+      options: ['div', 'span', 'section', 'article', 'nav', 'aside'],
+      control: 'select'
     },
     direction: {
       type: 'string',
       description: 'Chose the direction of inner items',
       options: ['row', 'col', 'row-reverse', 'col-reverse'],
-      control: 'select',
-      defaultValue: 'row'
+      control: 'select'
     },
     spacing: {
       type: 'number',
       description: 'Spacing between items',
-      control: 'number',
-      defaultValue: 4
+      control: 'number'
     },
     className: {
       type: 'string',
@@ -57,7 +54,7 @@ export default meta
 type Story = StoryObj<InnerComponentAndStackProps>
 
 const InnerComponent: Story = {
-  render: ({ childrenQuantity, ...props }: InnerComponentAndStackProps) => {
+  render: ({ childrenQuantity = 4, ...props }: InnerComponentAndStackProps) => {
     return (
       <Stack {...props}>
         {Array.from({ length: childrenQuantity || 3 }, (_, i) => i + 1).map(Component => (

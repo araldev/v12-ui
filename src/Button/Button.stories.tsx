@@ -24,41 +24,35 @@ const meta = {
       type: 'string',
       options: ['primary', 'secondary', 'muted', 'accent', 'success', 'warning', 'error', 'info', 'ghost'],
       control: 'select',
-      description: 'Colors variants',
-      defaultValue: 'primary'
+      description: 'Colors variants'
     },
     border: {
       type: 'boolean',
       description: 'Button border',
-      control: 'boolean',
-      defaultValue: true
+      control: 'boolean'
     },
     shadow: {
       type: 'string',
       description: 'box-shadow',
       options: ['default', 'success', 'warning', 'error', 'info'],
-      control: 'select',
-      defaultValue: 'default'
+      control: 'select'
     },
     rounded: {
       type: 'string',
       description: 'border-radius',
       options: ['none', 'sm', 'md', 'lg', 'pill', 'circle'],
-      control: 'select',
-      defaultValue: 'pill'
+      control: 'select'
     },
     size: {
       type: 'string',
       description: 'Button size',
       options: ['sm', 'md', 'lg', 'fit', 'full'],
-      control: 'select',
-      defaultValue: 'fit'
+      control: 'select'
     },
     disabled: {
       type: 'boolean',
       description: 'To disable the button',
-      control: 'boolean',
-      defaultValue: false
+      control: 'boolean'
     },
     className: {
       type: 'string',
