@@ -9,7 +9,7 @@ type PolymorphicProps<T extends ElementType = 'div'> = {
   as?: T
   children?: ReactElement | ReactElement[]
   direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse'
-  spacing?: number
+  spacing?: number | 'none'
   className?: string
 } & WithoutAs<ComponentPropsWithRef<T>>
 
