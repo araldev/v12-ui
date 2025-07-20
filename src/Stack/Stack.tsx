@@ -15,7 +15,7 @@ type PolymorphicProps<T extends ElementType = 'div'> = {
 
 const StackInner = <T extends ElementType = 'div'>(
   {
-    as,
+    as = 'div',
     children,
     direction = 'row',
     spacing = 4,
