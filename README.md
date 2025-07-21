@@ -5,7 +5,7 @@
 
 [![npm](https://img.shields.io/npm/v/v12-ui?style=flat-square&color=0d9488)](https://www.npmjs.com/package/v12-ui)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/v12-ui?style=flat-square&color=0d9488)](https://bundlephobia.com/package/v12-ui)
-[![License](https://img.shields.io/npm/l/v12-ui?style=flat-square&color=0d9488)](https://github.com/araldev/v12-ui/blob/main/LICENSE)
+[![License](https://img.shields.io/npm/l/v12-ui?style=flat-square&color=0d9488)](https://github.com/araldev/v12-ui/blob/main/LICENSE.md)
 [![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?style=flat-square&logo=storybook&logoColor=white)](https://araldev.github.io/v12-ui/)
 [![Demo](https://img.shields.io/badge/Demo-Playground-0ea5e9?style=flat-square&logo=react&logoColor=white)](https://araldev.github.io/v12-ui/)
 
