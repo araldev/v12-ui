@@ -78,6 +78,13 @@ function ButtonInner<T extends ElementType = 'button'> (
 ): ReactElement {
   const Component = as || 'button'
 
+  if (as === 'a' && !props.href) {
+    throw new Error('When using "as" prop with "a" tag, "href" must be provided.')
+  }
+  if (as === 'button' && props.href) {
+    throw new Error('When using "as" prop with "button" tag, "href" should not be provided.')
+  }
+
   function handleKeyDown (e: KeyboardEvent): void {
     const target = e.currentTarget as HTMLElement | null
 
@@ -95,7 +102,7 @@ function ButtonInner<T extends ElementType = 'button'> (
       tabIndex={0}
       onKeyDown={handleKeyDown}
       ref={ref}
-      aria-disabled={disabled}
+      aria-disabled={disabled ? -1 : 0}
       className={cn(
         button({ variant, border, shadow, rounded, size }),
         disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
