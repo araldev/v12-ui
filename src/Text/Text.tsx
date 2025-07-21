@@ -85,11 +85,11 @@ type PolymorphicProps<T extends ElementType> = {
   className?: string
 } & WithoutAs<ComponentPropsWithRef<T>> & VariantProps<typeof text>
 
-function TextInner<T extends AllowedTags = 'p'> (
+function TextInner<T extends ElementType = 'p'> (
   { as, children, variant, hover, textShadow, fontSize, fontWeight, className, ...props }: PolymorphicProps<T>,
   ref: Ref<T>
 ): ReactElement {
-  const Component = as || 'p' as ElementType
+  const Component = as || 'p'
 
   return (
     <Component
