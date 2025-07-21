@@ -99,10 +99,10 @@ function ButtonInner<T extends ElementType = 'button'> (
   return (
     <Component
       role='button'
-      tabIndex={0}
+      tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
       ref={ref}
-      aria-disabled={disabled ? -1 : 0}
+      aria-disabled={disabled}
       className={cn(
         button({ variant, border, shadow, rounded, size }),
         disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
