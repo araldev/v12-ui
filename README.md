@@ -75,10 +75,10 @@ Override CSS variables or pass props to components:
 }
 ```
 
-## 📖 Storybook & Live Examples
+## 📖 **Storybook & Demo**
 
-- Storybook: https://araldev.github.io/v12-ui/
-- Interactive demo: https://araldev.github.io/v12-ui/
+- [Storybook Live](https://araldev.github.io/v12-ui/)
+- [Demo](https://araldev.github.io/v12-ui/)
 
 ## 🧪 Development
 
