@@ -8,7 +8,7 @@ declare const canvas: (props?: ({
     theme?: "dark" | "light" | "transparent" | null | undefined;
 } & import('class-variance-authority/types').ClassProp) | undefined) => string;
 type HexColor = `#${string}`;
-interface PropsAnimatedBackground extends ComponentPropsWithRef<'div'>, VariantProps<typeof div>, VariantProps<typeof canvas> {
+export interface PropsAnimatedBackground extends ComponentPropsWithRef<'div'>, VariantProps<typeof div>, VariantProps<typeof canvas> {
     theme?: ThemeProps;
     bubbleGradiant1?: [HexColor, HexColor];
     bubbleGradiant2?: [HexColor, HexColor];
