@@ -34,7 +34,7 @@ const canvas = cva('absolute inset-0 w-full h-full', {
 
 type HexColor = `#${string}`
 
-interface PropsAnimatedBackground extends
+export interface PropsAnimatedBackground extends
   ComponentPropsWithRef<'div'>,
   VariantProps<typeof div>,
   VariantProps<typeof canvas> {
