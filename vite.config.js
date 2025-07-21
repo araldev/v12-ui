@@ -20,7 +20,7 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       rollupTypes: false,
-      exclude: ['vite.config.ts', '**/*.test.ts', '**/*.test.tsx']
+      exclude: ['vite.config.ts', 'src/**/*.stories.*', '**/*.test.ts', '**/*.test.tsx']
     })
   ],
   build: {
