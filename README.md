@@ -6,8 +6,8 @@
 [![npm](https://img.shields.io/npm/v/v12-ui?style=flat-square&color=0d9488)](https://www.npmjs.com/package/v12-ui)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/v12-ui?style=flat-square&color=0d9488)](https://bundlephobia.com/package/v12-ui)
 [![License](https://img.shields.io/npm/l/v12-ui?style=flat-square&color=0d9488)](https://github.com/araldev/v12-ui/blob/main/LICENSE)
-[![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?style=flat-square&logo=storybook&logoColor=white)](https://[YOUR_DOMAIN]/storybook)
-[![Demo](https://img.shields.io/badge/Demo-Playground-0ea5e9?style=flat-square&logo=react&logoColor=white)](https://[YOUR_DOMAIN]/demo)
+[![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?style=flat-square&logo=storybook&logoColor=white)](https://araldev.github.io/v12-ui/)
+[![Demo](https://img.shields.io/badge/Demo-Playground-0ea5e9?style=flat-square&logo=react&logoColor=white)](https://araldev.github.io/v12-ui/)
 
 ---
 
@@ -48,15 +48,15 @@ function Demo() {
 }
 ```
 
-| Component | Description                   | Docs                                                             |
-| --------- | ----------------------------- | ---------------------------------------------------------------- |
-| Button    | 4 variants + icon support     | [→](https://[YOUR_DOMAIN]/storybook/?path=/docs/button--docs)    |
-| Modal     | Focus-trap, ESC close, portal | [→](https://[YOUR_DOMAIN]/storybook/?path=/docs/modal--docs)     |
-| Accordion | Smooth GSAP animation         | [→](https://[YOUR_DOMAIN]/storybook/?path=/docs/accordion--docs) |
-| Avatar    | Fallback & online status      | [→](https://[YOUR_DOMAIN]/storybook/?path=/docs/avatar--docs)    |
-| …         | …                             | …                                                                |
+| Component | Description                   | Docs                                   |
+| --------- | ----------------------------- | -------------------------------------- |
+| Button    | 4 variants + icon support     | [→](https://araldev.github.io/v12-ui/) |
+| Modal     | Focus-trap, ESC close, portal | [→](https://araldev.github.io/v12-ui/) |
+| Accordion | Smooth GSAP animation         | [→](https://araldev.github.io/v12-ui/) |
+| Avatar    | Fallback & online status      | [→](https://araldev.github.io/v12-ui/) |
+| …         | …                             | …                                      |
 
-> Full API list in [Storybook](https://url.com).
+> Full API list in [Storybook](https://araldev.github.io/v12-ui/).
 
 ## 🎨 Theming and Styles
 
@@ -77,8 +77,8 @@ Override CSS variables or pass props to components:
 
 ## 📖 Storybook & Live Examples
 
-- Storybook: https://github.com/araldev/v12-ui/storybook
-- Interactive demo: https://github.com/araldev/v12-ui/demo
+- Storybook: https://araldev.github.io/v12-ui/
+- Interactive demo: https://araldev.github.io/v12-ui/
 
 ## 🧪 Development
 
