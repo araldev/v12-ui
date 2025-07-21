@@ -77,12 +77,15 @@ function ButtonInner<T extends ElementType = 'button'> (
   ref: Ref<T>
 ): ReactElement {
   const Component = as || 'button'
+  const isNativeButton = Component === 'button'
 
-  if (as === 'a' && !props.href) {
-    throw new Error('When using "as" prop with "a" tag, "href" must be provided.')
-  }
-  if (as === 'button' && props.href) {
-    throw new Error('When using "as" prop with "button" tag, "href" should not be provided.')
+  if (process.env.NODE_ENV !== 'production') {
+    if (as === 'a' && !props.href) {
+      throw new Error('When using "as" prop with "a" tag, "href" must be provided.')
+    }
+    if (as === 'button' && props.href) {
+      throw new Error('When using "as" prop with "button" tag, "href" should not be provided.')
+    }
   }
 
   function handleKeyDown (e: KeyboardEvent): void {
@@ -98,7 +101,7 @@ function ButtonInner<T extends ElementType = 'button'> (
 
   return (
     <Component
-      role='button'
+      role={isNativeButton ? undefined : 'button'}
       tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
       ref={ref}
