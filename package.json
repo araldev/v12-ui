@@ -34,7 +34,8 @@
     "lint": "standard",
     "lint:fix": "standard --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy-storybook": "npm run build-storybook && npx gh-pages -d storybook-static"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^9.0.17",
