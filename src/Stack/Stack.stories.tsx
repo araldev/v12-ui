@@ -4,7 +4,7 @@ import { Stack } from './Stack'
 import type { ComponentPropsWithRef } from 'react'
 
 const meta = {
-  title: 'Components/Stack',
+  title: 'Layout/Stack',
   tags: ['autodocs'],
   parameters: {
     layout: 'centered'
