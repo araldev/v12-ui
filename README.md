@@ -5,7 +5,7 @@
 
 [![npm](https://img.shields.io/npm/v/v12-ui?style=flat-square&color=0d9488)](https://www.npmjs.com/package/v12-ui)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/v12-ui?style=flat-square&color=0d9488)](https://bundlephobia.com/package/v12-ui)
-[![License](https://img.shields.io/npm/l/v12-ui?style=flat-square&color=0d9488)](https://github.com/araldev/v12-ui/blob/main/LICENSE.md)
+![GitHub License](https://img.shields.io/github/license/araldev/v12-ui)
 [![Storybook](https://img.shields.io/badge/Storybook-live-ff4785?style=flat-square&logo=storybook&logoColor=white)](https://araldev.github.io/v12-ui/)
 [![Demo](https://img.shields.io/badge/Demo-Playground-0ea5e9?style=flat-square&logo=react&logoColor=white)](https://araldev.github.io/v12-ui/)
 
@@ -13,13 +13,13 @@
 
 ## ✨ Highlights
 
-- 🧩 20+ ready-to-use components
-- ⚙️ 10+ custom hooks (useToggle, useMediaQuery, useScrollLock…)
+- 🧩 4 ready-to-use components
+- ⚙️ 1 custom hooks (useDataTheme)
 - 🎞️ Built-in GSAP & Lenis motion helpers
-- 🌗 Dark-mode support via Tailwind `dark:` variant
+- 🌗 Auto Dark-mode detect without config
 - 🛠️ Full TypeScript definitions
 - 🪄 Tree-shakable ESM & CJS builds
-- 🎨 Themeable via CSS variables
+- 🎨 Themeable via **CSS variables** , **CSS modules** and **Tailwind**
 - 📱 Responsive by default
 
 ---
@@ -48,13 +48,13 @@ function Demo() {
 }
 ```
 
-| Component | Description                   | Docs                                   |
-| --------- | ----------------------------- | -------------------------------------- |
-| Button    | 4 variants + icon support     | [→](https://araldev.github.io/v12-ui/) |
-| Modal     | Focus-trap, ESC close, portal | [→](https://araldev.github.io/v12-ui/) |
-| Accordion | Smooth GSAP animation         | [→](https://araldev.github.io/v12-ui/) |
-| Avatar    | Fallback & online status      | [→](https://araldev.github.io/v12-ui/) |
-| …         | …                             | …                                      |
+| Component          | Description                   | Docs                                                                                  |
+| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------- |
+| Button             | 4 variants + icon support     | [→](https://araldev.github.io/v12-ui/?path=/docs/components-button--docs)             |
+| Stack              | Focus-trap, ESC close, portal | [→](https://araldev.github.io/v12-ui/?path=/docs/components-stack--docs)              |
+| AnimatedBackground | Smooth GSAP animation         | [→](https://araldev.github.io/v12-ui/?path=/docs/components-animatedbackground--docs) |
+| Text               | Fallback & online status      | [→](https://araldev.github.io/v12-ui/?path=/docs/components-text--docs)               |
+| …                  | …                             | …                                                                                     |
 
 > Full API list in [Storybook](https://araldev.github.io/v12-ui/).
 
@@ -63,6 +63,7 @@ function Demo() {
 Import **v12-ui stylesheet** in your entry point like `src/main.{jsx,tsx}`.
 
 ```js
+// src/main.jsx
 import "v12-ui/styles.css";
 ```
 
