@@ -78,8 +78,8 @@ ref: Ref<HTMLDivElement>): ReactElement => {
 
     let { width, height } = canvasSize
 
-    width = (canvas.width = window.innerWidth)
-    height = (canvas.height = window.innerHeight)
+    width = (canvas.width = canvas.parentElement?.clientWidth || window.innerWidth)
+    height = (canvas.height = canvas.parentElement?.clientHeight || window.innerHeight)
 
     const colors = [
       bubbleGradiant1,
