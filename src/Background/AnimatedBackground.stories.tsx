@@ -6,14 +6,11 @@ const meta = {
   title: 'Components/AnimatedBackground',
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
-    // This is to ensure the background takes
-    // full viewport height on the storybook page
+    layout: 'fullscreen',
     docs: {
       story: {
-        inline: false,
-        height: '40vh',
-        width: '40wh'
+        height: '100vh',
+        width: '100%'
       }
     }
   },
@@ -74,5 +71,8 @@ export const Default: Story = {
     bubbleGradiant3: ['#e0f7f4', '#a3e9ff'],
     zIndex: -9999,
     className: ''
-  }
+  },
+  render: (args) => (
+    <AnimatedBackground {...args} />
+  )
 }

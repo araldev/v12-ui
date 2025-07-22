@@ -1,15 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import { Text } from './Text'
+import type { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react'
+import { useDataTheme } from '../Hooks/useDataTheme'
+
+type WrapperThemeType = 'black' | 'white'
+
+function WrapperThemeDetected ({ children, ...props }: { children?: ReactNode } & ComponentPropsWithoutRef<'div'>): ReactElement {
+  const { theme } = useDataTheme()
+
+  function transformTheme (currentTheme: string): WrapperThemeType {
+    if (currentTheme === 'dark') return 'black'
+    if (currentTheme === 'light') return 'white'
+    return 'black'
+  }
+
+  return (
+    <div style={{ backgroundColor: transformTheme(theme) }} className='w-full h-fit p-20 flex items-center justify-center' {...props}>
+      {children}
+    </div>
+  )
+}
 
 const meta = {
   title: 'Components/Text',
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
     docs: {
       story: {
-        inline: false,
         height: '100%',
         width: '100%'
       }
@@ -85,6 +104,8 @@ export const Default: Story = {
     className: ''
   },
   render: (args) => (
-    <Text {...args} />
+    <WrapperThemeDetected>
+      <Text {...args} />
+    </WrapperThemeDetected>
   )
 }
