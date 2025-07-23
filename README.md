@@ -13,12 +13,12 @@
 
 ## ✨ Highlights
 
-- 🧩 4 ready-to-use components
-- ⚙️ 1 custom hooks (useDataTheme)
+- 🧩 4 components ready to use without configuration
+- ⚙️ 1 custom hook
 - 🎞️ Built-in GSAP & Lenis motion helpers
-- 🌗 Auto Dark-mode detect without config
-- 🛠️ Full TypeScript definitions
-- 🪄 Tree-shakable ESM & CJS builds
+- 🌗 Automatic dark-mode detection without configuration
+- 🛠️ Full TypeScript definitions with autocomplete
+- ✂️ Tree-shakable ESM & CJS builds
 - 🎨 Themeable via **CSS variables** , **CSS modules** and **Tailwind**
 - 📱 Responsive by default
 
@@ -48,13 +48,12 @@ function Demo() {
 }
 ```
 
-| Component          | Description                   | Docs                                                                                  |
-| ------------------ | ----------------------------- | ------------------------------------------------------------------------------------- |
-| Button             | 4 variants + icon support     | [→](https://araldev.github.io/v12-ui/?path=/docs/components-button--docs)             |
-| Stack              | Focus-trap, ESC close, portal | [→](https://araldev.github.io/v12-ui/?path=/docs/components-stack--docs)              |
-| AnimatedBackground | Smooth GSAP animation         | [→](https://araldev.github.io/v12-ui/?path=/docs/components-animatedbackground--docs) |
-| Text               | Fallback & online status      | [→](https://araldev.github.io/v12-ui/?path=/docs/components-text--docs)               |
-| …                  | …                             | …                                                                                     |
+| Component          | Description                         | Docs                                                                                  |
+| ------------------ | ----------------------------------- | ------------------------------------------------------------------------------------- |
+| Button             | Polymorphic button                  | [→](https://araldev.github.io/v12-ui/?path=/docs/components-button--docs)             |
+| Stack              | Flex Box Container                  | [→](https://araldev.github.io/v12-ui/?path=/docs/components-stack--docs)              |
+| AnimatedBackground | Canvas-based light-source animation | [→](https://araldev.github.io/v12-ui/?path=/docs/components-animatedbackground--docs) |
+| Text               | Polymorphic text                    | [→](https://araldev.github.io/v12-ui/?path=/docs/components-text--docs)               |
 
 > Full API list in [Storybook](https://araldev.github.io/v12-ui/).
 
