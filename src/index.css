@@ -4,296 +4,296 @@
   :root {
     color-scheme: light dark;
 
-    --brand-primary-50: hsl(210 100% 97%);
-    --brand-primary-100: hsl(210 95% 93%);
-    --brand-primary-200: hsl(210 92% 84%);
-    --brand-primary-300: hsl(210 90% 72%);
-    --brand-primary-400: hsl(210 90% 64%);
-    --brand-primary-500: hsl(210 90% 56%);
-    --brand-primary-600: hsl(210 88% 48%);
-    --brand-primary-700: hsl(210 85% 40%);
-    --brand-primary-800: hsl(210 82% 32%);
-    --brand-primary-900: hsl(210 80% 24%);
+    --v12-brand-primary-50: hsl(210 100% 97%);
+    --v12-brand-primary-100: hsl(210 95% 93%);
+    --v12-brand-primary-200: hsl(210 92% 84%);
+    --v12-brand-primary-300: hsl(210 90% 72%);
+    --v12-brand-primary-400: hsl(210 90% 64%);
+    --v12-brand-primary-500: hsl(210 90% 56%);
+    --v12-brand-primary-600: hsl(210 88% 48%);
+    --v12-brand-primary-700: hsl(210 85% 40%);
+    --v12-brand-primary-800: hsl(210 82% 32%);
+    --v12-brand-primary-900: hsl(210 80% 24%);
 
-    --brand-secondary-50: hsl(340 85% 96%);
-    --brand-secondary-100: hsl(340 80% 90%);
-    --brand-secondary-200: hsl(340 78% 80%);
-    --brand-secondary-300: hsl(340 76% 70%);
-    --brand-secondary-400: hsl(340 75% 65%);
-    --brand-secondary-500: hsl(340 75% 60%);
-    --brand-secondary-600: hsl(340 73% 52%);
-    --brand-secondary-700: hsl(340 70% 44%);
-    --brand-secondary-800: hsl(340 68% 36%);
-    --brand-secondary-900: hsl(340 65% 28%);
+    --v12-brand-secondary-50: hsl(340 85% 96%);
+    --v12-brand-secondary-100: hsl(340 80% 90%);
+    --v12-brand-secondary-200: hsl(340 78% 80%);
+    --v12-brand-secondary-300: hsl(340 76% 70%);
+    --v12-brand-secondary-400: hsl(340 75% 65%);
+    --v12-brand-secondary-500: hsl(340 75% 60%);
+    --v12-brand-secondary-600: hsl(340 73% 52%);
+    --v12-brand-secondary-700: hsl(340 70% 44%);
+    --v12-brand-secondary-800: hsl(340 68% 36%);
+    --v12-brand-secondary-900: hsl(340 65% 28%);
 
-    --brand-tertiary-50: hsl(0 0% 98%);
-    --brand-tertiary-100: hsl(0 0% 96%);
-    --brand-tertiary-200: hsl(0 0% 89%);
-    --brand-tertiary-300: hsl(0 0% 78%);
-    --brand-tertiary-400: hsl(0 0% 65%);
-    --brand-tertiary-500: hsl(0 0% 52%);
-    --brand-tertiary-600: hsl(0 0% 42%);
-    --brand-tertiary-700: hsl(0 0% 32%);
-    --brand-tertiary-800: hsl(0 0% 22%);
-    --brand-tertiary-900: hsl(0 0% 12%);
+    --v12-brand-tertiary-50: hsl(0 0% 98%);
+    --v12-brand-tertiary-100: hsl(0 0% 96%);
+    --v12-brand-tertiary-200: hsl(0 0% 89%);
+    --v12-brand-tertiary-300: hsl(0 0% 78%);
+    --v12-brand-tertiary-400: hsl(0 0% 65%);
+    --v12-brand-tertiary-500: hsl(0 0% 52%);
+    --v12-brand-tertiary-600: hsl(0 0% 42%);
+    --v12-brand-tertiary-700: hsl(0 0% 32%);
+    --v12-brand-tertiary-800: hsl(0 0% 22%);
+    --v12-brand-tertiary-900: hsl(0 0% 12%);
 
-    --background: hsl(0 0% 100%);
-    --foreground: hsl(0 0% 12%);
+    --v12-background: hsl(0 0% 100%);
+    --v12-foreground: hsl(0 0% 12%);
 
-    --card: hsl(0 0% 100%);
-    --card-hover: hsl(0 0% 98%);
-    --card-foreground: hsl(0 0% 12%);
-    --card-hover-foreground: hsl(0 0% 12%);
-    --card-border: hsl(0 0% 89%);
-    --card-hover-border: hsl(0 0% 78%);
+    --v12-card: hsl(0 0% 100%);
+    --v12-card-hover: hsl(0 0% 98%);
+    --v12-card-foreground: hsl(0 0% 12%);
+    --v12-card-hover-foreground: hsl(0 0% 12%);
+    --v12-card-border: hsl(0 0% 89%);
+    --v12-card-hover-border: hsl(0 0% 78%);
 
-    --popover: hsl(0 0% 100%);
-    --popover-hover: hsl(0 0% 98%);
-    --popover-foreground: hsl(0 0% 12%);
-    --popover-hover-foreground: hsl(0 0% 12%);
-    --popover-border: hsl(0 0% 89%);
-    --popover-hover-border: hsl(0 0% 78%);
+    --v12-popover: hsl(0 0% 100%);
+    --v12-popover-hover: hsl(0 0% 98%);
+    --v12-popover-foreground: hsl(0 0% 12%);
+    --v12-popover-hover-foreground: hsl(0 0% 12%);
+    --v12-popover-border: hsl(0 0% 89%);
+    --v12-popover-hover-border: hsl(0 0% 78%);
 
-    --primary: hsl(210 90% 56%);
-    --primary-hover: hsl(210 88% 48%);
-    --primary-foreground: hsl(0 0% 100%);
-    --primary-hover-foreground: hsl(0 0% 100%);
-    --primary-border: hsl(210 90% 56%);
-    --primary-hover-border: hsl(210 88% 48%);
+    --v12-primary: hsl(210 90% 56%);
+    --v12-primary-hover: hsl(210 88% 48%);
+    --v12-primary-foreground: hsl(0 0% 100%);
+    --v12-primary-hover-foreground: hsl(0 0% 100%);
+    --v12-primary-border: hsl(210 90% 56%);
+    --v12-primary-hover-border: hsl(210 88% 48%);
 
-    --secondary: hsl(0 0% 96%);
-    --secondary-hover: hsl(0 0% 89%);
-    --secondary-foreground: hsl(0 0% 12%);
-    --secondary-hover-foreground: hsl(0 0% 12%);
-    --secondary-border: hsl(0 0% 89%);
-    --secondary-hover-border: hsl(0 0% 78%);
+    --v12-secondary: hsl(0 0% 96%);
+    --v12-secondary-hover: hsl(0 0% 89%);
+    --v12-secondary-foreground: hsl(0 0% 12%);
+    --v12-secondary-hover-foreground: hsl(0 0% 12%);
+    --v12-secondary-border: hsl(0 0% 89%);
+    --v12-secondary-hover-border: hsl(0 0% 78%);
 
-    --ghost: transparent;
-    --ghost-hover: hsl(0, 0%, 93%);
-    --ghost-foreground: hsl(0, 0%, 0%);
-    --ghost-hover-foreground: hsl(0, 0%, 0%);
-    --ghost-border: hsl(0, 0%, 5%);
-    --ghost-hover-border: hsl(0 0% 24%);
+    --v12-ghost: transparent;
+    --v12-ghost-hover: hsl(0, 0%, 93%);
+    --v12-ghost-foreground: hsl(0, 0%, 0%);
+    --v12-ghost-hover-foreground: hsl(0, 0%, 0%);
+    --v12-ghost-border: hsl(0, 0%, 5%);
+    --v12-ghost-hover-border: hsl(0 0% 24%);
 
-    --muted: hsl(0 0% 96%);
-    --muted-foreground: hsl(0 0% 42%);
+    --v12-muted: hsl(0 0% 96%);
+    --v12-muted-foreground: hsl(0 0% 42%);
 
-    --accent: hsl(0 0% 96%);
-    --accent-hover: hsl(0 0% 89%);
-    --accent-foreground: hsl(0 0% 12%);
-    --accent-hover-foreground: hsl(0 0% 12%);
+    --v12-accent: hsl(0 0% 96%);
+    --v12-accent-hover: hsl(0 0% 89%);
+    --v12-accent-foreground: hsl(0 0% 12%);
+    --v12-accent-hover-foreground: hsl(0 0% 12%);
 
-    --input: hsl(0 0% 100%);
-    --input-hover: hsl(0 0% 98%);
-    --input-foreground: hsl(0 0% 12%);
-    --input-hover-foreground: hsl(0 0% 12%);
-    --input-border: hsl(0 0% 89%);
-    --input-hover-border: hsl(0 0% 78%);
+    --v12-input: hsl(0 0% 100%);
+    --v12-input-hover: hsl(0 0% 98%);
+    --v12-input-foreground: hsl(0 0% 12%);
+    --v12-input-hover-foreground: hsl(0 0% 12%);
+    --v12-input-border: hsl(0 0% 89%);
+    --v12-input-hover-border: hsl(0 0% 78%);
 
-    --success: hsl(142 76% 36%);
-    --success-hover: hsl(142 76% 31%);
-    --success-foreground: hsl(210 40% 98%);
-    --success-hover-foreground: hsl(210 40% 98%);
-    --success-border: hsl(142, 86%, 20%);
-    --success-hover-border: hsl(143, 89%, 14%);
-    --success-shadow: 0 4px 10px -2px hsl(142 76% 36% / 0.2);
+    --v12-success: hsl(142 76% 36%);
+    --v12-success-hover: hsl(142 76% 31%);
+    --v12-success-foreground: hsl(210 40% 98%);
+    --v12-success-hover-foreground: hsl(210 40% 98%);
+    --v12-success-border: hsl(142, 86%, 20%);
+    --v12-success-hover-border: hsl(143, 89%, 14%);
+    --v12-success-shadow: 0 4px 10px -2px hsl(142 76% 36% / 0.2);
 
-    --warning: hsl(38 92% 50%);
-    --warning-hover: hsl(38 92% 45%);
-    --warning-foreground: hsl(0 0% 100%);
-    --warning-hover-foreground: hsl(0 0% 100%);
-    --warning-border: hsl(38, 93%, 27%);
-    --warning-hover-border: hsl(38, 93%, 17%);
-    --warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.2);
+    --v12-warning: hsl(38 92% 50%);
+    --v12-warning-hover: hsl(38 92% 45%);
+    --v12-warning-foreground: hsl(0 0% 100%);
+    --v12-warning-hover-foreground: hsl(0 0% 100%);
+    --v12-warning-border: hsl(38, 93%, 27%);
+    --v12-warning-hover-border: hsl(38, 93%, 17%);
+    --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.2);
 
-    --error: hsl(0 84% 60%);
-    --error-hover: hsl(0 84% 55%);
-    --error-foreground: hsl(0, 52%, 82%);
-    --error-hover-foreground: hsl(210 40% 98%);
-    --error-border: hsl(0, 57%, 32%);
-    --error-hover-border: hsl(0, 58%, 23%);
-    --error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.2);
+    --v12-error: hsl(0 84% 60%);
+    --v12-error-hover: hsl(0 84% 55%);
+    --v12-error-foreground: hsl(0, 52%, 82%);
+    --v12-error-hover-foreground: hsl(210 40% 98%);
+    --v12-error-border: hsl(0, 57%, 32%);
+    --v12-error-hover-border: hsl(0, 58%, 23%);
+    --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.2);
 
-    --info: hsl(199 89% 48%);
-    --info-hover: hsl(199 89% 43%);
-    --info-foreground: hsl(210 40% 98%);
-    --info-hover-foreground: hsl(210 40% 98%);
-    --info-border: hsl(199, 82%, 29%);
-    --info-hover-border: hsl(199, 79%, 19%);
-    --info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.2);
+    --v12-info: hsl(199 89% 48%);
+    --v12-info-hover: hsl(199 89% 43%);
+    --v12-info-foreground: hsl(210 40% 98%);
+    --v12-info-hover-foreground: hsl(210 40% 98%);
+    --v12-info-border: hsl(199, 82%, 29%);
+    --v12-info-hover-border: hsl(199, 79%, 19%);
+    --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.2);
 
-    --ring-disabled: hsl(0 0% 65%);
-    --ring-focus: hsl(340, 73%, 52%);
-    --ring-active: hsl(209, 64%, 17%);
+    --v12-ring-disabled: hsl(0 0% 65%);
+    --v12-ring-focus: hsl(340, 73%, 52%);
+    --v12-ring-active: hsl(209, 64%, 17%);
 
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
-    --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.1);
-    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.15);
-    --shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.15);
-    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.05);
+    --v12-shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --v12-shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --v12-shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+    --v12-shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -4px hsl(0 0% 0% / 0.1);
+    --v12-shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 8px 10px -6px hsl(0 0% 0% / 0.1);
+    --v12-shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.15);
+    --v12-shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.15);
+    --v12-shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.05);
 
-    --text-shadow-black-p: 0px 1px 2px rgba(0, 0, 0, .2);
-    --text-shadow-black-title: 0px 2px 4px rgba(0, 0, 0, .3);
-    --text-shadow-white-p: 0px 1px 2px rgba(255, 255, 255, .2);
-    --text-shadow-white-title: 0px 2px 4px rgba(255, 255, 255, .3);
-    --text-shadow-success-p: 0px 1px 2px hsl(142 76% 36% / 0.2);
-    --text-shadow-success-title: 0px 2px 4px hsl(142 76% 36% / 0.3);
-    --text-shadow-warning-p: 0px 1px 2px hsl(38 92% 50% / 0.2);
-    --text-shadow-warning-title: 0px 2px 4px hsl(38 92% 50% / 0.3);
-    --text-shadow-error-p: 0px 1px 2px hsl(0 80% 63% / 0.2);
-    --text-shadow-error-title: 0px 2px 4px hsl(0 80% 63% / 0.3);
-    --text-shadow-info-p: 0px 1px 2px hsl(199 89% 48% / 0.2);
-    --text-shadow-info-title: 0px 2px 4px hsl(199 89% 48% / 0.3);
+    --v12-text-shadow-black-p: 0px 1px 2px rgba(0, 0, 0, .2);
+    --v12-text-shadow-black-title: 0px 2px 4px rgba(0, 0, 0, .3);
+    --v12-text-shadow-white-p: 0px 1px 2px rgba(255, 255, 255, .2);
+    --v12-text-shadow-white-title: 0px 2px 4px rgba(255, 255, 255, .3);
+    --v12-text-shadow-success-p: 0px 1px 2px hsl(142 76% 36% / 0.2);
+    --v12-text-shadow-success-title: 0px 2px 4px hsl(142 76% 36% / 0.3);
+    --v12-text-shadow-warning-p: 0px 1px 2px hsl(38 92% 50% / 0.2);
+    --v12-text-shadow-warning-title: 0px 2px 4px hsl(38 92% 50% / 0.3);
+    --v12-text-shadow-error-p: 0px 1px 2px hsl(0 80% 63% / 0.2);
+    --v12-text-shadow-error-title: 0px 2px 4px hsl(0 80% 63% / 0.3);
+    --v12-text-shadow-info-p: 0px 1px 2px hsl(199 89% 48% / 0.2);
+    --v12-text-shadow-info-title: 0px 2px 4px hsl(199 89% 48% / 0.3);
 
-    --font-size-small-responsive: clamp(.5rem, .9vw + 0.3rem, 0.75rem);
-    --font-weight-small: 400;
-    --font-size-paragraph-responsive: clamp(1rem, 1.2vw + 0.5rem, 1.25rem);
-    --font-weight-paragraph: 400;
-    --font-size-subtitle-responsive: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
-    --font-weight-subtitle: 500;
-    --font-size-title-responsive: clamp(2rem, 5vw + 1rem, 4rem);
-    --font-weight-title: 700;
+    --v12-font-size-small-responsive: clamp(.5rem, .9vw + 0.3rem, 0.75rem);
+    --v12-font-weight-small: 400;
+    --v12-font-size-paragraph-responsive: clamp(1rem, 1.2vw + 0.5rem, 1.25rem);
+    --v12-font-weight-paragraph: 400;
+    --v12-font-size-subtitle-responsive: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
+    --v12-font-weight-subtitle: 500;
+    --v12-font-size-title-responsive: clamp(2rem, 5vw + 1rem, 4rem);
+    --v12-font-weight-title: 700;
 
-    --font-size-button-responsive: clamp(1rem, 1vw + 0.5rem, 1.125rem);
-    --font-weight-button: 600;
+    --v12-font-size-button-responsive: clamp(1rem, 1vw + 0.5rem, 1.125rem);
+    --v12-font-weight-button: 600;
   }
 
   [data-theme="dark"] {
-    --background: hsl(0 0% 4%);
-    --foreground: hsl(0 0% 96%);
+    --v12-background: hsl(0 0% 4%);
+    --v12-foreground: hsl(0 0% 96%);
 
-    --card: hsl(0 0% 6%);
-    --card-hover: hsl(0 0% 8%);
-    --card-foreground: hsl(0 0% 96%);
-    --card-hover-foreground: hsl(0 0% 96%);
-    --card-border: hsl(0 0% 18%);
-    --card-hover-border: hsl(0 0% 24%);
+    --v12-card: hsl(0 0% 6%);
+    --v12-card-hover: hsl(0 0% 8%);
+    --v12-card-foreground: hsl(0 0% 96%);
+    --v12-card-hover-foreground: hsl(0 0% 96%);
+    --v12-card-border: hsl(0 0% 18%);
+    --v12-card-hover-border: hsl(0 0% 24%);
 
-    --popover: hsl(0 0% 6%);
-    --popover-hover: hsl(0 0% 8%);
-    --popover-foreground: hsl(0 0% 96%);
-    --popover-hover-foreground: hsl(0 0% 96%);
-    --popover-border: hsl(0 0% 18%);
-    --popover-hover-border: hsl(0 0% 24%);
+    --v12-popover: hsl(0 0% 6%);
+    --v12-popover-hover: hsl(0 0% 8%);
+    --v12-popover-foreground: hsl(0 0% 96%);
+    --v12-popover-hover-foreground: hsl(0 0% 96%);
+    --v12-popover-border: hsl(0 0% 18%);
+    --v12-popover-hover-border: hsl(0 0% 24%);
 
-    --primary: hsl(210 90% 56%);
-    --primary-hover: hsl(210 90% 64%);
-    --primary-foreground: hsl(0 0% 100%);
-    --primary-hover-foreground: hsl(0 0% 100%);
-    --primary-border: hsl(210 90% 56%);
-    --primary-hover-border: hsl(210 90% 64%);
+    --v12-primary: hsl(210 90% 56%);
+    --v12-primary-hover: hsl(210 90% 64%);
+    --v12-primary-foreground: hsl(0 0% 100%);
+    --v12-primary-hover-foreground: hsl(0 0% 100%);
+    --v12-primary-border: hsl(210 90% 56%);
+    --v12-primary-hover-border: hsl(210 90% 64%);
     
-    --secondary: hsl(0 0% 18%);
-    --secondary-hover: hsl(0 0% 24%);
-    --secondary-foreground: hsl(0 0% 96%);
-    --secondary-hover-foreground: hsl(0 0% 96%);
-    --secondary-border: hsl(0 0% 18%);
-    --secondary-hover-border: hsl(0 0% 24%);
+    --v12-secondary: hsl(0 0% 18%);
+    --v12-secondary-hover: hsl(0 0% 24%);
+    --v12-secondary-foreground: hsl(0 0% 96%);
+    --v12-secondary-hover-foreground: hsl(0 0% 96%);
+    --v12-secondary-border: hsl(0 0% 18%);
+    --v12-secondary-hover-border: hsl(0 0% 24%);
 
-    --ghost: transparent;
-    --ghost-hover: hsl(0, 0%, 18%);
-    --ghost-foreground: hsl(0, 0%, 95%);
-    --ghost-hover-foreground: hsl(0, 0%, 95%);
-    --ghost-border: hsl(0, 0%, 30%);
-    --ghost-hover-border: hsl(0, 0%, 45%); 
+    --v12-ghost: transparent;
+    --v12-ghost-hover: hsl(0, 0%, 18%);
+    --v12-ghost-foreground: hsl(0, 0%, 95%);
+    --v12-ghost-hover-foreground: hsl(0, 0%, 95%);
+    --v12-ghost-border: hsl(0, 0%, 30%);
+    --v12-ghost-hover-border: hsl(0, 0%, 45%); 
 
-    --muted: hsl(0 0% 18%);
-    --muted-foreground: hsl(0 0% 65%);
+    --v12-muted: hsl(0 0% 18%);
+    --v12-muted-foreground: hsl(0 0% 65%);
 
-    --accent: hsl(0 0% 24%);
-    --accent-hover: hsl(0 0% 30%);
-    --accent-foreground: hsl(0 0% 96%);
-    --accent-hover-foreground: hsl(0 0% 96%);
+    --v12-accent: hsl(0 0% 24%);
+    --v12-accent-hover: hsl(0 0% 30%);
+    --v12-accent-foreground: hsl(0 0% 96%);
+    --v12-accent-hover-foreground: hsl(0 0% 96%);
 
-    --input: hsl(0 0% 18%);
-    --input-hover: hsl(0 0% 24%);
-    --input-foreground: hsl(0 0% 96%);
-    --input-hover-foreground: hsl(0 0% 96%);
-    --input-border: hsl(0 0% 18%);
-    --input-hover-border: hsl(0 0% 24%);
+    --v12-input: hsl(0 0% 18%);
+    --v12-input-hover: hsl(0 0% 24%);
+    --v12-input-foreground: hsl(0 0% 96%);
+    --v12-input-hover-foreground: hsl(0 0% 96%);
+    --v12-input-border: hsl(0 0% 18%);
+    --v12-input-hover-border: hsl(0 0% 24%);
 
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.5);
-    --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.6), 0 1px 2px -1px hsl(0 0% 0% / 0.6);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.6), 0 2px 4px -2px hsl(0 0% 0% / 0.6);
-    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.6), 0 4px 6px -4px hsl(0 0% 0% / 0.6);
-    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6), 0 8px 10px -6px hsl(0 0% 0% / 0.6);
-    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
-    --shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
-    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
+    --v12-shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.5);
+    --v12-shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.6), 0 1px 2px -1px hsl(0 0% 0% / 0.6);
+    --v12-shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.6), 0 2px 4px -2px hsl(0 0% 0% / 0.6);
+    --v12-shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.6), 0 4px 6px -4px hsl(0 0% 0% / 0.6);
+    --v12-shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6), 0 8px 10px -6px hsl(0 0% 0% / 0.6);
+    --v12-shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
+    --v12-shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
+    --v12-shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme]) {
-      --background: hsl(0 0% 4%);
-      --foreground: hsl(0 0% 96%);
+      --v12-background: hsl(0 0% 4%);
+      --v12-foreground: hsl(0 0% 96%);
 
-      --card: hsl(0 0% 6%);
-      --card-hover: hsl(0 0% 8%);
-      --card-foreground: hsl(0 0% 96%);
-      --card-hover-foreground: hsl(0 0% 96%);
-      --card-border: hsl(0 0% 18%);
-      --card-hover-border: hsl(0 0% 24%);
+      --v12-card: hsl(0 0% 6%);
+      --v12-card-hover: hsl(0 0% 8%);
+      --v12-card-foreground: hsl(0 0% 96%);
+      --v12-card-hover-foreground: hsl(0 0% 96%);
+      --v12-card-border: hsl(0 0% 18%);
+      --v12-card-hover-border: hsl(0 0% 24%);
 
-      --popover: hsl(0 0% 6%);
-      --popover-hover: hsl(0 0% 8%);
-      --popover-foreground: hsl(0 0% 96%);
-      --popover-hover-foreground: hsl(0 0% 96%);
-      --popover-border: hsl(0 0% 18%);
-      --popover-hover-border: hsl(0 0% 24%);
+      --v12-popover: hsl(0 0% 6%);
+      --v12-popover-hover: hsl(0 0% 8%);
+      --v12-popover-foreground: hsl(0 0% 96%);
+      --v12-popover-hover-foreground: hsl(0 0% 96%);
+      --v12-popover-border: hsl(0 0% 18%);
+      --v12-popover-hover-border: hsl(0 0% 24%);
 
-      --primary: hsl(210 90% 56%);
-      --primary-hover: hsl(210 90% 64%);
-      --primary-foreground: hsl(0 0% 100%);
-      --primary-hover-foreground: hsl(0 0% 100%);
-      --primary-border: hsl(210 90% 56%);
-      --primary-hover-border: hsl(210 90% 64%);
+      --v12-primary: hsl(210 90% 56%);
+      --v12-primary-hover: hsl(210 90% 64%);
+      --v12-primary-foreground: hsl(0 0% 100%);
+      --v12-primary-hover-foreground: hsl(0 0% 100%);
+      --v12-primary-border: hsl(210 90% 56%);
+      --v12-primary-hover-border: hsl(210 90% 64%);
 
-      --secondary: hsl(0 0% 18%);
-      --secondary-hover: hsl(0 0% 24%);
-      --secondary-foreground: hsl(0 0% 96%);
-      --secondary-hover-foreground: hsl(0 0% 96%);
-      --secondary-border: hsl(0 0% 18%);
-      --secondary-hover-border: hsl(0 0% 24%);
+      --v12-secondary: hsl(0 0% 18%);
+      --v12-secondary-hover: hsl(0 0% 24%);
+      --v12-secondary-foreground: hsl(0 0% 96%);
+      --v12-secondary-hover-foreground: hsl(0 0% 96%);
+      --v12-secondary-border: hsl(0 0% 18%);
+      --v12-secondary-hover-border: hsl(0 0% 24%);
 
-      --ghost: transparent;
-      --ghost-hover: hsl(0, 0%, 18%);
-      --ghost-foreground: hsl(0, 0%, 95%);
-      --ghost-hover-foreground: hsl(0, 0%, 95%);
-      --ghost-border: hsl(0, 0%, 30%);
-      --ghost-hover-border: hsl(0, 0%, 45%); 
+      --v12-ghost: transparent;
+      --v12-ghost-hover: hsl(0, 0%, 18%);
+      --v12-ghost-foreground: hsl(0, 0%, 95%);
+      --v12-ghost-hover-foreground: hsl(0, 0%, 95%);
+      --v12-ghost-border: hsl(0, 0%, 30%);
+      --v12-ghost-hover-border: hsl(0, 0%, 45%); 
 
-      --muted: hsl(0 0% 18%);
-      --muted-foreground: hsl(0 0% 65%);
+      --v12-muted: hsl(0 0% 18%);
+      --v12-muted-foreground: hsl(0 0% 65%);
 
-      --accent: hsl(0 0% 24%);
-      --accent-hover: hsl(0 0% 30%);
-      --accent-foreground: hsl(0 0% 96%);
-      --accent-hover-foreground: hsl(0 0% 96%);
+      --v12-accent: hsl(0 0% 24%);
+      --v12-accent-hover: hsl(0 0% 30%);
+      --v12-accent-foreground: hsl(0 0% 96%);
+      --v12-accent-hover-foreground: hsl(0 0% 96%);
 
-      --input: hsl(0 0% 18%);
-      --input-hover: hsl(0 0% 24%);
-      --input-foreground: hsl(0 0% 96%);
-      --input-hover-foreground: hsl(0 0% 96%);
-      --input-border: hsl(0 0% 18%);
-      --input-hover-border: hsl(0 0% 24%);
+      --v12-input: hsl(0 0% 18%);
+      --v12-input-hover: hsl(0 0% 24%);
+      --v12-input-foreground: hsl(0 0% 96%);
+      --v12-input-hover-foreground: hsl(0 0% 96%);
+      --v12-input-border: hsl(0 0% 18%);
+      --v12-input-hover-border: hsl(0 0% 24%);
 
-      --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.5);
-      --shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.6), 0 1px 2px -1px hsl(0 0% 0% / 0.6);
-      --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.6), 0 2px 4px -2px hsl(0 0% 0% / 0.6);
-      --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.6), 0 4px 6px -4px hsl(0 0% 0% / 0.6);
-      --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6), 0 8px 10px -6px hsl(0 0% 0% / 0.6);
-      --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
-      --shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
-      --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
+      --v12-shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.5);
+      --v12-shadow: 0 1px 3px 0 hsl(0 0% 0% / 0.6), 0 1px 2px -1px hsl(0 0% 0% / 0.6);
+      --v12-shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.6), 0 2px 4px -2px hsl(0 0% 0% / 0.6);
+      --v12-shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.6), 0 4px 6px -4px hsl(0 0% 0% / 0.6);
+      --v12-shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.6), 0 8px 10px -6px hsl(0 0% 0% / 0.6);
+      --v12-shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
+      --v12-shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
+      --v12-shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
     }
   }
 
-  * {
+  *, :after, :before {
     box-sizing: border-box;
-    border-color: var(--color-border-default);
+    border-color: var(--v12-color-border-default);
   }
 
   body {
@@ -303,8 +303,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: var(--v12-background);
+    color: var(--v12-foreground);
   }
 
   body,
@@ -315,167 +315,167 @@
 }
 
 @theme inline {
-  --color-brand-primary-50: var(--brand-primary-50);
-  --color-brand-primary-100: var(--brand-primary-100);
-  --color-brand-primary-200: var(--brand-primary-200);
-  --color-brand-primary-300: var(--brand-primary-300);
-  --color-brand-primary-400: var(--brand-primary-400);
-  --color-brand-primary-500: var(--brand-primary-500);
-  --color-brand-primary-600: var(--brand-primary-600);
-  --color-brand-primary-700: var(--brand-primary-700);
-  --color-brand-primary-800: var(--brand-primary-800);
-  --color-brand-primary-900: var(--brand-primary-900);
+  --color-brand-primary-50: var(--v12-brand-primary-50);
+  --color-brand-primary-100: var(--v12-brand-primary-100);
+  --color-brand-primary-200: var(--v12-brand-primary-200);
+  --color-brand-primary-300: var(--v12-brand-primary-300);
+  --color-brand-primary-400: var(--v12-brand-primary-400);
+  --color-brand-primary-500: var(--v12-brand-primary-500);
+  --color-brand-primary-600: var(--v12-brand-primary-600);
+  --color-brand-primary-700: var(--v12-brand-primary-700);
+  --color-brand-primary-800: var(--v12-brand-primary-800);
+  --color-brand-primary-900: var(--v12-brand-primary-900);
 
-  --color-brand-secondary-50: var(--brand-secondary-50);
-  --color-brand-secondary-100: var(--brand-secondary-100);
-  --color-brand-secondary-200: var(--brand-secondary-200);
-  --color-brand-secondary-300: var(--brand-secondary-300);
-  --color-brand-secondary-400: var(--brand-secondary-400);
-  --color-brand-secondary-500: var(--brand-secondary-500);
-  --color-brand-secondary-600: var(--brand-secondary-600);
-  --color-brand-secondary-700: var(--brand-secondary-700);
-  --color-brand-secondary-800: var(--brand-secondary-800);
-  --color-brand-secondary-900: var(--brand-secondary-900);
+  --color-brand-secondary-50: var(--v12-brand-secondary-50);
+  --color-brand-secondary-100: var(--v12-brand-secondary-100);
+  --color-brand-secondary-200: var(--v12-brand-secondary-200);
+  --color-brand-secondary-300: var(--v12-brand-secondary-300);
+  --color-brand-secondary-400: var(--v12-brand-secondary-400);
+  --color-brand-secondary-500: var(--v12-brand-secondary-500);
+  --color-brand-secondary-600: var(--v12-brand-secondary-600);
+  --color-brand-secondary-700: var(--v12-brand-secondary-700);
+  --color-brand-secondary-800: var(--v12-brand-secondary-800);
+  --color-brand-secondary-900: var(--v12-brand-secondary-900);
 
-  --color-brand-tertiary-50: var(--brand-tertiary-50);
-  --color-brand-tertiary-100: var(--brand-tertiary-100);
-  --color-brand-tertiary-200: var(--brand-tertiary-200);
-  --color-brand-tertiary-300: var(--brand-tertiary-300);
-  --color-brand-tertiary-400: var(--brand-tertiary-400);
-  --color-brand-tertiary-500: var(--brand-tertiary-500);
-  --color-brand-tertiary-600: var(--brand-tertiary-600);
-  --color-brand-tertiary-700: var(--brand-tertiary-700);
-  --color-brand-tertiary-800: var(--brand-tertiary-800);
-  --color-brand-tertiary-900: var(--brand-tertiary-900);
+  --color-brand-tertiary-50: var(--v12-brand-tertiary-50);
+  --color-brand-tertiary-100: var(--v12-brand-tertiary-100);
+  --color-brand-tertiary-200: var(--v12-brand-tertiary-200);
+  --color-brand-tertiary-300: var(--v12-brand-tertiary-300);
+  --color-brand-tertiary-400: var(--v12-brand-tertiary-400);
+  --color-brand-tertiary-500: var(--v12-brand-tertiary-500);
+  --color-brand-tertiary-600: var(--v12-brand-tertiary-600);
+  --color-brand-tertiary-700: var(--v12-brand-tertiary-700);
+  --color-brand-tertiary-800: var(--v12-brand-tertiary-800);
+  --color-brand-tertiary-900: var(--v12-brand-tertiary-900);
 
-  --color-text-default: var(--foreground);
-  --color-text-muted: var(--muted-foreground);
-  --color-text-inverse: var(--background);
-  --color-text-primary: var(--primary-foreground);
-  --color-text-primary-hover: var(--primary-hover-foreground);
-  --color-text-secondary: var(--secondary-foreground);
-  --color-text-secondary-hover: var(--secondary-hover-foreground);
-  --color-text-accent: var(--accent-foreground);
-  --color-text-accent-hover: var(--accent-hover-foreground);
-  --color-text-card: var(--card-foreground);
-  --color-text-card-hover: var(--card-hover-foreground);
-  --color-text-popover: var(--popover-foreground);
-  --color-text-popover-hover: var(--popover-hover-foreground);
-  --color-text-input: var(--input-foreground);
-  --color-text-input-hover: var(--input-hover-foreground);
-  --color-text-success: var(--success-foreground);
-  --color-text-success-hover: var(--success-hover-foreground);
-  --color-text-warning: var(--warning-foreground);
-  --color-text-warning-hover: var(--warning-hover-foreground);
-  --color-text-error: var(--error-foreground);
-  --color-text-error-hover: var(--error-hover-foreground);
-  --color-text-info: var(--info-foreground);
-  --color-text-info-hover: var(--info-hover-foreground);
-  --color-text-ghost: var(--ghost-foreground);
-  --color-text-ghost-hover: var(--ghost-hover-foreground);
+  --color-text-default: var(--v12-foreground);
+  --color-text-muted: var(--v12-muted-foreground);
+  --color-text-inverse: var(--v12-background);
+  --color-text-primary: var(--v12-primary-foreground);
+  --color-text-primary-hover: var(--v12-primary-hover-foreground);
+  --color-text-secondary: var(--v12-secondary-foreground);
+  --color-text-secondary-hover: var(--v12-secondary-hover-foreground);
+  --color-text-accent: var(--v12-accent-foreground);
+  --color-text-accent-hover: var(--v12-accent-hover-foreground);
+  --color-text-card: var(--v12-card-foreground);
+  --color-text-card-hover: var(--v12-card-hover-foreground);
+  --color-text-popover: var(--v12-popover-foreground);
+  --color-text-popover-hover: var(--v12-popover-hover-foreground);
+  --color-text-input: var(--v12-input-foreground);
+  --color-text-input-hover: var(--v12-input-hover-foreground);
+  --color-text-success: var(--v12-success-foreground);
+  --color-text-success-hover: var(--v12-success-hover-foreground);
+  --color-text-warning: var(--v12-warning-foreground);
+  --color-text-warning-hover: var(--v12-warning-hover-foreground);
+  --color-text-error: var(--v12-error-foreground);
+  --color-text-error-hover: var(--v12-error-hover-foreground);
+  --color-text-info: var(--v12-info-foreground);
+  --color-text-info-hover: var(--v12-info-hover-foreground);
+  --color-text-ghost: var(--v12-ghost-foreground);
+  --color-text-ghost-hover: var(--v12-ghost-hover-foreground);
 
-  --color-bg-default: var(--background);
-  --color-bg-card: var(--card);
-  --color-bg-card-hover: var(--card-hover);
-  --color-bg-popover: var(--popover);
-  --color-bg-popover-hover: var(--popover-hover);
-  --color-bg-primary: var(--primary);
-  --color-bg-primary-hover: var(--primary-hover);
-  --color-bg-secondary: var(--secondary);
-  --color-bg-secondary-hover: var(--secondary-hover);
-  --color-bg-muted: var(--muted);
-  --color-bg-accent: var(--accent);
-  --color-bg-accent-hover: var(--accent-hover);
-  --color-bg-input: var(--input);
-  --color-bg-input-hover: var(--input-hover);
-  --color-bg-success: var(--success);
-  --color-bg-success-hover: var(--success-hover);
-  --color-bg-warning: var(--warning);
-  --color-bg-warning-hover: var(--warning-hover);
-  --color-bg-error: var(--error);
-  --color-bg-error-hover: var(--error-hover);
-  --color-bg-info: var(--info);
-  --color-bg-info-hover: var(--info-hover);
-  --color-bg-ghost: var(--ghost);
-  --color-bg-ghost-hover: var(--ghost-hover);
+  --color-bg-default: var(--v12-background);
+  --color-bg-card: var(--v12-card);
+  --color-bg-card-hover: var(--v12-card-hover);
+  --color-bg-popover: var(--v12-popover);
+  --color-bg-popover-hover: var(--v12-popover-hover);
+  --color-bg-primary: var(--v12-primary);
+  --color-bg-primary-hover: var(--v12-primary-hover);
+  --color-bg-secondary: var(--v12-secondary);
+  --color-bg-secondary-hover: var(--v12-secondary-hover);
+  --color-bg-muted: var(--v12-muted);
+  --color-bg-accent: var(--v12-accent);
+  --color-bg-accent-hover: var(--v12-accent-hover);
+  --color-bg-input: var(--v12-input);
+  --color-bg-input-hover: var(--v12-input-hover);
+  --color-bg-success: var(--v12-success);
+  --color-bg-success-hover: var(--v12-success-hover);
+  --color-bg-warning: var(--v12-warning);
+  --color-bg-warning-hover: var(--v12-warning-hover);
+  --color-bg-error: var(--v12-error);
+  --color-bg-error-hover: var(--v12-error-hover);
+  --color-bg-info: var(--v12-info);
+  --color-bg-info-hover: var(--v12-info-hover);
+  --color-bg-ghost: var(--v12-ghost);
+  --color-bg-ghost-hover: var(--v12-ghost-hover);
 
-  --color-border-default: var(--card-border);
-  --color-border-card: var(--card-border);
-  --color-border-card-hover: var(--card-hover-border);
-  --color-border-popover: var(--popover-border);
-  --color-border-popover-hover: var(--popover-hover-border);
-  --color-border-primary: var(--primary-border);
-  --color-border-primary-hover: var(--primary-hover-border);
-  --color-border-secondary: var(--secondary-border);
-  --color-border-secondary-hover: var(--secondary-hover-border);
-  --color-border-muted: var(--muted);
-  --color-border-accent: var(--accent);
-  --color-border-accent-hover: var(--accent-hover);
-  --color-border-input: var(--input-border);
-  --color-border-input-hover: var(--input-hover-border);
-  --color-border-success: var(--success-border);
-  --color-border-success-hover: var(--success-hover-border);
-  --color-border-warning: var(--warning-border);
-  --color-border-warning-hover: var(--warning-hover-border);
-  --color-border-error: var(--error-border);
-  --color-border-error-hover: var(--error-hover-border);
-  --color-border-info: var(--info-border);
-  --color-border-info-hover: var(--info-hover-border);
-  --color-border-ghost: var(--ghost-border);
-  --color-border-ghost-hover: var(--ghost-hover-border);
+  --color-border-default: var(--v12-card-border);
+  --color-border-card: var(--v12-card-border);
+  --color-border-card-hover: var(--v12-card-hover-border);
+  --color-border-popover: var(--v12-popover-border);
+  --color-border-popover-hover: var(--v12-popover-hover-border);
+  --color-border-primary: var(--v12-primary-border);
+  --color-border-primary-hover: var(--v12-primary-hover-border);
+  --color-border-secondary: var(--v12-secondary-border);
+  --color-border-secondary-hover: var(--v12-secondary-hover-border);
+  --color-border-muted: var(--v12-muted);
+  --color-border-accent: var(--v12-accent);
+  --color-border-accent-hover: var(--v12-accent-hover);
+  --color-border-input: var(--v12-input-border);
+  --color-border-input-hover: var(--v12-input-hover-border);
+  --color-border-success: var(--v12-success-border);
+  --color-border-success-hover: var(--v12-success-hover-border);
+  --color-border-warning: var(--v12-warning-border);
+  --color-border-warning-hover: var(--v12-warning-hover-border);
+  --color-border-error: var(--v12-error-border);
+  --color-border-error-hover: var(--v12-error-hover-border);
+  --color-border-info: var(--v12-info-border);
+  --color-border-info-hover: var(--v12-info-hover-border);
+  --color-border-ghost: var(--v12-ghost-border);
+  --color-border-ghost-hover: var(--v12-ghost-hover-border);
   
-  --color-disabled: var(--ring-disabled);
-  --color-focus: var(--ring-focus);
-  --color-active: var(--ring-active);
+  --color-disabled: var(--v12-ring-disabled);
+  --color-focus: var(--v12-ring-focus);
+  --color-active: var(--v12-ring-active);
 
-  --shadow-shadow-success: var(--success-shadow);
-  --shadow-shadow-warning: var(--warning-shadow);
-  --shadow-shadow-error: var(--error-shadow);
-  --shadow-shadow-info: var(--info-shadow);
+  --shadow-shadow-success: var(--v12-success-shadow);
+  --shadow-shadow-warning: var(--v12-warning-shadow);
+  --shadow-shadow-error: var(--v12-error-shadow);
+  --shadow-shadow-info: var(--v12-info-shadow);
   
-  --shadow-shadow-sm: var(--shadow-sm);
-  --shadow-shadow: var(--shadow);
-  --shadow-shadow-md: var(--shadow-md);
-  --shadow-shadow-lg: var(--shadow-lg);
-  --shadow-shadow-xl: var(--shadow-xl);
-  --shadow-shadow-2xl: var(--shadow-2xl);
-  --shadow-shadow-3xl: var(--shadow-3xl);
-  --shadow-shadow-inner: var(--shadow-inner);
+  --shadow-shadow-sm: var(--v12-shadow-sm);
+  --shadow-shadow: var(--v12-shadow);
+  --shadow-shadow-md: var(--v12-shadow-md);
+  --shadow-shadow-lg: var(--v12-shadow-lg);
+  --shadow-shadow-xl: var(--v12-shadow-xl);
+  --shadow-shadow-2xl: var(--v12-shadow-2xl);
+  --shadow-shadow-3xl: var(--v12-shadow-3xl);
+  --shadow-shadow-inner: var(--v12-shadow-inner);
 
-  --text-shadow-shadow-black-p: var(--text-shadow-black-p);
-  --text-shadow-shadow-black-title: var(--text-shadow-black-title);
-  --text-shadow-shadow-white-p: var(--text-shadow-white-p);
-  --text-shadow-shadow-white-title: var(--text-shadow-white-title);
-  --text-shadow-shadow-success-p: var(--text-shadow-success-p);
-  --text-shadow-shadow-success-title: var(--text-shadow-success-title);
-  --text-shadow-shadow-warning-p: var(--text-shadow-warning-p);
-  --text-shadow-shadow-warning-title: var(--text-shadow-warning-title);
-  --text-shadow-shadow-error-p: var(--text-shadow-error-p);
-  --text-shadow-shadow-error-title: var(--text-shadow-error-title);
-  --text-shadow-shadow-info-p: var(--text-shadow-info-p);
-  --text-shadow-shadow-info-title: var(--text-shadow-info-title);
+  --text-shadow-shadow-black-p: var(--v12-text-shadow-black-p);
+  --text-shadow-shadow-black-title: var(--v12-text-shadow-black-title);
+  --text-shadow-shadow-white-p: var(--v12-text-shadow-white-p);
+  --text-shadow-shadow-white-title: var(--v12-text-shadow-white-title);
+  --text-shadow-shadow-success-p: var(--v12-text-shadow-success-p);
+  --text-shadow-shadow-success-title: var(--v12-text-shadow-success-title);
+  --text-shadow-shadow-warning-p: var(--v12-text-shadow-warning-p);
+  --text-shadow-shadow-warning-title: var(--v12-text-shadow-warning-title);
+  --text-shadow-shadow-error-p: var(--v12-text-shadow-error-p);
+  --text-shadow-shadow-error-title: var(--v12-text-shadow-error-title);
+  --text-shadow-shadow-info-p: var(--v12-text-shadow-info-p);
+  --text-shadow-shadow-info-title: var(--v12-text-shadow-info-title);
 
-  --font-weight-weight-small: var(--font-weight-small);
-  --font-weight-weight-paragraph: var(--font-weight-paragraph);
-  --font-weight-weight-subtitle: var(--font-weight-subtitle);
-  --font-weight-weight-title: var(--font-weight-title);
-  --font-weight-weight-button: var(--font-weight-button);
+  --font-weight-weight-small: var(--v12-font-weight-small);
+  --font-weight-weight-paragraph: var(--v12-font-weight-paragraph);
+  --font-weight-weight-subtitle: var(--v12-font-weight-subtitle);
+  --font-weight-weight-title: var(--v12-font-weight-title);
+  --font-weight-weight-button: var(--v12-font-weight-button);
 }
 
 @layer utilities {
   .size-text-small {
-    font-size: var(--font-size-small-responsive);
+    font-size: var(--v12-font-size-small-responsive);
   }
   .size-text-paragraph {
-    font-size: var(--font-size-paragraph-responsive);
+    font-size: var(--v12-font-size-paragraph-responsive);
   }
   .size-text-subtitle {
-    font-size: var(--font-size-subtitle-responsive);
+    font-size: var(--v12-font-size-subtitle-responsive);
   }
   .size-text-title {
-    font-size: var(--font-size-title-responsive);
+    font-size: var(--v12-font-size-title-responsive);
   }
   .size-text-button {
-    font-size: var(--font-size-button-responsive);
+    font-size: var(--v12-font-size-button-responsive);
   }
 }
