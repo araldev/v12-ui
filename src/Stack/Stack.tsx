@@ -1,30 +1,30 @@
-import { forwardRef } from 'react'
-import type { ReactElement, ComponentPropsWithRef, ElementType, Ref } from 'react'
-import type { WithoutAs } from '../utils/polymorphicTypes'
+import React, { forwardRef } from 'react'
+import type { ReactElement, ComponentPropsWithRef, Ref } from 'react'
+import type { WithoutSharedProperties } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 
-type AllowedTags = 'div' | 'span' | 'section' | 'article' | 'nav' | 'aside'
+type AllowedTags = 'div' | 'span' | 'section' | 'article' | 'nav' | 'aside' & keyof React.JSX.IntrinsicElements
 
-type PolymorphicProps<T extends ElementType = 'div'> = {
+type PolymorphicProps<T extends AllowedTags = 'div'> = {
   as?: T
   children?: ReactElement | ReactElement[]
   direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse'
   spacing?: number | 'none'
   className?: string
-} & WithoutAs<ComponentPropsWithRef<T>>
+} & WithoutSharedProperties<ComponentPropsWithRef<T>>
 
-const StackInner = <T extends ElementType = 'div'>(
+const StackInner = <T extends AllowedTags = 'div'>(
   {
-    as = 'div',
+    as,
     children,
     direction = 'row',
     spacing = 4,
     className,
     ...props
   }: PolymorphicProps<T>,
-  ref: Ref<T>
+  ref: Ref<any>
 ): ReactElement => {
-  const Component = as || 'div'
+  const Component: AllowedTags = as || 'div'
 
   return (
     <Component
@@ -42,6 +42,4 @@ const StackInner = <T extends ElementType = 'div'>(
   )
 }
 
-export const Stack = forwardRef(StackInner) as <T extends AllowedTags = 'div'>(
-  props: PolymorphicProps<T> & { ref?: Ref<T> }
-) => ReactElement
+export const Stack = forwardRef(StackInner)

@@ -3,6 +3,7 @@ import type { Ref, ComponentPropsWithRef, ReactElement } from 'react'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { useDataTheme } from '../Hooks/useDataTheme'
+import type { WithoutSharedProperties } from '../utils/polymorphicTypes'
 
 type ThemeProps = {} & VariantProps<typeof div>['theme']
 
@@ -35,7 +36,7 @@ const canvas = cva('absolute inset-0 w-full h-full', {
 type HexColor = `#${string}`
 
 export interface PropsAnimatedBackground extends
-  ComponentPropsWithRef<'div'>,
+  WithoutSharedProperties<ComponentPropsWithRef<'div'>>,
   VariantProps<typeof div>,
   VariantProps<typeof canvas> {
   theme?: ThemeProps
@@ -43,6 +44,7 @@ export interface PropsAnimatedBackground extends
   bubbleGradiant2?: [HexColor, HexColor]
   bubbleGradiant3?: [HexColor, HexColor]
   zIndex?: number
+  className?: string
 }
 
 interface PropsCanvasSize {
@@ -56,7 +58,7 @@ export const AnimatedBackground = forwardRef<HTMLDivElement, PropsAnimatedBackgr
   bubbleGradiant2 = ['#00C9FF', '#92FE9D'],
   bubbleGradiant3 = ['#e0f7f4', '#a3e9ff'],
   zIndex = -9999,
-  className = '',
+  className,
   ...props
 }: PropsAnimatedBackground,
 ref: Ref<HTMLDivElement>): ReactElement => {

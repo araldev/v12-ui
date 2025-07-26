@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import type { Ref, ComponentPropsWithRef, ReactElement, ReactNode } from 'react'
-import type { WithoutAs } from '../utils/polymorphicTypes'
+import type { WithoutSharedProperties } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -84,7 +84,7 @@ type PolymorphicProps<T extends ElementAllowedTags = 'p'> = {
   as?: T
   children?: ReactNode
   className?: string
-} & WithoutAs<ComponentPropsWithRef<T>> & VariantProps<typeof text>
+} & WithoutSharedProperties<ComponentPropsWithRef<T>> & VariantProps<typeof text>
 
 function TextInner <T extends ElementAllowedTags> (
   { as, children, variant, hover, textShadow, fontSize, fontWeight, className, ...props }: PolymorphicProps<T>,

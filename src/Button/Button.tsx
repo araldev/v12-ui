@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import type { Ref, ComponentPropsWithRef, ElementType, ReactElement, ReactNode } from 'react'
-import type { WithoutAs } from '../utils/polymorphicTypes'
+import type { Ref, ComponentPropsWithRef, ReactElement, ReactNode, KeyboardEvent } from 'react'
+import type { WithoutSharedProperties } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -63,32 +63,32 @@ const button = cva('size-text-button font-weight-button flex justify-center item
   }
 })
 
-type AllowedTags = 'button' | 'a'
+type AllowedTags = 'button' | 'a' & keyof React.JSX.IntrinsicElements
 
-type PolymorphicProps<T extends ElementType = 'button'> = {
+type PolymorphicProps<T extends AllowedTags = 'button'> = {
   as?: T
   disabled?: boolean
   children?: ReactNode
   className?: string
-} & WithoutAs<ComponentPropsWithRef<T>> & VariantProps<typeof button>
+} & WithoutSharedProperties<ComponentPropsWithRef<T>> & VariantProps<typeof button>
 
-function ButtonInner<T extends ElementType = 'button'> (
+function ButtonInner<T extends AllowedTags = 'button'> (
   { as, disabled, children, variant, border, shadow, rounded, size, className, ...props }: PolymorphicProps<T>,
-  ref: Ref<T>
+  ref: Ref<any>
 ): ReactElement {
   const Component = as || 'button'
   const isNativeButton = Component === 'button'
 
   if (process.env.NODE_ENV !== 'production') {
-    if (as === 'a' && !props.href) {
+    if (as === 'a' && !('href' in props)) {
       throw new Error('When using "as" prop with "a" tag, "href" must be provided.')
     }
-    if (as === 'button' && props.href) {
+    if (as === 'button' && 'href' in props) {
       throw new Error('When using "as" prop with "button" tag, "href" should not be provided.')
     }
   }
 
-  function handleKeyDown (e: KeyboardEvent): void {
+  function handleKeyDown (e: KeyboardEvent<HTMLElement>): void {
     const target = e.currentTarget as HTMLElement | null
 
     if (!target || target.tagName === 'BUTTON') return
@@ -118,6 +118,4 @@ function ButtonInner<T extends ElementType = 'button'> (
   )
 }
 
-export const Button = forwardRef(ButtonInner) as <T extends AllowedTags = 'button'> (
-  props: PolymorphicProps<T> & { ref?: Ref<T> }
-) => ReactElement
+export const Button = forwardRef(ButtonInner)
