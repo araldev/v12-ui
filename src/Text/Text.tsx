@@ -77,7 +77,7 @@ type ElementAllowedTags = (
   | 'p' | 'span' | 'strong' | 'small' | 'em'
   | 'b' | 'i' | 'u' | 'mark' | 'del' | 'ins'
   | 'code' | 'kbd' | 'samp' | 'var' | 'cite'
-  | 'q' | 'pre' | 'blockquote'
+  | 'q' | 'pre' | 'blockquote' | 'address'
 ) & keyof React.JSX.IntrinsicElements
 
 type PolymorphicProps<T extends ElementAllowedTags = 'p'> = {
