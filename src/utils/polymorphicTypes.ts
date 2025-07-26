@@ -1,4 +1,4 @@
-export type WithoutAs<C> = 'as' extends keyof C ? Omit<C, 'as' | 'children'> : C
+export type WithoutSharedProperties<C> = 'as' extends keyof C ? Omit<C, 'as' | 'children' | 'className'> : Omit<C, 'className'>
 
 export type PropsOf<C extends React.ElementType> = React.ComponentPropsWithRef<C>
 
