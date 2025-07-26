@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import type { Ref, ComponentPropsWithRef, ElementType, ReactElement, ReactNode } from 'react'
+import type { Ref, ComponentPropsWithRef, ReactElement, ReactNode } from 'react'
 import type { WithoutAs } from '../utils/polymorphicTypes'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -72,36 +72,35 @@ const text = cva('', {
   }
 })
 
-type AllowedTags =
+type ElementAllowedTags = (
   'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
   | 'p' | 'span' | 'strong' | 'small' | 'em'
   | 'b' | 'i' | 'u' | 'mark' | 'del' | 'ins'
   | 'code' | 'kbd' | 'samp' | 'var' | 'cite'
   | 'q' | 'pre' | 'blockquote'
+) & keyof React.JSX.IntrinsicElements
 
-type PolymorphicProps<T extends ElementType> = {
+type PolymorphicProps<T extends ElementAllowedTags = 'p'> = {
   as?: T
   children?: ReactNode
   className?: string
 } & WithoutAs<ComponentPropsWithRef<T>> & VariantProps<typeof text>
 
-function TextInner<T extends ElementType = 'p'> (
+function TextInner <T extends ElementAllowedTags> (
   { as, children, variant, hover, textShadow, fontSize, fontWeight, className, ...props }: PolymorphicProps<T>,
-  ref: Ref<T>
+  ref: Ref<any>
 ): ReactElement {
-  const Component = as || 'p'
+  const Component: ElementAllowedTags = as || 'p'
 
   return (
     <Component
       ref={ref}
-      className={cn(text({ variant, hover, textShadow, fontSize, fontWeight }), '', className)}
       {...props}
+      className={cn(text({ variant, hover, textShadow, fontSize, fontWeight }), '', className)}
     >
       {children}
     </Component>
   )
 }
 
-export const Text = forwardRef(TextInner) as <T extends AllowedTags = 'p'>(
-  props: PolymorphicProps<T> & { ref?: Ref<T> }
-) => ReactElement
+export const Text = forwardRef(TextInner)

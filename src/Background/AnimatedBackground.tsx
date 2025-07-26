@@ -238,8 +238,8 @@ ref: Ref<HTMLDivElement>): ReactElement => {
     <div
       ref={ref}
       style={{ zIndex }}
-      className={cn(div({ theme }), className)}
       {...props}
+      className={cn(div({ theme }), className)}
     >
       <canvas
         ref={canvasRef}

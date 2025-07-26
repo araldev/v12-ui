@@ -29,13 +29,13 @@ const StackInner = <T extends ElementType = 'div'>(
   return (
     <Component
       ref={ref}
+      {...props}
       className={cn(
         'flex flex-wrap',
         direction != null && `flex-${String(direction)}`,
         spacing != null && `gap-${String(spacing)}`,
         className
       )}
-      {...props}
     >
       {children}
     </Component>
