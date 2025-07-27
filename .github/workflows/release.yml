@@ -17,6 +17,10 @@ jobs:
       pull-requests: write # to be able to comment on released pull requests
       id-token: write # to enable use of OIDC for npm provenance
     steps:
+      - name: Set Git identity for gh-pages
+        run: |
+          git config --global user.email "arturo.r2d2.dev@gmail.com"
+          git config --global user.name "araldev"
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -29,15 +33,15 @@ jobs:
         run: npm clean-install
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
-      - name: Set Git identity for gh-pages
-        run: |
-          git config --global user.email "arturo.r2d2.dev@gmail.com"
-          git config --global user.name "araldev"
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          npx semantic-release && \
-          npm run build-storybook && \
-          npx gh-pages -d storybook-static
+        run: npx semantic-release
+      - name: Build Storybook
+        run: npm run build-storybook
+      - name: Deploy Storybook to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
