@@ -71,7 +71,7 @@
     "lint": "standard",
     "lint:fix": "standard --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "build-storybook": "STORYBOOK_BUILD=true storybook build",
     "deploy-storybook": "npm run build-storybook && npx gh-pages -d storybook-static",
     "commit": "cz"
   },

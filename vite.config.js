@@ -7,6 +7,8 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+const storyBookBuild = process.env.STORYBOOK_BUILD === 'true'
+
 export default defineConfig({
   base: '/',
   resolve: {
@@ -17,12 +19,12 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    dts({
+    !storyBookBuild && dts({
       insertTypesEntry: true,
       rollupTypes: false,
       exclude: ['vite.config.ts', 'src/**/*.stories.*', '**/*.test.ts', '**/*.test.tsx']
     })
-  ],
+  ].filter(Boolean),
   build: {
     minify: true,
     // sourcemap: true,
