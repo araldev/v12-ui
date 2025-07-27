@@ -1,6 +1,25 @@
 {
   "name": "v12-ui",
   "version": "0.0.26",
+  "description": "A React component library with a focus on utility-first design and accessibility.",
+  "keywords": [
+    "react",
+    "component-library",
+    "ui",
+    "tailwindcss",
+    "accessibility",
+    "utility-first",
+    "design-system",
+    "no-config",
+    "typescript"
+  ],
+  "author": "araldev",
+  "license": "MIT",
+  "repository": {
+    "type": "GitHub",
+    "url": "https://github.com/araldev/v12-ui"
+  },
+  "homepage": "https://araldev.github.io/v12-ui/",
   "type": "module",
   "files": [
     "dist",
