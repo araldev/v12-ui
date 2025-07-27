@@ -71,7 +71,6 @@ Override CSS variables or pass props to components:
 ```css
 :root {
   --v12-primary: #0d9488;
-  --v12-secondary: 0.5rem;
   --v12-rounded: 0.5rem;
 }
 ```
