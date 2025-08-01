@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/araldev/v12-ui/compare/v0.1.0...v0.1.1) (2025-08-01)
+
+
+### Bug Fixes
+
+* **index.ts(magictext):** add export for MagicText Component ([246130f](https://github.com/araldev/v12-ui/commit/246130fbac7e1974571ce3710e65dd45e7b1625d))
+
 # [0.1.0](https://github.com/araldev/v12-ui/compare/v0.0.26...v0.1.0) (2025-08-01)
 
 
