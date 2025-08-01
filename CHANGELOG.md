@@ -1,3 +1,10 @@
+# [0.1.0](https://github.com/araldev/v12-ui/compare/v0.0.26...v0.1.0) (2025-08-01)
+
+
+### Features
+
+* **magictext:** new component that generates text with animated particles ([f8916eb](https://github.com/araldev/v12-ui/commit/f8916eb0ab31aed9ee8b6e5e0916909ebef0e60c))
+
 ## [0.0.26](https://github.com/araldev/v12-ui/compare/v0.0.25...v0.0.26) (2025-07-26)
 
 
