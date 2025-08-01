@@ -71,8 +71,5 @@ export const Default: Story = {
     bubbleGradiant3: ['#e0f7f4', '#a3e9ff'],
     zIndex: -9999,
     className: ''
-  },
-  render: (args) => (
-    <AnimatedBackground {...args} />
-  )
+  }
 }
