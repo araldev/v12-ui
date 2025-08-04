@@ -1,3 +1,10 @@
+# [0.2.0](https://github.com/araldev/v12-ui/compare/v0.1.1...v0.2.0) (2025-08-04)
+
+
+### Features
+
+* **magiclogo & magicmousefollower:** add two new premium components and improve MagicText component ([da624f2](https://github.com/araldev/v12-ui/commit/da624f28b576e5fb1c7956a9d965319402dd4c37))
+
 ## [0.1.1](https://github.com/araldev/v12-ui/compare/v0.1.0...v0.1.1) (2025-08-01)
 
 
