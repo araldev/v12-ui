@@ -255,7 +255,7 @@ class ParticleLogoEffect {
     // Radio grande para que salgan de la pantalla
     const scatterRadius = Math.max(this.canvas.width, this.canvas.height) * 2
 
-    this.particles = positions.map(pos => ({
+    this.particles = positions.map((pos, idx) => ({
       tx: pos.x, // posición final (píxel real)
       ty: pos.y,
       // posición inicial: fuera del canvas
@@ -266,7 +266,7 @@ class ParticleLogoEffect {
       color: pos.color,
       phase: Math.random() * Math.PI * 2, // 0…2π
       age: 0,
-      isImmune: Math.random() < 0.05 // ≈ 5 % no se repelen
+      order: idx
     }))
   }
 
@@ -274,42 +274,22 @@ class ParticleLogoEffect {
     const dx = p.tx - p.x
     const dy = p.ty - p.y
 
-    if (this.mouse && this.config.attractMode) {
+    if (this.mouse) {
       const mx = this.mouse.x - p.x
       const my = this.mouse.y - p.y
       const dist = Math.hypot(mx, my)
 
-      if (dist < this.config.repulsion && dist > 0) {
-        const force = Math.max(0, 1 - dist / this.config.repulsion)
-        const strength = 10 * force // fuerza suave
-        p.vx += (mx / dist) * strength // + en vez de –
-        p.vy += (my / dist) * strength
-      }
-    } else if (this.mouse && !this.config.attractMode) {
-      const mx = this.mouse.x - p.x
-      const my = this.mouse.y - p.y
-      const dist = Math.hypot(mx, my)
+      // espaciado fijo entre “capas”
+      const spacing = 0.08 // píxeles entre partícula y partícula
+      const targetRadius = p.order * spacing
 
-      if (dist < this.config.repulsion && dist > 0) {
-        let force: number
+      // fuerza proporcional a cuánto se desvía de su radio asignado
+      const delta = dist - targetRadius
+      const force = delta * 0.1 // 0.1 = suavidad
 
-        if (!this.config.trace) {
-          // Repulsión fuerte para todos
-          force = Math.max(0, 1 - dist / this.config.repulsion)
-        } else {
-          // Repulsión suave o nula según isImmune
-          if (p.isImmune) {
-            // Suavísima o nula
-            force = (this.config.repulsion - dist) / this.config.repulsion * 0.1
-          } else {
-            // Suave
-            force = Math.max(0, 1 - dist / this.config.repulsion)
-          }
-        }
-
-        const strength = 20 * force
-        p.vx -= (mx / dist) * strength
-        p.vy -= (my / dist) * strength
+      if (dist > 0) {
+        p.vx += (mx / dist) * force
+        p.vy += (my / dist) * force
       }
     }
 
@@ -392,7 +372,7 @@ interface ParticleCords {
   color: string
   phase: number
   age: number
-  isImmune: boolean
+  order: number
 }
 
 // Union type discriminado para las fuentes de imagen
@@ -409,11 +389,9 @@ type RequiredConfigProps = ImageSource & {
   returnSpeed: number
   color?: string
   glow: boolean
-  trace: boolean
-  attractMode: boolean
 }
 
-interface MagicLogoProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'className'> {
+interface MagicMouseFollowerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, 'className'> {
   particles?: number
   dotSize?: number
   repulsion?: number
@@ -421,12 +399,10 @@ interface MagicLogoProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, '
   returnSpeed?: number
   color?: string
   glow?: boolean
-  trace?: boolean
-  attractMode?: boolean
   className?: string
 }
 
-export function MagicLogo ({
+export function MagicMouseFollower ({
   imageUrl,
   imageElement,
   svgContent,
@@ -437,11 +413,9 @@ export function MagicLogo ({
   returnSpeed = 0.01,
   color,
   glow = true,
-  trace = true,
-  attractMode = false,
   className,
   ...props
-}: MagicLogoProps & ImageSource): ReactElement {
+}: MagicMouseFollowerProps & ImageSource): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
@@ -476,8 +450,6 @@ export function MagicLogo ({
       returnSpeed,
       color,
       glow,
-      trace,
-      attractMode,
       ...imageSource
     }
 
@@ -486,7 +458,7 @@ export function MagicLogo ({
     return () => {
       if (effect) effect.destroy()
     }
-  }, [imageUrl, imageElement, svgContent, particles, dotSize, repulsion, friction, returnSpeed, color, glow, trace, attractMode])
+  }, [imageUrl, imageElement, svgContent, particles, dotSize, repulsion, friction, returnSpeed, color, glow])
 
   return (
     <canvas

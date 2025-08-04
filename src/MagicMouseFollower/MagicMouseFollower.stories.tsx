@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { MagicText } from './MagicText'
+import { MagicMouseFollower } from './MagicMouseFollower'
 
 const meta = {
-  title: 'Premium Components/MagicText',
+  title: 'Premium Components/MagicMouseFollower',
   tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
     docs: {
       story: {
         height: '100%',
@@ -14,14 +14,30 @@ const meta = {
       }
     }
   },
-  component: MagicText,
+  component: MagicMouseFollower,
   argTypes: {
-    text: {
+    imageUrl: {
       type: 'string',
-      description: 'The text to display in the magic effect',
+      description: 'URL of the image to use as the logo',
       control: 'text',
       table: {
-        category: 'Config'
+        category: 'Image URL'
+      }
+    },
+    imageElement: {
+      type: 'symbol',
+      description: 'React element to use as the logo image',
+      control: 'text',
+      table: {
+        category: 'Image Element'
+      }
+    },
+    svgContent: {
+      type: 'string',
+      description: 'Inline SVG content for the logo',
+      control: 'text',
+      table: {
+        category: 'SVG Content'
       }
     },
     particles: {
@@ -64,25 +80,9 @@ const meta = {
         category: 'Config'
       }
     },
-    fontFamily: {
-      type: 'string',
-      description: 'Font family for the text',
-      control: 'text',
-      table: {
-        category: 'Config'
-      }
-    },
-    fontSize: {
-      type: 'number',
-      description: 'Font size for the text in pixels',
-      control: 'number',
-      table: {
-        category: 'Config'
-      }
-    },
     color: {
       type: 'string',
-      description: 'Color of the text in hex format (#RRGGBB)',
+      description: 'Color of the logo in hex format (e.g., #ffffff)',
       control: 'color',
       table: {
         category: 'Config'
@@ -90,23 +90,7 @@ const meta = {
     },
     glow: {
       type: 'boolean',
-      description: 'Enable glow effect on the logo',
-      control: 'boolean',
-      table: {
-        category: 'Effects'
-      }
-    },
-    trace: {
-      type: 'boolean',
-      description: 'Enable tracing effect on the particles',
-      control: 'boolean',
-      table: {
-        category: 'Effects'
-      }
-    },
-    attractMode: {
-      type: 'boolean',
-      description: 'Enable attract mode for particles',
+      description: 'Enable glow effect on the particles',
       control: 'boolean',
       table: {
         category: 'Effects'
@@ -121,26 +105,21 @@ const meta = {
       }
     }
   }
-} satisfies Meta<typeof MagicText>
+} satisfies Meta<typeof MagicMouseFollower>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    text: 'Magic Text',
-    particles: 500,
+    imageUrl: '/src/assets/brand-araldev-miniatura.webp',
+    imageElement: undefined,
+    svgContent: undefined,
+    particles: 750,
     dotSize: 0.9,
     repulsion: 50,
     friction: 0.82,
     returnSpeed: 0.01,
-    fontFamily: 'sans-serif',
-    fontSize: 50,
-    glow: true,
-    trace: true,
-    attractMode: false
-  },
-  render: (args) => (
-    <MagicText {...args} />
-  )
+    glow: true
+  }
 }
