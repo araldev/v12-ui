@@ -38,6 +38,10 @@ jobs:
     needs: release
     name: Build-and-deploy-storybook
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # ← allows the action to push to gh-pages
+      pages: write # ← optional, if you later use GitHub Pages env
+      id-token: write # ← optional, for OIDC
     steps:
       - name: Set Git identity for gh-pages
         run: |
