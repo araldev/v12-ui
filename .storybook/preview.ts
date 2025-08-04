@@ -1,7 +1,6 @@
 import "@/index.css";
 import "@/sotoryBook-safeList.css";
 import type { Preview } from '@storybook/react-vite';
-import {useDataTheme} from '../src/Hooks/useDataTheme';
 
 // Definir temas base personalizados
 const lightTheme = {
@@ -92,7 +91,7 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Introduction', 'Layout', 'Components', 'Hooks', 'Utilities'],
+        order: ['Introduction','Premium Components', 'Layout' , 'Components', 'Hooks', 'Utilities'],
       },
     },
     docs: {
