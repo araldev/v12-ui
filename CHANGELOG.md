@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/araldev/v12-ui/compare/v0.2.0...v0.2.1) (2025-08-04)
+
+
+### Bug Fixes
+
+* **magiclogo & magicmousefollower:** added the exports to the entry point ([dfe5a1b](https://github.com/araldev/v12-ui/commit/dfe5a1bd64a3488d430f720504a56bfc53870e98))
+
 # [0.2.0](https://github.com/araldev/v12-ui/compare/v0.1.1...v0.2.0) (2025-08-04)
 
 
