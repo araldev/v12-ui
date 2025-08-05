@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { MagicMouseFollower } from './MagicMouseFollower'
+import imgBrandAraldev from '../assets/brand-araldev-miniatura.webp'
 
 const meta = {
   title: 'Premium Components/MagicMouseFollower',
@@ -112,7 +112,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    imageUrl: '/src/assets/brand-araldev-miniatura.webp',
+    imageUrl: imgBrandAraldev,
     imageElement: undefined,
     svgContent: undefined,
     particles: 750,

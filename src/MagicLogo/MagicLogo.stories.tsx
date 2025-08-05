@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import imgBrandAraldev from '../assets/brand-araldev-miniatura.webp'
 
 import { MagicLogo } from './MagicLogo'
 
@@ -128,7 +129,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    imageUrl: '/src/assets/brand-araldev-miniatura.webp',
+    imageUrl: imgBrandAraldev,
     imageElement: undefined,
     svgContent: undefined,
     particles: 750,
