@@ -1,3 +1,10 @@
+## [0.2.3](https://github.com/araldev/v12-ui/compare/v0.2.2...v0.2.3) (2025-08-10)
+
+
+### Bug Fixes
+
+* **package.json:** solve bugs with dependencies ([bdff8c9](https://github.com/araldev/v12-ui/commit/bdff8c9ee7b3fcaf2f9e8174e9f3f0f51404f92d))
+
 ## [0.2.2](https://github.com/araldev/v12-ui/compare/v0.2.1...v0.2.2) (2025-08-10)
 
 
