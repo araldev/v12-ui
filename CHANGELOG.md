@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/araldev/v12-ui/compare/v0.2.1...v0.2.2) (2025-08-10)
+
+
+### Bug Fixes
+
+* **package.json:** added multiple version of React 18 on peerDependencies ([5ed14b2](https://github.com/araldev/v12-ui/commit/5ed14b2576d4943c9ce5b7e6f3809e2a2bb3cdd2))
+
 ## [0.2.1](https://github.com/araldev/v12-ui/compare/v0.2.0...v0.2.1) (2025-08-04)
 
 
