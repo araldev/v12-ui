@@ -162,14 +162,14 @@ class ParticleLogoEffect {
   }
 
   private createImageMask (): ImageData {
-    this.ctx.clearRect(0, 0, this.canvas.width / this.dpr, this.canvas.height / this.dpr)
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     // Para imágenes externas o SVG convertido a imagen
     if (this.imageElement) {
       this.drawImageToCanvas(this.imageElement)
     }
 
-    return this.ctx.getImageData(0, 0, this.canvas.width / this.dpr, this.canvas.height / this.dpr)
+    return this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height)
   }
 
   private drawImageToCanvas (img: HTMLImageElement): void {
