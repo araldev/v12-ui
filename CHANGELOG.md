@@ -1,3 +1,10 @@
+## [0.2.4](https://github.com/araldev/v12-ui/compare/v0.2.3...v0.2.4) (2025-08-11)
+
+
+### Bug Fixes
+
+* **package.json:** fix main and repository ([9420e8f](https://github.com/araldev/v12-ui/commit/9420e8f7b4af22fcde6e328014dde8adc5cd8458))
+
 ## [0.2.3](https://github.com/araldev/v12-ui/compare/v0.2.2...v0.2.3) (2025-08-10)
 
 
