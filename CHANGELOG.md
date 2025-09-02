@@ -1,3 +1,10 @@
+## [0.2.5](https://github.com/araldev/v12-ui/compare/v0.2.4...v0.2.5) (2025-08-11)
+
+
+### Bug Fixes
+
+* **magiclogo & magicmousefollwer:** fix devicePixelRatio for mobile ([1ac99da](https://github.com/araldev/v12-ui/commit/1ac99da13afb573b2a6b5c839856b122a8992844))
+
 ## [0.2.4](https://github.com/araldev/v12-ui/compare/v0.2.3...v0.2.4) (2025-08-11)
 
 
