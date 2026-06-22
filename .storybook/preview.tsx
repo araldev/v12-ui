@@ -3,12 +3,10 @@ import "@/sotoryBook-safeList.css";
 import { useEffect } from 'react';
 import type { Preview, Decorator } from '@storybook/react-vite';
 import { useGlobals } from 'storybook/internal/preview-api';
-import { addons } from 'storybook/preview-api';
 
 // ============================================================================
-// Light/dark themes — applied to the Storybook manager chrome via the local
-// addon in .storybook/addons/v12-theme-bridge/register.ts (see that file
-// for the manager-side handler that listens to the channel event below).
+// Light/dark themes — applied to the Storybook manager chrome via postMessage
+// to .storybook/manager.ts which calls addons.setConfig({ theme }).
 // ============================================================================
 
 const lightTheme = {
@@ -70,7 +68,7 @@ const darkTheme = {
 };
 
 // ============================================================================
-// Custom toolbar — light/dark/system with the icons you originally had
+// Custom toolbar — light/dark/system with your original icons
 // ============================================================================
 
 const globalTypes = {
@@ -90,14 +88,7 @@ const globalTypes = {
   },
 };
 
-// ============================================================================
-// Channel event used to push theme changes from the preview (Decorators) to
-// the manager (chrome). The local addon in .storybook/addons/v12-theme-bridge/
-// listens to this event and calls addons.setConfig({ theme }) so the manager
-// UI re-renders.
-// ============================================================================
-
-export const V12_THEME_CHANGED = 'v12-ui/theme-changed'
+const V12_THEME_CHANGED = 'v12-ui/theme-changed'
 
 const withTheme: Decorator = (Story, context) => {
   const selected = (context.globals.theme ?? 'system') as 'light' | 'dark' | 'system'
@@ -113,18 +104,24 @@ const withTheme: Decorator = (Story, context) => {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
+    // Sync iframe background with themes addon
     const currentBg = globals.backgrounds
     if (currentBg !== resolvedTheme) {
       setGlobals({ backgrounds: resolvedTheme })
     }
 
-    // Apply data-theme to <html> in the iframe so our CSS variables react
+    // Apply data-theme to <html> so CSS variables (--v12-*) react
     document.documentElement.setAttribute('data-theme', resolvedTheme)
     localStorage.setItem('v12-theme', selected)
 
-    // Tell the manager chrome to swap themes via the Storybook channel
+    // Tell the manager chrome to swap themes via cross-frame postMessage.
+    // .storybook/manager.ts listens on the parent window for these messages
+    // and calls addons.setConfig({ theme }), which updates the chrome.
     const newTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme
-    addons.getChannel()?.emit(V12_THEME_CHANGED, newTheme)
+    window.parent.postMessage(
+      { type: V12_THEME_CHANGED, theme: newTheme },
+      '*'
+    )
   }, [resolvedTheme, selected, globals.backgrounds, setGlobals])
 
   return <Story {...context} />
