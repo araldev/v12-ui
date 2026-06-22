@@ -46,6 +46,7 @@
     --v12-card-hover-foreground: hsl(0 0% 12%);
     --v12-card-border: hsl(0 0% 89%);
     --v12-card-hover-border: hsl(0 0% 78%);
+    --v12-color-border-default: var(--v12-card-border);
 
     --v12-popover: hsl(0 0% 100%);
     --v12-popover-hover: hsl(0 0% 98%);
@@ -350,6 +351,7 @@
 
   --color-text-default: var(--v12-foreground);
   --color-text-muted: var(--v12-muted-foreground);
+  --color-text-muted-hover: var(--v12-muted-foreground);
   --color-text-inverse: var(--v12-background);
   --color-text-primary: var(--v12-primary-foreground);
   --color-text-primary-hover: var(--v12-primary-hover-foreground);
@@ -384,6 +386,7 @@
   --color-bg-secondary: var(--v12-secondary);
   --color-bg-secondary-hover: var(--v12-secondary-hover);
   --color-bg-muted: var(--v12-muted);
+  --color-bg-muted-hover: var(--v12-muted);
   --color-bg-accent: var(--v12-accent);
   --color-bg-accent-hover: var(--v12-accent-hover);
   --color-bg-input: var(--v12-input);
@@ -425,6 +428,8 @@
   --color-border-ghost-hover: var(--v12-ghost-hover-border);
   
   --color-disabled: var(--v12-ring-disabled);
+  --color-bg-disabled: var(--v12-ring-disabled);
+  --color-border-disabled: var(--v12-ring-disabled);
   --color-focus: var(--v12-ring-focus);
   --color-active: var(--v12-ring-active);
 
