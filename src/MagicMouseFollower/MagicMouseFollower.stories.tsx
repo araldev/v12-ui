@@ -96,6 +96,14 @@ const meta = {
         category: 'Effects'
       }
     },
+    ariaLabel: {
+      type: 'string',
+      description: 'Accessible name for the canvas role="img" element. When omitted, derived from the imageUrl filename.',
+      control: 'text',
+      table: {
+        category: 'Accessibility'
+      }
+    },
     className: {
       type: 'string',
       description: 'Custom CSS class for additional styling',
@@ -122,4 +130,52 @@ export const Default: Story = {
     returnSpeed: 0.01,
     glow: true
   }
+}
+
+/**
+ * Explicitly sets the `ariaLabel` prop so the accessible name is deterministic
+ * rather than auto-derived from the `imageUrl` filename.
+ */
+export const WithAriaLabel: Story = {
+  args: {
+    imageUrl: imgBrandAraldev,
+    ariaLabel: 'Cursor follower image',
+    particles: 750,
+    dotSize: 0.9,
+    repulsion: 50,
+    friction: 0.82,
+    returnSpeed: 0.01,
+    glow: true
+  }
+}
+
+/**
+ * Shows the reduced-motion static fallback: an `<img>` element with `alt` matching
+ * the `ariaLabel`, and the `<canvas>` hidden with `aria-hidden="true"`.
+ *
+ * Note: Storybook runs in a normal browser context where `prefers-reduced-motion`
+ * is respected. To see this story with the static output, either:
+ * - Enable "Reduce motion" in your OS accessibility settings, or
+ * - Use browser DevTools to override the `prefers-reduced-motion` media query
+ */
+export const ReducedMotion: Story = {
+  name: 'Reduced Motion Fallback',
+  args: {
+    imageUrl: imgBrandAraldev,
+    ariaLabel: 'Static cursor follower image',
+    particles: 750,
+    dotSize: 0.9,
+    repulsion: 50,
+    friction: 0.82,
+    returnSpeed: 0.01,
+    glow: true
+  },
+  render: (args) => (
+    <div>
+      <p style={{ fontSize: '0.75rem', color: '#888', marginBottom: '0.5rem' }}>
+        Reduced motion mode (prefers-reduced-motion: reduce)
+      </p>
+      <MagicMouseFollower {...args} />
+    </div>
+  )
 }
