@@ -290,7 +290,6 @@ export function MagicText ({
   const { theme } = useDataTheme()
   const reducedMotion = useReducedMotion()
   const textColorDetected = color || (theme === 'dark' ? '#fff' : '#000')
-  console.log('Theme:', theme, 'Color detected:', textColorDetected)
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
