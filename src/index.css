@@ -232,6 +232,12 @@
     --v12-brand-primary-950: hsl(210 82% 14%);
     --v12-brand-secondary-950: hsl(340 70% 16%);
     --v12-brand-tertiary-950: hsl(0 0% 2%);
+
+    /* Status shadow dark overrides — alpha 0.4 vs light 0.2 keeps parity against --v12-background (hsl(0 0% 4%)) */
+    --v12-success-shadow: 0 4px 10px -2px hsl(142 76% 36% / 0.4);
+    --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.4);
+    --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.4);
+    --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.4);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -302,6 +308,12 @@
       --v12-brand-primary-950: hsl(210 82% 14%);
       --v12-brand-secondary-950: hsl(340 70% 16%);
       --v12-brand-tertiary-950: hsl(0 0% 2%);
+
+      /* Status shadow system-mode parity (same alpha-0.4 overrides as [data-theme="dark"]) */
+      --v12-success-shadow: 0 4px 10px -2px hsl(142 76% 36% / 0.4);
+      --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.4);
+      --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.4);
+      --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.4);
     }
   }
 
