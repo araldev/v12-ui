@@ -14,6 +14,7 @@
     --v12-brand-primary-700: hsl(210 85% 40%);
     --v12-brand-primary-800: hsl(210 82% 32%);
     --v12-brand-primary-900: hsl(210 80% 24%);
+    --v12-brand-primary-950: hsl(210 78% 18%);
 
     --v12-brand-secondary-50: hsl(340 85% 96%);
     --v12-brand-secondary-100: hsl(340 80% 90%);
@@ -25,6 +26,7 @@
     --v12-brand-secondary-700: hsl(340 70% 44%);
     --v12-brand-secondary-800: hsl(340 68% 36%);
     --v12-brand-secondary-900: hsl(340 65% 28%);
+    --v12-brand-secondary-950: hsl(340 63% 20%);
 
     --v12-brand-tertiary-50: hsl(0 0% 98%);
     --v12-brand-tertiary-100: hsl(0 0% 96%);
@@ -36,6 +38,7 @@
     --v12-brand-tertiary-700: hsl(0 0% 32%);
     --v12-brand-tertiary-800: hsl(0 0% 22%);
     --v12-brand-tertiary-900: hsl(0 0% 12%);
+    --v12-brand-tertiary-950: hsl(0 0% 6%);
 
     --v12-background: hsl(0 0% 100%);
     --v12-foreground: hsl(0 0% 12%);
@@ -224,6 +227,11 @@
     --v12-shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
     --v12-shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
     --v12-shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
+
+    /* Brand 950 (pressed-state semantics: even darker than 900) */
+    --v12-brand-primary-950: hsl(210 82% 14%);
+    --v12-brand-secondary-950: hsl(340 70% 16%);
+    --v12-brand-tertiary-950: hsl(0 0% 2%);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -289,6 +297,11 @@
       --v12-shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.7);
       --v12-shadow-3xl: 0 35px 60px -12px hsl(0 0% 0% / 0.7);
       --v12-shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.3);
+
+      /* Brand 950 — dark system-mode parity */
+      --v12-brand-primary-950: hsl(210 82% 14%);
+      --v12-brand-secondary-950: hsl(340 70% 16%);
+      --v12-brand-tertiary-950: hsl(0 0% 2%);
     }
   }
 
@@ -326,6 +339,7 @@
   --color-brand-primary-700: var(--v12-brand-primary-700);
   --color-brand-primary-800: var(--v12-brand-primary-800);
   --color-brand-primary-900: var(--v12-brand-primary-900);
+  --color-brand-primary-950: var(--v12-brand-primary-950);
 
   --color-brand-secondary-50: var(--v12-brand-secondary-50);
   --color-brand-secondary-100: var(--v12-brand-secondary-100);
@@ -337,6 +351,7 @@
   --color-brand-secondary-700: var(--v12-brand-secondary-700);
   --color-brand-secondary-800: var(--v12-brand-secondary-800);
   --color-brand-secondary-900: var(--v12-brand-secondary-900);
+  --color-brand-secondary-950: var(--v12-brand-secondary-950);
 
   --color-brand-tertiary-50: var(--v12-brand-tertiary-50);
   --color-brand-tertiary-100: var(--v12-brand-tertiary-100);
@@ -348,6 +363,7 @@
   --color-brand-tertiary-700: var(--v12-brand-tertiary-700);
   --color-brand-tertiary-800: var(--v12-brand-tertiary-800);
   --color-brand-tertiary-900: var(--v12-brand-tertiary-900);
+  --color-brand-tertiary-950: var(--v12-brand-tertiary-950);
 
   --color-text-default: var(--v12-foreground);
   --color-text-muted: var(--v12-muted-foreground);
