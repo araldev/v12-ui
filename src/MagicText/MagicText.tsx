@@ -1,6 +1,7 @@
 import type { CanvasHTMLAttributes, ReactElement } from 'react'
 import { useRef, useEffect } from 'react'
 import { useDataTheme } from '../Hooks/useDataTheme'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import { cn } from '../utils/utils'
 
 class ParticleLogoEffect {
@@ -287,6 +288,7 @@ export function MagicText ({
   ...props
 }: MagicLogoProps): ReactElement {
   const { theme } = useDataTheme()
+  const reducedMotion = useReducedMotion()
   const textColorDetected = color || (theme === 'dark' ? '#fff' : '#000')
   console.log('Theme:', theme, 'Color detected:', textColorDetected)
 
@@ -318,12 +320,32 @@ export function MagicText ({
       attractMode
     }
 
+    // Static fallback when user prefers reduced motion: render the text once, skip RAF.
+    if (reducedMotion) {
+      const ctxLocal = canvas.getContext('2d')
+      if (!ctxLocal) return
+      const rect = canvas.getBoundingClientRect()
+      const dpr = window.devicePixelRatio || 1
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+      ctxLocal.scale(dpr, dpr)
+      ctxLocal.imageSmoothingEnabled = true
+      ctxLocal.fillStyle = textColorDetected
+      ctxLocal.font = `bold ${fontSize || 50}px ${fontFamily || 'sans-serif'}`
+      ctxLocal.textAlign = 'center'
+      ctxLocal.textBaseline = 'middle'
+      ctxLocal.fillText(text, rect.width / 2, rect.height / 2)
+      return
+    }
+
     const effect = new ParticleLogoEffect(canvas, config)
 
     return () => {
       if (effect) effect.destroy()
     }
-  }, [text, particles, dotSize, repulsion, friction, returnSpeed, fontFamily, fontSize, theme, color, glow, trace, attractMode])
+  }, [text, particles, dotSize, repulsion, friction, returnSpeed, fontFamily, fontSize, theme, color, glow, trace, attractMode, reducedMotion])
 
   return (
     <canvas

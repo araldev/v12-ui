@@ -556,3 +556,19 @@
     font-size: var(--v12-font-size-button-responsive);
   }
 }
+
+/*
+ * Vestibular-disorder mitigation: when the user prefers reduced motion, disable
+ * color transitions and CSS animations on interactive elements (Button).
+ * The Button CVA config does not introduce a `.btn` prefix, so we target the
+ * rendered DOM elements directly: <button> and <a role="button">.
+ * No conditional class strings are used in Button.tsx (spec 5.7.a — grep
+ * "transition-none" src/Button/Button.tsx returns 0).
+ */
+@media (prefers-reduced-motion: reduce) {
+  button,
+  a[role='button'] {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -1,5 +1,6 @@
 import type { CanvasHTMLAttributes, ReactElement } from 'react'
 import { useRef, useEffect } from 'react'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import { cn } from '../utils/utils'
 
 class ParticleLogoEffect {
@@ -443,6 +444,7 @@ export function MagicLogo ({
   ...props
 }: MagicLogoProps & ImageSource): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -468,6 +470,57 @@ export function MagicLogo ({
     }
 
     /* ------------------- 2.  Construir el objeto final  ------------------ */
+
+    // Static fallback when user prefers reduced motion: render the image once, skip RAF + listeners.
+    if (reducedMotion) {
+      const ctxLocal = canvas.getContext('2d')
+      if (!ctxLocal) return
+      const rect = canvas.getBoundingClientRect()
+      const dpr = window.devicePixelRatio || 1
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+      ctxLocal.scale(dpr, dpr)
+      ctxLocal.imageSmoothingEnabled = true
+
+      const drawStatic = (img: HTMLImageElement): void => {
+        if (!img.naturalWidth || !img.naturalHeight) return
+        const cssWidth = rect.width
+        const cssHeight = rect.height
+        const fitScale = Math.min(cssWidth / img.naturalWidth, cssHeight / img.naturalHeight)
+        const scale = fitScale * 0.8
+        const drawWidth = img.naturalWidth * scale
+        const drawHeight = img.naturalHeight * scale
+        const drawX = (cssWidth - drawWidth) / 2
+        const drawY = (cssHeight - drawHeight) / 2
+        ctxLocal.drawImage(img, drawX, drawY, drawWidth, drawHeight)
+      }
+
+      if (imageElement?.complete && imageElement?.naturalWidth) {
+        drawStatic(imageElement)
+        return
+      }
+      if (imageUrl != null) {
+        const img = new Image()
+        img.crossOrigin = 'anonymous'
+        img.onload = () => drawStatic(img)
+        img.src = imageUrl
+        return
+      }
+      if (svgContent != null) {
+        const svg = new Blob([svgContent], { type: 'image/svg+xml' })
+        const url = URL.createObjectURL(svg)
+        const img = new Image()
+        img.onload = () => { drawStatic(img); URL.revokeObjectURL(url) }
+        img.onerror = () => URL.revokeObjectURL(url)
+        img.crossOrigin = 'anonymous'
+        img.src = url
+        return
+      }
+      return
+    }
+
     const config: RequiredConfigProps = {
       particles,
       dotSize,
@@ -486,7 +539,7 @@ export function MagicLogo ({
     return () => {
       if (effect) effect.destroy()
     }
-  }, [imageUrl, imageElement, svgContent, particles, dotSize, repulsion, friction, returnSpeed, color, glow, trace, attractMode])
+  }, [imageUrl, imageElement, svgContent, particles, dotSize, repulsion, friction, returnSpeed, color, glow, trace, attractMode, reducedMotion])
 
   return (
     <canvas

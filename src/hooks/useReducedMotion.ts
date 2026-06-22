@@ -2,19 +2,19 @@ import { useSyncExternalStore } from 'react'
 
 const QUERY = '(prefers-reduced-motion: reduce)'
 
-function subscribe(callback: () => void): () => void {
+function subscribe (callback: () => void): () => void {
   if (typeof window === 'undefined' || !window.matchMedia) return () => {}
   const mql = window.matchMedia(QUERY)
   mql.addEventListener('change', callback)
   return () => mql.removeEventListener('change', callback)
 }
 
-function getSnapshot(): boolean {
+function getSnapshot (): boolean {
   if (typeof window === 'undefined' || !window.matchMedia) return false
   return window.matchMedia(QUERY).matches
 }
 
-function getServerSnapshot(): boolean {
+function getServerSnapshot (): boolean {
   return false
 }
 
@@ -26,6 +26,6 @@ function getServerSnapshot(): boolean {
  * Used by the animation components to skip their motion work for users
  * who would otherwise experience vestibular discomfort.
  */
-export function useReducedMotion(): boolean {
+export function useReducedMotion (): boolean {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }

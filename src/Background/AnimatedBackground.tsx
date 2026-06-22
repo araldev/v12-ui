@@ -2,6 +2,7 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import type { Ref, ComponentPropsWithRef, ReactElement } from 'react'
 import { cn } from '../utils/utils'
 import { useDataTheme } from '../Hooks/useDataTheme'
+import { useReducedMotion } from '../hooks/useReducedMotion'
 import type { WithoutSharedProperties } from '../utils/polymorphicTypes'
 
 type ThemeProps = 'dark' | 'light' | 'transparent'
@@ -65,6 +66,7 @@ export const AnimatedBackground = forwardRef<HTMLDivElement, PropsAnimatedBackgr
 }: PropsAnimatedBackground,
 ref: Ref<HTMLDivElement>): ReactElement => {
   const { theme } = useDataTheme(themeParam)
+  const reducedMotion = useReducedMotion()
 
   // Soft-deprecation: warn once per mount when the theme prop is used (dev only).
   const warnedRef = useRef(false)
@@ -107,6 +109,14 @@ ref: Ref<HTMLDivElement>): ReactElement => {
           [cssVar('--v12-bubble-2-a'), cssVar('--v12-bubble-2-b')],
           [cssVar('--v12-bubble-3-a'), cssVar('--v12-bubble-3-b')]
         ]
+
+    // Render a single static frame; no RAF when user prefers reduced motion.
+    if (reducedMotion) {
+      const staticColor = colors[0]?.[0] ?? cssVar('--v12-bubble-1-a')
+      ctx.fillStyle = staticColor
+      ctx.fillRect(0, 0, width, height)
+      return
+    }
 
     const shadow = {
       colors: [
@@ -229,7 +239,7 @@ ref: Ref<HTMLDivElement>): ReactElement => {
     return () => {
       if (idAnimationFrameRef.current) cancelAnimationFrame(idAnimationFrameRef.current)
     }
-  }, [canvasSize, bubbleGradiant1, bubbleGradiant2, bubbleGradiant3, theme])
+  }, [canvasSize, bubbleGradiant1, bubbleGradiant2, bubbleGradiant3, theme, reducedMotion])
 
   // ResizeObserver replaces the previous window-resize listener and setTimeout debounce.
   useEffect(() => {
