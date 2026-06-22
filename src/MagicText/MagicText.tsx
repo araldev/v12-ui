@@ -43,14 +43,21 @@ class ParticleLogoEffect {
   }
 
   private createTextMask (): ImageData {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    // Después de setupCanvas(), el contexto está escalado por this.dpr.
+    // this.canvas.width/height están en píxeles de dispositivo (CSS px × dpr).
+    // clearRect y fillText usan coordenadas de usuario (CSS px). Dividir
+    // por dpr para obtener las coordenadas correctas en espacio de usuario.
+    const cssW = this.canvas.width / this.dpr
+    const cssH = this.canvas.height / this.dpr
+
+    this.ctx.clearRect(0, 0, cssW, cssH)
 
     this.ctx.font = `bold ${this.config.fontSize || 50}px ${this.config.fontFamily || 'sans-serif'}`
     this.ctx.textAlign = 'center'
     this.ctx.textBaseline = 'middle'
     this.ctx.fillStyle = `${this.config.color || '#fff'}`
 
-    this.ctx.fillText(this.config.text, this.canvas.width / 2, this.canvas.height / 2)
+    this.ctx.fillText(this.config.text, cssW / 2, cssH / 2)
 
     return this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height)
   }
@@ -66,8 +73,8 @@ class ParticleLogoEffect {
     // 2. Primero: contar cuántos píxeles visibles hay
     let visiblePixelCount = 0
     for (let i = 0; i < data.length; i += 4) {
-      const [a] = data.slice(i, i + 4)
-      if (a > 50) {
+      const alpha = data[i + 3]
+      if (alpha > 50) {
         visiblePixelCount++
       }
     }
@@ -83,8 +90,8 @@ class ParticleLogoEffect {
     for (let y = 0; y < height; y += step) {
       for (let x = 0; x < width; x += step) {
         const idx = (y * width + x) * 4
-        const [a] = data.slice(idx, idx + 4)
-        const isVisible = a > 50
+        const alpha = data[idx + 3]
+        const isVisible = alpha > 50
 
         if (isVisible) {
           positions.push({
@@ -333,28 +340,16 @@ export function MagicText ({
     let cleanupResize: (() => void) | null = null
 
     // The canvas uses w-fit/h-fit which means getBoundingClientRect() can return
-    // 0 before layout. Defer particle effect creation to the next animation
-    // frame so the browser has time to apply layout. ResizeObserver catches
-    // size changes after mount (e.g., when the parent expands or font loads).
+    // 0 before layout. setupCanvas has fallback dimensions based on fontSize
+    // and text length, so we proceed immediately rather than bailing out.
     const initEffect = () => {
-      const rect = canvas.getBoundingClientRect()
-      if (rect.width === 0 || rect.height === 0) {
-        // Canvas still has no layout — try once more after a short delay.
-        requestAnimationFrame(() => {
-          const r2 = canvas.getBoundingClientRect()
-          if (r2.width === 0 || r2.height === 0) return
-          if (reducedMotion) {
-            renderStaticFallback(canvas, config, r2.width, r2.height)
-          } else {
-            effect = new ParticleLogoEffect(canvas, config)
-          }
-        })
+      if (reducedMotion) {
+        const rect = canvas.getBoundingClientRect()
+        const w = rect.width || config.fontSize * (config.text.length + 2) * 0.6
+        const h = rect.height || (config.fontSize || 50) * 1.5
+        renderStaticFallback(canvas, config, w, h)
       } else {
-        if (reducedMotion) {
-          renderStaticFallback(canvas, config, rect.width, rect.height)
-        } else {
-          effect = new ParticleLogoEffect(canvas, config)
-        }
+        effect = new ParticleLogoEffect(canvas, config)
       }
     }
 
@@ -404,22 +399,12 @@ export function MagicText ({
 
   return (
     <div role="img" aria-label={derivedAriaLabel}>
-      {reducedMotion ? (
-        <img
-          src=""
-          alt={derivedAriaLabel}
-          aria-hidden="true"
-          className={cn('block mx-auto overflow-visible z-0 w-fit h-fit', className)}
-          style={{ background: 'transparent' }}
-        />
-      ) : (
-        <canvas
-          ref={canvasRef}
-          aria-hidden="true"
-          className={cn('block mx-auto overflow-visible z-0 w-fit h-fit', className)}
-          {...props}
-        />
-      )}
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className={cn('block mx-auto overflow-visible z-0 w-fit h-fit', className)}
+        {...props}
+      />
     </div>
   )
 }

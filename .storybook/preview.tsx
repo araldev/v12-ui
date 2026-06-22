@@ -40,31 +40,31 @@ const lightTheme = {
 
 const darkTheme = {
   base: 'dark' as const,
-  colorPrimary: '#1ea7fd',
-  colorSecondary: '#585C6D',
-  appBg: '#1a1a1a',
-  appHoverBg: '#252525',
+  colorPrimary: '#4fc3f7',
+  colorSecondary: '#7ec8e3',
+  appBg: '#222222',
+  appHoverBg: '#2e2e2e',
   appContentBg: '#2a2a2a',
-  appPreviewBg: '#222222',
-  appBorderColor: '#404040',
+  appPreviewBg: '#1e1e1e',
+  appBorderColor: '#505050',
   appBorderRadius: 4,
-  textColor: '#ffffff',
-  textInverseColor: '#333333',
-  textMutedColor: '#888888',
+  textColor: '#f0f0f0',
+  textInverseColor: '#222222',
+  textMutedColor: '#999999',
   fontBase: '"Inter", "Arial", sans-serif',
   fontCode: 'monospace',
-  barTextColor: '#ffffff',
-  barSelectedColor: '#1ea7fd',
-  barBg: '#2a2a2a',
-  barHoverColor: '#404040',
-  inputBg: '#2a2a2a',
-  inputBorder: '#404040',
-  inputTextColor: '#ffffff',
+  barTextColor: '#f0f0f0',
+  barSelectedColor: '#4fc3f7',
+  barBg: '#333333',
+  barHoverColor: '#4a4a4a',
+  inputBg: '#333333',
+  inputBorder: '#505050',
+  inputTextColor: '#f0f0f0',
   inputBorderRadius: 4,
-  booleanBg: '#222222',
-  booleanSelectedBg: '#1ea7fd',
-  buttonBg: '#1ea7fd',
-  buttonBorder: '#1ea7fd',
+  booleanBg: '#2a2a2a',
+  booleanSelectedBg: '#4fc3f7',
+  buttonBg: '#4fc3f7',
+  buttonBorder: '#4fc3f7',
 };
 
 // ============================================================================
@@ -113,6 +113,19 @@ const withTheme: Decorator = (Story, context) => {
     // Apply data-theme to <html> so CSS variables (--v12-*) react
     document.documentElement.setAttribute('data-theme', resolvedTheme)
     localStorage.setItem('v12-theme', selected)
+
+    // Inject CSS for Docs page background — Storybook's Docs mode renders
+    // inside the iframe but its background comes from inline CSS that
+    // doesn't respond to data-theme changes.
+    let styleEl = document.getElementById('v12-docs-theme')
+    if (!styleEl) {
+      styleEl = document.createElement('style')
+      styleEl.id = 'v12-docs-theme'
+      document.head.appendChild(styleEl)
+    }
+    styleEl.textContent = resolvedTheme === 'dark'
+      ? `body, .sbdocs-wrapper, .sbdocs-content { background-color: #1a1a1a !important; }`
+      : `body, .sbdocs-wrapper, .sbdocs-content { background-color: #ffffff !important; }`
 
     // Tell the manager chrome to swap themes via cross-frame postMessage.
     // .storybook/manager.ts listens on the parent window for these messages
