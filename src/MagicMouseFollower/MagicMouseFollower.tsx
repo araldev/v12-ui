@@ -401,6 +401,7 @@ interface MagicMouseFollowerProps extends Omit<CanvasHTMLAttributes<HTMLCanvasEl
   color?: string
   glow?: boolean
   className?: string
+  ariaLabel?: string
 }
 
 export function MagicMouseFollower ({
@@ -414,11 +415,17 @@ export function MagicMouseFollower ({
   returnSpeed = 0.01,
   color,
   glow = true,
+  ariaLabel,
   className,
   ...props
 }: MagicMouseFollowerProps & ImageSource): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const reducedMotion = useReducedMotion()
+  const derivedAriaLabel = ariaLabel ?? (
+    imageUrl
+      ? imageUrl.split('/').pop()?.replace(/\.[^.]+$/, '') ?? 'Image'
+      : 'Interactive cursor follower'
+  )
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -513,11 +520,32 @@ export function MagicMouseFollower ({
     }
   }, [imageUrl, imageElement, svgContent, particles, dotSize, repulsion, friction, returnSpeed, color, glow, reducedMotion])
 
+  if (reducedMotion) {
+    return (
+      <div role="img" aria-label={derivedAriaLabel}>
+        <img
+          src={imageUrl || ''}
+          alt={derivedAriaLabel}
+          aria-hidden="true"
+          className={cn('block mx-auto overflow-visible z-0 w-auto h-auto', className)}
+        />
+        <canvas
+          ref={canvasRef}
+          aria-hidden="true"
+          className={cn('block mx-auto overflow-visible z-0 w-auto h-auto', className)}
+        />
+      </div>
+    )
+  }
+
   return (
-    <canvas
-      ref={canvasRef}
-      {...props}
-      className={cn('block mx-auto overflow-visible z-0 w-auto h-auto', className)}
-    />
+    <div role="img" aria-label={derivedAriaLabel}>
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className={cn('block mx-auto overflow-visible z-0 w-auto h-auto', className)}
+        {...props}
+      />
+    </div>
   )
 }
