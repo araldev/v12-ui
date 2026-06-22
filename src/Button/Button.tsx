@@ -36,9 +36,9 @@ const button = cva('size-text-button font-weight-button flex justify-center item
       circle: 'rounded-full aspect-square'
     },
     size: {
-      sm: 'px-3 py-1 w-20 h-9',
-      md: 'px-6 py-2 w-30 h-11',
-      lg: 'px-10 py-3 w-35 h-14',
+      sm: 'px-3 py-1 min-w-20 h-9',
+      md: 'px-6 py-2 min-w-30 h-11',
+      lg: 'px-10 py-3 min-w-35 h-14',
       fit: 'px-8 py-3 w-fit h-fit',
       full: 'px-10 py-3 w-full h-14'
     }
