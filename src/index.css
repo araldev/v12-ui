@@ -572,3 +572,12 @@
     animation: none !important;
   }
 }
+
+/* A6: Disable text hover transitions when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .text-hover,
+  [class*='text-hover-'] {
+    transition: none !important;
+    text-shadow: none !important;
+  }
+}
