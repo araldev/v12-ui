@@ -137,29 +137,6 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
   args: {
     text: 'Magic Text',
-    particles: 500,
-    dotSize: 0.9,
-    repulsion: 50,
-    friction: 0.82,
-    returnSpeed: 0.01,
-    fontFamily: 'sans-serif',
-    fontSize: 50,
-    glow: true,
-    trace: true,
-    attractMode: false
-  },
-  render: (args) => (
-    <MagicText {...args} />
-  )
-}
-
-/**
- * Explicitly sets the `ariaLabel` prop so the accessible name is deterministic
- * rather than auto-derived from the `text` prop.
- */
-export const WithAriaLabel: Story = {
-  args: {
-    text: 'Magic Text',
     ariaLabel: 'Animated greeting text',
     particles: 500,
     dotSize: 0.9,

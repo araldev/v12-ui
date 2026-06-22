@@ -140,24 +140,6 @@ export const Default: Story = {
     imageUrl: imgBrandAraldev,
     imageElement: undefined,
     svgContent: undefined,
-    particles: 750,
-    dotSize: 0.9,
-    repulsion: 50,
-    friction: 0.82,
-    returnSpeed: 0.01,
-    glow: true,
-    trace: true,
-    attractMode: false
-  }
-}
-
-/**
- * Explicitly sets the `ariaLabel` prop so the accessible name is deterministic
- * rather than auto-derived from the `imageUrl` filename.
- */
-export const WithAriaLabel: Story = {
-  args: {
-    imageUrl: imgBrandAraldev,
     ariaLabel: 'Company logo',
     particles: 750,
     dotSize: 0.9,

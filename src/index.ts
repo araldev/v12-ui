@@ -1,6 +1,6 @@
 import './index.css'
 
-export { useDataTheme } from './Hooks/useDataTheme'
+export { useDataTheme } from './hooks/useDataTheme'
 
 export { AnimatedBackground } from './Background/AnimatedBackground'
 export { Button } from './Button/Button'

@@ -1,6 +1,6 @@
 import type { CanvasHTMLAttributes, ReactElement } from 'react'
 import { useRef, useEffect } from 'react'
-import { useDataTheme } from '../Hooks/useDataTheme'
+import { useDataTheme } from '../hooks/useDataTheme'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { cn } from '../utils/utils'
 

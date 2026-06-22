@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef, useState } from 'react'
 import type { Ref, ComponentPropsWithRef, ReactElement } from 'react'
 import { cn } from '../utils/utils'
-import { useDataTheme } from '../Hooks/useDataTheme'
+import { useDataTheme } from '../hooks/useDataTheme'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import type { WithoutSharedProperties } from '../utils/polymorphicTypes'
 
