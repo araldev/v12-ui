@@ -3,8 +3,14 @@ import "@/sotoryBook-safeList.css";
 import { useEffect } from 'react';
 import type { Preview, Decorator } from '@storybook/react-vite';
 import { useGlobals } from 'storybook/internal/preview-api';
+import { addons } from 'storybook/preview-api';
 
-// Themes for the Storybook manager chrome — picked up by storybook-dark-mode
+// ============================================================================
+// Light/dark themes — applied to the Storybook manager chrome via the local
+// addon in .storybook/addons/v12-theme-bridge/register.ts (see that file
+// for the manager-side handler that listens to the channel event below).
+// ============================================================================
+
 const lightTheme = {
   base: 'light' as const,
   colorPrimary: '#1ea7fd',
@@ -63,42 +69,70 @@ const darkTheme = {
   buttonBorder: '#1ea7fd',
 };
 
-// Watch the iframe <html> for class="dark" / class="light" applied by
-// storybook-dark-mode, and mirror them as data-theme="dark" / "light"
-// so our CSS variables (--v12-*) react to the theme. This is the only way
-// to bridge the gap between storybook-dark-mode (which uses CSS classes)
-// and our existing CSS (which uses [data-theme="dark"]).
-const withThemeMirror: Decorator = (Story) => {
-  useEffect(() => {
-    if (typeof document === 'undefined') return
+// ============================================================================
+// Custom toolbar — light/dark/system with the icons you originally had
+// ============================================================================
 
-    const sync = () => {
-      const html = document.documentElement
-      const isDark = html.classList.contains('dark')
-      const isLight = html.classList.contains('light')
-      if (isDark) {
-        html.setAttribute('data-theme', 'dark')
-      } else if (isLight) {
-        html.setAttribute('data-theme', 'light')
-      }
+const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for v12-ui stories',
+    defaultValue: 'system',
+    toolbar: {
+      icon: 'circlehollow' as const,
+      items: [
+        { value: 'light', icon: 'sun' as const, title: 'Light' },
+        { value: 'dark', icon: 'moon' as const, title: 'Dark' },
+        { value: 'system', icon: 'mirror' as const, title: 'System' },
+      ],
+      dynamicTitle: true,
+    },
+  },
+};
+
+// ============================================================================
+// Channel event used to push theme changes from the preview (Decorators) to
+// the manager (chrome). The local addon in .storybook/addons/v12-theme-bridge/
+// listens to this event and calls addons.setConfig({ theme }) so the manager
+// UI re-renders.
+// ============================================================================
+
+export const V12_THEME_CHANGED = 'v12-ui/theme-changed'
+
+const withTheme: Decorator = (Story, context) => {
+  const selected = (context.globals.theme ?? 'system') as 'light' | 'dark' | 'system'
+  const [globals, setGlobals] = useGlobals()
+
+  const resolvedTheme =
+    selected === 'system'
+      ? typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+      : selected
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const currentBg = globals.backgrounds
+    if (currentBg !== resolvedTheme) {
+      setGlobals({ backgrounds: resolvedTheme })
     }
 
-    sync()
+    // Apply data-theme to <html> in the iframe so our CSS variables react
+    document.documentElement.setAttribute('data-theme', resolvedTheme)
+    localStorage.setItem('v12-theme', selected)
 
-    const observer = new MutationObserver(sync)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    })
+    // Tell the manager chrome to swap themes via the Storybook channel
+    const newTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme
+    addons.getChannel()?.emit(V12_THEME_CHANGED, newTheme)
+  }, [resolvedTheme, selected, globals.backgrounds, setGlobals])
 
-    return () => observer.disconnect()
-  }, [])
-
-  return <Story />
+  return <Story {...context} />
 }
 
 const preview: Preview = {
-  decorators: [withThemeMirror],
+  globalTypes,
+  decorators: [withTheme],
 
   parameters: {
     controls: {
@@ -112,20 +146,16 @@ const preview: Preview = {
         order: ['Introduction', 'Premium Components', 'Layout', 'Components', 'Hooks', 'Utilities'],
       },
     },
-
-    // storybook-dark-mode configuration. It registers a toolbar item
-    // and calls addons.setConfig({ theme }) so the manager chrome updates.
-    darkMode: {
-      dark: darkTheme,
-      light: lightTheme,
-      current: 'light',
-      // Apply the dark/light class to <html> in the preview iframe so our
-      // mirror Decorator above picks it up and converts it to data-theme.
-      classTarget: 'html',
-      stylePreview: true,
+    backgrounds: {
+      options: {
+        light: { name: 'Light', value: '#ffffff' },
+        dark: { name: 'Dark', value: '#1a1a1a' },
+      },
     },
+  },
 
-    docs: {},
+  initialGlobals: {
+    backgrounds: window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
   },
 }
 

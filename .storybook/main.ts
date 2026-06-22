@@ -6,8 +6,7 @@ const config: StorybookConfig = {
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
   "addons": [
-    "@storybook/addon-docs",
-    "storybook-dark-mode"
+    "@storybook/addon-docs"
   ],
   core: {
     "builder": "@storybook/builder-vite",
