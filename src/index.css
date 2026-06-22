@@ -163,6 +163,17 @@
 
     --v12-font-size-button-responsive: clamp(1rem, 1vw + 0.5rem, 1.125rem);
     --v12-font-weight-button: 600;
+
+    /* Bubble colors (theme-invariant per design.md OQ-2 — brand hues don't shift between modes) */
+    --v12-bubble-1-a: hsl(211 100% 29%);   /* #004e92 */
+    --v12-bubble-1-b: hsl(228 100% 2%);    /* #000428 */
+    --v12-bubble-2-a: hsl(189 100% 50%);   /* #00C9FF */
+    --v12-bubble-2-b: hsl(135 97% 78%);    /* #92FE9D */
+    --v12-bubble-3-a: hsl(174 71% 93%);    /* #e0f7f4 */
+    --v12-bubble-3-b: hsl(201 100% 82%);   /* #a3e9ff */
+    --v12-bubble-shadow-1: rgba(0, 201, 255, 0.7);
+    --v12-bubble-shadow-2: rgba(0, 78, 146, 0.7);
+    --v12-bubble-shadow-3: rgba(224, 247, 244, 0.7);
   }
 
   [data-theme="dark"] {
@@ -238,6 +249,17 @@
     --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.4);
     --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.4);
     --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.4);
+
+    /* Bubbles (theme-invariant — same values as :root per OQ-2) */
+    --v12-bubble-1-a: hsl(211 100% 29%);
+    --v12-bubble-1-b: hsl(228 100% 2%);
+    --v12-bubble-2-a: hsl(189 100% 50%);
+    --v12-bubble-2-b: hsl(135 97% 78%);
+    --v12-bubble-3-a: hsl(174 71% 93%);
+    --v12-bubble-3-b: hsl(201 100% 82%);
+    --v12-bubble-shadow-1: rgba(0, 201, 255, 0.7);
+    --v12-bubble-shadow-2: rgba(0, 78, 146, 0.7);
+    --v12-bubble-shadow-3: rgba(224, 247, 244, 0.7);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -314,6 +336,17 @@
       --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.4);
       --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.4);
       --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.4);
+
+      /* Bubbles (theme-invariant — system-mode parity) */
+      --v12-bubble-1-a: hsl(211 100% 29%);
+      --v12-bubble-1-b: hsl(228 100% 2%);
+      --v12-bubble-2-a: hsl(189 100% 50%);
+      --v12-bubble-2-b: hsl(135 97% 78%);
+      --v12-bubble-3-a: hsl(174 71% 93%);
+      --v12-bubble-3-b: hsl(201 100% 82%);
+      --v12-bubble-shadow-1: rgba(0, 201, 255, 0.7);
+      --v12-bubble-shadow-2: rgba(0, 78, 146, 0.7);
+      --v12-bubble-shadow-3: rgba(224, 247, 244, 0.7);
     }
   }
 
@@ -376,6 +409,17 @@
   --color-brand-tertiary-800: var(--v12-brand-tertiary-800);
   --color-brand-tertiary-900: var(--v12-brand-tertiary-900);
   --color-brand-tertiary-950: var(--v12-brand-tertiary-950);
+
+  /* Bubble tokens (bridged from --v12-bubble-*) */
+  --color-bubble-1-a: var(--v12-bubble-1-a);
+  --color-bubble-1-b: var(--v12-bubble-1-b);
+  --color-bubble-2-a: var(--v12-bubble-2-a);
+  --color-bubble-2-b: var(--v12-bubble-2-b);
+  --color-bubble-3-a: var(--v12-bubble-3-a);
+  --color-bubble-3-b: var(--v12-bubble-3-b);
+  --color-bubble-shadow-1: var(--v12-bubble-shadow-1);
+  --color-bubble-shadow-2: var(--v12-bubble-shadow-2);
+  --color-bubble-shadow-3: var(--v12-bubble-shadow-3);
 
   --color-text-default: var(--v12-foreground);
   --color-text-muted: var(--v12-muted-foreground);
