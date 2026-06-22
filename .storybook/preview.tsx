@@ -2,6 +2,7 @@ import "@/index.css";
 import "@/sotoryBook-safeList.css";
 import { useEffect } from 'react';
 import type { Preview, Decorator } from '@storybook/react-vite';
+import { useGlobals } from 'storybook/internal/preview-api';
 
 // Definir temas base personalizados
 const lightTheme = {
@@ -86,71 +87,30 @@ let currentTheme = localStorage.getItem('v12-theme') as 'light' | 'dark' | 'syst
 
 const withTheme: Decorator = (Story, context) => {
   const selected = (context.globals.theme ?? 'system') as 'light' | 'dark' | 'system';
+  const [globals, setGlobals] = useGlobals();
 
   const resolvedTheme = selected === 'system'
-    ? (window.matchMedia?.('(prefers-color-scheme: dark)').matches
-      ? 'dark'
+    ? (window.matchMedia?.('(prefers-color-scheme: dark)').matches 
+      ? 'dark' 
       : 'light')
     : selected;
 
-  currentTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
+  // Sync the backgrounds global with our theme so Storybook's iframe
+  // background matches the selected theme.
+  useEffect(() => {
+    const currentBg = (globals.backgrounds ?? '') as string;
+    if (currentBg !== resolvedTheme) {
+      setGlobals({ backgrounds: resolvedTheme });
+    }
 
-  // Apply data-theme AND override iframe background by injecting a
-  // high-specificity <style> with !important. The Decorator runs in the
-  // story iframe so `document` IS the iframe's document.
+    currentTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
+  }, [resolvedTheme]);
+
+  // Apply data-theme to current document
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
-    const bgColor = resolvedTheme === 'dark' ? '#1a1a1a' : '#ffffff';
     document.documentElement.setAttribute('data-theme', resolvedTheme);
     localStorage.setItem('v12-theme', selected);
-
-    const applyToIframe = () => {
-      // Try the current document first
-      const targets: Document[] = [document];
-
-      // Also walk parent if we're not in an iframe
-      try {
-        let win: Window | null = window.parent;
-        while (win && win !== window.top) {
-          const iframes = win.document.querySelectorAll('iframe');
-          iframes.forEach((iframe) => {
-            try {
-              const doc = iframe.contentDocument;
-              if (doc) targets.push(doc);
-            } catch {
-              // cross-origin
-            }
-          });
-          win = win.parent;
-        }
-      } catch {
-        // cross-origin parent
-      }
-
-      targets.forEach((doc) => {
-        // setAttribute on documentElement (no !important needed for inline)
-        doc.documentElement.style.background = bgColor;
-        doc.documentElement.style.backgroundColor = bgColor;
-        if (doc.body) {
-          doc.body.style.background = bgColor;
-          doc.body.style.backgroundColor = bgColor;
-        }
-
-        // Also inject a high-specificity style element as fallback
-        let styleEl = doc.getElementById('storybook-theme-bg') as HTMLStyleElement | null;
-        if (!styleEl) {
-          styleEl = doc.createElement('style');
-          styleEl.id = 'storybook-theme-bg';
-          doc.head.insertBefore(styleEl, doc.head.firstChild);
-        }
-        styleEl.textContent = `html body, body, html { background: ${bgColor} !important; background-color: ${bgColor} !important; }`;
-      });
-    };
-
-    // Run immediately and also after RAF to ensure Storybook has finished its initial render
-    applyToIframe();
-    requestAnimationFrame(applyToIframe);
   }, [resolvedTheme, selected]);
 
   return <Story {...context} />;
@@ -179,10 +139,16 @@ const preview: Preview = {
       // the html element to decide which theme to apply.
       theme: currentTheme,
     },
-    // backgrounds omitted — withTheme Decorator injects a high-specificity
-    // <style> to set the iframe background based on data-theme. Using the
-    // backgrounds addon with globals.backgrounds triggers Storybook's
-    // instrumenter warnings when changed from a Decorator.
+    backgrounds: {
+      options: {
+        light: { name: 'Light', value: '#ffffff' },
+        dark: { name: 'Dark', value: '#1a1a1a' },
+      },
+    },
+  },
+
+  initialGlobals: {
+    backgrounds: 'light',
   },
 };
 
