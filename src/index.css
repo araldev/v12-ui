@@ -223,6 +223,35 @@
     --v12-accent-foreground: hsl(0 0% 96%);
     --v12-accent-hover-foreground: hsl(0 0% 96%);
 
+    /* Status — dark mode: desaturated backgrounds + white foreground for contrast */
+    --v12-error: hsl(0 65% 48%);
+    --v12-error-hover: hsl(0 65% 40%);
+    --v12-error-foreground: hsl(0 0% 100%);
+    --v12-error-hover-foreground: hsl(0 0% 100%);
+    --v12-error-border: hsl(0 55% 32%);
+    --v12-error-hover-border: hsl(0 55% 25%);
+
+    --v12-warning: hsl(25 80% 52%);
+    --v12-warning-hover: hsl(25 80% 44%);
+    --v12-warning-foreground: hsl(0 0% 100%);
+    --v12-warning-hover-foreground: hsl(0 0% 100%);
+    --v12-warning-border: hsl(25 65% 35%);
+    --v12-warning-hover-border: hsl(25 65% 27%);
+
+    --v12-success: hsl(142 60% 38%);
+    --v12-success-hover: hsl(142 60% 30%);
+    --v12-success-foreground: hsl(0 0% 100%);
+    --v12-success-hover-foreground: hsl(0 0% 100%);
+    --v12-success-border: hsl(142 50% 26%);
+    --v12-success-hover-border: hsl(142 50% 19%);
+
+    --v12-info: hsl(199 70% 45%);
+    --v12-info-hover: hsl(199 70% 37%);
+    --v12-info-foreground: hsl(0 0% 100%);
+    --v12-info-hover-foreground: hsl(0 0% 100%);
+    --v12-info-border: hsl(199 60% 30%);
+    --v12-info-hover-border: hsl(199 60% 23%);
+
     --v12-input: hsl(0 0% 18%);
     --v12-input-hover: hsl(0 0% 24%);
     --v12-input-foreground: hsl(0 0% 96%);
@@ -309,6 +338,35 @@
       --v12-accent-hover: hsl(0 0% 30%);
       --v12-accent-foreground: hsl(0 0% 96%);
       --v12-accent-hover-foreground: hsl(0 0% 96%);
+
+      /* Status — dark mode: desaturated backgrounds + white foreground for contrast */
+      --v12-error: hsl(0 65% 48%);
+      --v12-error-hover: hsl(0 65% 40%);
+      --v12-error-foreground: hsl(0 0% 100%);
+      --v12-error-hover-foreground: hsl(0 0% 100%);
+      --v12-error-border: hsl(0 55% 32%);
+      --v12-error-hover-border: hsl(0 55% 25%);
+
+      --v12-warning: hsl(25 80% 52%);
+      --v12-warning-hover: hsl(25 80% 44%);
+      --v12-warning-foreground: hsl(0 0% 100%);
+      --v12-warning-hover-foreground: hsl(0 0% 100%);
+      --v12-warning-border: hsl(25 65% 35%);
+      --v12-warning-hover-border: hsl(25 65% 27%);
+
+      --v12-success: hsl(142 60% 38%);
+      --v12-success-hover: hsl(142 60% 30%);
+      --v12-success-foreground: hsl(0 0% 100%);
+      --v12-success-hover-foreground: hsl(0 0% 100%);
+      --v12-success-border: hsl(142 50% 26%);
+      --v12-success-hover-border: hsl(142 50% 19%);
+
+      --v12-info: hsl(199 70% 45%);
+      --v12-info-hover: hsl(199 70% 37%);
+      --v12-info-foreground: hsl(0 0% 100%);
+      --v12-info-hover-foreground: hsl(0 0% 100%);
+      --v12-info-border: hsl(199 60% 30%);
+      --v12-info-hover-border: hsl(199 60% 23%);
 
       --v12-input: hsl(0 0% 18%);
       --v12-input-hover: hsl(0 0% 24%);

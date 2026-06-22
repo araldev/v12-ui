@@ -269,7 +269,7 @@ ref: Ref<HTMLDivElement>): ReactElement => {
       style={{ zIndex }}
       {...props}
       className={cn(
-        'overflow-hidden fixed top-0 left-0 pointer-events-none w-full h-screen bg-bg-background before:content-[\'\'] before:absolute before:inset-0 before:w-full before:h-full before:bg-black/30',
+        'overflow-hidden fixed top-0 left-0 pointer-events-none w-full h-screen bg-bg-background before:content-[\'\'] before:absolute before:inset-0 before:w-full before:h-full before:bg-[var(--v12-background)]/30',
         className
       )}
     >

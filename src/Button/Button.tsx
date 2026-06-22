@@ -1,6 +1,5 @@
 import { forwardRef } from 'react'
-import type { Ref, ComponentPropsWithRef, ReactElement, ReactNode, KeyboardEvent } from 'react'
-import type { WithoutSharedProperties } from '../utils/polymorphicTypes'
+import type { Ref, ReactElement, KeyboardEvent } from 'react'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -63,33 +62,33 @@ const button = cva('size-text-button font-weight-button flex justify-center item
   }
 })
 
-type AllowedTags = 'button' | 'a' & keyof React.JSX.IntrinsicElements
-
-type PolymorphicProps<T extends AllowedTags = 'button'> = {
-  as?: T
+// Discriminated union: href only exists when as="a"
+export type ButtonProps = VariantProps<typeof button> & {
   disabled?: boolean
-  children?: ReactNode
+  children?: React.ReactNode
   className?: string
-} & WithoutSharedProperties<ComponentPropsWithRef<T>> & VariantProps<typeof button>
+} & ({
+  as: 'a'
+  href: string
+  target?: string
+  rel?: string
+} | {
+  as?: 'button'
+  href?: never
+  target?: never
+  rel?: never
+})
 
-function ButtonInner<T extends AllowedTags = 'button'> (
-  { as, disabled, children, variant, border, shadow, rounded, size, className, ...props }: PolymorphicProps<T>,
+function ButtonInner(
+  props: ButtonProps,
   ref: Ref<any>
 ): ReactElement {
-  const Component = as || 'button'
-  const isNativeButton = Component === 'button'
-  const disabledProps = isNativeButton && disabled
-    ? { disabled: true, 'aria-disabled': true }
-    : disabled
-      ? { 'aria-disabled': true }
-      : {}
+  const { as, disabled, children, variant, border, shadow, rounded, size, className, href, target, rel, ...restProps } = props
+  const isAnchor = as === 'a'
 
   if (process.env.NODE_ENV !== 'production') {
-    if (as === 'a' && !('href' in props)) {
-      throw new Error('When using "as" prop with "a" tag, "href" must be provided.')
-    }
-    if (as === 'button' && 'href' in props) {
-      throw new Error('When using "as" prop with "button" tag, "href" should not be provided.')
+    if (isAnchor && !href) {
+      throw new Error('When using as="a", href is required.')
     }
   }
 
@@ -104,14 +103,36 @@ function ButtonInner<T extends AllowedTags = 'button'> (
     }
   }
 
+  if (!isAnchor) {
+    return (
+      <button
+        disabled={disabled}
+        aria-disabled={disabled ? true : undefined}
+        tabIndex={disabled ? -1 : 0}
+        onKeyDown={handleKeyDown}
+        ref={ref}
+        {...restProps}
+        className={cn(
+          button({ variant, border, shadow, rounded, size }),
+          disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
+          className
+        )}
+      >
+        {children}
+      </button>
+    )
+  }
+
   return (
-    <Component
-      role={isNativeButton ? undefined : 'button'}
+    <a
+      role="button"
+      href={href}
+      target={target}
+      rel={rel}
       tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
       ref={ref}
-      {...disabledProps}
-      {...props}
+      {...restProps}
       className={cn(
         button({ variant, border, shadow, rounded, size }),
         disabled && 'bg-bg-disabled hover:cursor-not-allowed hover:bg-bg-disabled border-border-disabled',
@@ -119,7 +140,7 @@ function ButtonInner<T extends AllowedTags = 'button'> (
       )}
     >
       {children}
-    </Component>
+    </a>
   )
 }
 

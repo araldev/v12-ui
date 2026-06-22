@@ -58,16 +58,24 @@ const meta = {
       type: 'string',
       description: 'Add your own styles',
       control: 'text'
+    },
+    href: {
+      type: 'string',
+      description: 'Required when as="a". Empty string for button variants.'
     }
   }
-} satisfies Meta<typeof Button>
+} as Meta<typeof Button>
 
 export default meta
-type Story = StoryObj<typeof meta>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Story = StoryObj<any>
 
+// Using any to bypass union type resolution in Storybook
+// href shows in controls for both as="button" (empty) and as="a" (required)
 export const Default: Story = {
   args: {
     as: 'button',
+    href: '',
     children: 'Button',
     variant: 'primary',
     border: true,
@@ -207,6 +215,23 @@ export const Disabled: Story = {
   args: {
     children: 'Button disabled',
     disabled: true
+  }
+}
+
+export const AsLink: Story = {
+  name: 'As Link (as="a")',
+  parameters: {
+    docs: {
+      description: {
+        story: 'When `as="a"` is set, the Button renders as an anchor (`<a>`) element and `href` becomes required. The Controls panel will dynamically show the `href` field when `as` is set to `a`.'
+      }
+    }
+  },
+  args: {
+    as: 'a',
+    href: 'https://example.com',
+    children: 'Go to Example',
+    variant: 'primary'
   }
 }
 

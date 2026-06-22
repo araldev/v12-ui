@@ -88,14 +88,32 @@ const withTheme: Decorator = (Story, context) => {
 
     const root = document.documentElement;
 
-    if (selected === 'system') {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-    } else {
-      root.setAttribute('data-theme', selected);
-    }
+    const resolvedTheme = selected === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : selected;
 
+    root.setAttribute('data-theme', resolvedTheme);
     localStorage.setItem('v12-theme', selected);
+
+    // Also set data-theme on the Storybook canvas iframe so CSS variables
+    // inside the iframe (--v12-*, used for backgrounds, text, etc.) respond
+    // to the selected theme. The iframe has its own documentElement.
+    const applyToIframes = () => {
+      const iframes = document.querySelectorAll<HTMLIFrameElement>('iframe[id^="storybook"]');
+      iframes.forEach((iframe) => {
+        try {
+          const iframeDoc = iframe.contentDocument ?? iframe.contentWindow?.document;
+          if (iframeDoc) {
+            iframeDoc.documentElement.setAttribute('data-theme', resolvedTheme);
+          }
+        } catch {
+          // Cross-origin iframes cannot be accessed — skip
+        }
+      });
+    };
+
+    // Defer to after the iframe has loaded (RAF + small delay covers mount)
+    requestAnimationFrame(() => requestAnimationFrame(applyToIframes));
   }, [selected]);
 
   return <Story {...context} />;
@@ -117,7 +135,11 @@ const preview: Preview = {
       },
     },
     docs: {
-      theme: lightTheme,
+      // No explicit theme — Storybook 9 auto-selects light/dark based on the
+      // active theme context (driven by the theme toolbar in globals). The
+      // canvas/iframe background uses --v12-background CSS var which reacts to
+      // data-theme set by the withTheme decorator above.
+      // theme: lightTheme,  <-- intentionally omitted so Storybook auto-switches
     },
     backgrounds: {
       default: 'auto',
