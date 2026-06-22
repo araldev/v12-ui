@@ -2,6 +2,7 @@ import "@/index.css";
 import "@/sotoryBook-safeList.css";
 import { useEffect } from 'react';
 import type { Preview, Decorator } from '@storybook/react-vite';
+import { useGlobals } from 'storybook/internal/preview-api';
 
 // Definir temas base personalizados
 const lightTheme = {
@@ -69,59 +70,55 @@ const globalTypes = {
     description: 'Global theme for v12-ui stories',
     defaultValue: 'system',
     toolbar: {
-      icon: 'circlehollow',
+      icon: 'circlehollow' as const,
       items: [
-        { value: 'light', icon: 'sun', title: 'Light' },
-        { value: 'dark', icon: 'moon', title: 'Dark' },
-        { value: 'system', icon: 'mirror', title: 'System' },
+        { value: 'light', icon: 'sun' as const, title: 'Light' },
+        { value: 'dark', icon: 'moon' as const, title: 'Dark' },
+        { value: 'system', icon: 'mirror' as const, title: 'System' },
       ],
       dynamicTitle: true,
     },
   },
 };
 
+let currentTheme = localStorage.getItem('v12-theme') as 'light' | 'dark' | 'system' | null === 'dark' ? darkTheme : lightTheme;
+
 const withTheme: Decorator = (Story, context) => {
   const selected = (context.globals.theme ?? 'system') as 'light' | 'dark' | 'system';
+  const [globals, setGlobals] = useGlobals();
 
+  const resolvedTheme = selected === 'system'
+    ? (window.matchMedia?.('(prefers-color-scheme: dark)').matches 
+      ? 'dark' 
+      : 'light')
+    : selected;
+
+  // Sync the backgrounds global with our theme so Storybook's iframe
+  // background matches the selected theme.
+  useEffect(() => {
+    const currentBg = (globals.backgrounds ?? '') as string;
+    if (currentBg !== resolvedTheme) {
+      setGlobals({ backgrounds: resolvedTheme });
+    }
+
+    currentTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
+  }, [resolvedTheme]);
+
+  // Apply data-theme to current document
   useEffect(() => {
     if (typeof window === 'undefined') return;
-
-    const root = document.documentElement;
-
-    const resolvedTheme = selected === 'system'
-      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-      : selected;
-
-    root.setAttribute('data-theme', resolvedTheme);
+    document.documentElement.setAttribute('data-theme', resolvedTheme);
     localStorage.setItem('v12-theme', selected);
-
-    // Also set data-theme on the Storybook canvas iframe so CSS variables
-    // inside the iframe (--v12-*, used for backgrounds, text, etc.) respond
-    // to the selected theme. The iframe has its own documentElement.
-    const applyToIframes = () => {
-      const iframes = document.querySelectorAll<HTMLIFrameElement>('iframe[id^="storybook"]');
-      iframes.forEach((iframe) => {
-        try {
-          const iframeDoc = iframe.contentDocument ?? iframe.contentWindow?.document;
-          if (iframeDoc) {
-            iframeDoc.documentElement.setAttribute('data-theme', resolvedTheme);
-          }
-        } catch {
-          // Cross-origin iframes cannot be accessed — skip
-        }
-      });
-    };
-
-    // Defer to after the iframe has loaded (RAF + small delay covers mount)
-    requestAnimationFrame(() => requestAnimationFrame(applyToIframes));
-  }, [selected]);
+  }, [resolvedTheme, selected]);
 
   return <Story {...context} />;
 };
 
+
 const preview: Preview = {
   globalTypes,
   decorators: [withTheme],
+
   parameters: {
     controls: {
       matchers: {
@@ -135,28 +132,21 @@ const preview: Preview = {
       },
     },
     docs: {
-      // No explicit theme — Storybook 9 auto-selects light/dark based on the
-      // active theme context (driven by the theme toolbar in globals). The
-      // canvas/iframe background uses --v12-background CSS var which reacts to
-      // data-theme set by the withTheme decorator above.
-      // theme: lightTheme,  <-- intentionally omitted so Storybook auto-switches
+      // Theme follows data-theme attribute set by withTheme Decorator.
+      // Use lightTheme as the default but Storybook will read data-theme from
+      // the html element to decide which theme to apply.
+      theme: currentTheme,
     },
     backgrounds: {
-      default: 'auto',
-      // Storybook's canvas chrome (the manager UI surrounding the iframe)
-      // lives OUTSIDE the <html> cascade, so these background swatches must
-      // remain literal hex values — they cannot read the data-theme attribute
-      // we set above (that only affects the story iframe document, not the
-      // surrounding Storybook chrome). See spec A6.5.a.
-      values: [
-        {
-          name: 'auto',
-          value: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#1a1a1a' : '#ffffff'
-        },
-        { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#1a1a1a' },
-      ],
+      options: {
+        light: { name: 'Light', value: '#ffffff' },
+        dark: { name: 'Dark', value: '#1a1a1a' },
+      },
     },
+  },
+
+  initialGlobals: {
+    backgrounds: 'light',
   },
 };
 
