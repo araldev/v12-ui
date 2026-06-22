@@ -27,3 +27,9 @@ tsconfig.tsbuildinfo
 .eslintignore
 .env
 package-lock.json
+
+# Local tooling artifacts (not part of the library source)
+.agents/
+.atl/
+openspec/
+pulserun-ui-promo/
