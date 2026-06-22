@@ -44,15 +44,15 @@ const button = cva('size-text-button font-weight-button flex justify-center item
     }
   },
   compoundVariants: [
-    { variant: 'primary', border: true, className: 'border-border-primary hover:border-primary-hover' },
-    { variant: 'secondary', border: true, className: 'border-border-secondary hover:border-secondary-hover' },
+    { variant: 'primary', border: true, className: 'border-border-primary hover:border-border-primary-hover' },
+    { variant: 'secondary', border: true, className: 'border-border-secondary hover:border-border-secondary-hover' },
     { variant: 'muted', border: true, className: 'border-border-muted' },
-    { variant: 'accent', border: true, className: 'border-border-accent hover:border-accent-hover' },
-    { variant: 'success', border: true, className: 'border-border-success hover:border-success-hover' },
-    { variant: 'warning', border: true, className: 'border-border-warning hover:border-warning-hover' },
-    { variant: 'error', border: true, className: 'border-border-error hover:border-error-hover' },
-    { variant: 'info', border: true, className: 'border-border-info hover:border-info-hover' },
-    { variant: 'ghost', border: true, className: 'border-border-ghost hover:border-ghost-hover' }
+    { variant: 'accent', border: true, className: 'border-border-accent hover:border-border-accent-hover' },
+    { variant: 'success', border: true, className: 'border-border-success hover:border-border-success-hover' },
+    { variant: 'warning', border: true, className: 'border-border-warning hover:border-border-warning-hover' },
+    { variant: 'error', border: true, className: 'border-border-error hover:border-border-error-hover' },
+    { variant: 'info', border: true, className: 'border-border-info hover:border-border-info-hover' },
+    { variant: 'ghost', border: true, className: 'border-border-ghost hover:border-border-ghost-hover' }
   ],
   defaultVariants: {
     variant: 'primary',
