@@ -134,10 +134,12 @@ const preview: Preview = {
       },
     },
     docs: {
-      // Theme follows data-theme attribute set by withTheme Decorator.
-      // Use lightTheme as the default but Storybook will read data-theme from
-      // the html element to decide which theme to apply.
-      theme: currentTheme,
+      // Use a getter so the docs theme reacts to `currentTheme` reassignments
+      // made by the withTheme Decorator. With a plain value, Storybook
+      // captures the theme reference once at module init and never updates.
+      get theme() {
+        return currentTheme
+      },
     },
     backgrounds: {
       options: {
