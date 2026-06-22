@@ -15,7 +15,7 @@ class ParticleLogoEffect {
 
   constructor (canvas: HTMLCanvasElement, config: RequiredConfigProps) {
     this.canvas = canvas
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d', { willReadFrequently: true })
     if (!ctx) throw new Error('No se pudo obtener el contexto 2D del canvas')
     this.ctx = ctx
     this.dpr = window.devicePixelRatio || 1
@@ -29,10 +29,14 @@ class ParticleLogoEffect {
 
   private setupCanvas (): void {
     const rect = this.canvas.getBoundingClientRect()
-    this.canvas.width = rect.width * this.dpr
-    this.canvas.height = rect.height * this.dpr
-    this.canvas.style.width = `${rect.width}px`
-    this.canvas.style.height = `${rect.height}px`
+    // Fallback when the canvas hasn't been laid out yet (e.g. w-fit/h-fit with
+    // no content). Without dimensions, getImageData() throws IndexSizeError.
+    const width = rect.width || this.config.fontSize * (this.config.text.length + 2) * 0.6
+    const height = rect.height || (this.config.fontSize || 50) * 1.5
+    this.canvas.width = width * this.dpr
+    this.canvas.height = height * this.dpr
+    this.canvas.style.width = `${width}px`
+    this.canvas.style.height = `${height}px`
     this.ctx.scale(this.dpr, this.dpr)
     this.ctx.imageSmoothingEnabled = true
     if (this.ctx.imageSmoothingQuality) this.ctx.imageSmoothingQuality = 'high'
@@ -327,14 +331,17 @@ export function MagicText ({
 
     // Static fallback when user prefers reduced motion: render the text once, skip RAF.
     if (reducedMotion) {
-      const ctxLocal = canvas.getContext('2d')
+      const ctxLocal = canvas.getContext('2d', { willReadFrequently: true })
       if (!ctxLocal) return
       const rect = canvas.getBoundingClientRect()
+      // Fallback when canvas has no layout yet (w-fit/h-fit with no content).
       const dpr = window.devicePixelRatio || 1
-      canvas.width = rect.width * dpr
-      canvas.height = rect.height * dpr
-      canvas.style.width = `${rect.width}px`
-      canvas.style.height = `${rect.height}px`
+      const width = rect.width || fontSize * (text.length + 2) * 0.6
+      const height = rect.height || (fontSize || 50) * 1.5
+      canvas.width = width * dpr
+      canvas.height = height * dpr
+      canvas.style.width = `${width}px`
+      canvas.style.height = `${height}px`
       ctxLocal.scale(dpr, dpr)
       ctxLocal.imageSmoothingEnabled = true
       ctxLocal.fillStyle = textColorDetected

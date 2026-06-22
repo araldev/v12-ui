@@ -1,0 +1,164 @@
+# openspec/config.yaml
+# ------------------------------------------------------------------------------
+# Project: v12-ui
+# Phase:   sdd-init
+# Created: 2026-06-22
+#
+# This file is the canonical SDD config for v12-ui. It is consumed by every
+# downstream SDD phase (sdd-explore, sdd-new, sdd-ff, sdd-propose, sdd-spec,
+# sdd-design, sdd-tasks, sdd-apply, sdd-verify, sdd-archive).
+#
+# Preflight answers (cached for the whole session, do NOT change mid-session):
+# ------------------------------------------------------------------------------
+# - execution_mode         : auto
+# - artifact_store         : both    (mirror to openspec/ AND Engram)
+# - delivery_strategy      : single-pr-default  (one PR; orchestrator stops on >5k lines)
+# - review_budget_lines    : 5000
+# - project_root           : /home/arturo/workspace/v12-ui
+# - working_language_prose : Spanish
+# ------------------------------------------------------------------------------
+
+project: v12-ui
+schema_version: 1
+
+# Artifact persistence: every SDD artifact is mirrored to BOTH openspec/ files
+# AND Engram observations under topic_key `sdd/{change-name}/{phase}`.
+artifact_store: both
+
+# Delivery strategy: orchestrator prefers a single PR. If a phase forecast
+# exceeds 5_000 changed lines, the orchestrator stops and asks the maintainer
+# before continuing (chained-pr skill owns the slicing rules).
+delivery_strategy: single-pr-default
+review_budget_lines: 5000
+
+# Execution: phases run back-to-back; orchestrator stops only on high risk.
+execution_mode: auto
+
+# Working language for prose in artifacts (user-facing prose in Spanish;
+# orchestrator translates summaries back to the user when needed).
+language_prose: es
+
+# ------------------------------------------------------------------------------
+# Resolved at sdd-init time (read by sdd-apply and sdd-verify via grep):
+# ------------------------------------------------------------------------------
+
+# v12-ui ships ZERO test infrastructure. There is no vitest, jest, playwright,
+# cypress, @storybook/test-runner, @storybook/addon-vitest, or @storybook/addon-a11y
+# in package.json. The @testing-library/* packages in node_modules are transitive
+# deps pulled in by @storybook/addon-docs; they are not configured to run.
+#
+# Decision: strict_tdd MUST be false. sdd-apply and sdd-verify launches should
+# grep this field and adapt — DO NOT block on failing tests for changes that
+# only touch components. When a new feature genuinely requires test coverage,
+# sdd-explore or sdd-propose must propose installing vitest + @testing-library/react
+# as an explicit first task (a separate work-unit).
+strict_tdd: false
+testing_capabilities:
+  runner: none
+  component_testing_lib: none
+  axe_a11y: false
+  visual_regression: none
+  notes: >-
+    No test runner is installed. @testing-library/{dom,jest-dom,user-event}
+    are present in node_modules only as transitive deps via @storybook/addon-docs
+    and @storybook/test (Storybook 9). They are not wired to a test runner.
+    Adding tests requires an explicit change to install and configure a runner.
+
+# Stack baseline (snapshot 2026-06-22, refreshed 2026-06-22 after
+# Storybook 10 upgrade and theme workunit). Future SDD phases SHOULD
+# validate that these have not drifted before assuming them. Drift
+# triggers a discovery note.
+stack_baseline:
+  react_peer: "^18.2.0 || ^19.0.0"
+  react_types: "19.1.8"
+  typescript: "5.8.3"
+  vite: "7.0.0"
+  tailwind: "4.1.11"
+  tailwind_integration: "@tailwindcss/vite (CSS-first, @theme inline)"
+  storybook: "10.4.6"
+  storybook_addons: ["@storybook/addon-docs"]
+  linter: "ts-standard (no standalone ESLint config)"
+  formatter: "standard (built into ts-standard)"
+  bundle: "dual es+cjs via vite lib mode, preserveModules=true"
+  release_workflow: ".github/workflows/release.yml (semantic-release + Storybook deploy)"
+  release_docs: ".github/RELEASE.md"
+
+# Design-token + styling primitives baseline. NO @radix-ui/*, NO lucide-react,
+# NO tailwindcss-animate. Components are hand-rolled.
+styling_baseline:
+  cva: "^0.7.1"
+  clsx: "^2.1.1"
+  tailwind_merge: "^3.3.1"
+  radix_ui: false
+  lucide_react: false
+  tailwindcss_animate: false
+  tokens: "src/index.css (HSL --v12-* vars, dark via [data-theme=\"dark\"])"
+  dark_mode_status: >-
+    All 9 button variants (primary, secondary, muted, accent, success, warning,
+    error, info, ghost) plus secondary surfaces (card, popover, input, accent)
+    have dark mode overrides. Status colors (success/warning/error/info) added
+    in the 2026-06-22 workunit.
+
+# A11y baseline. a11y posture is MANUAL (component-level aria-* only). No
+# automated a11y tests, no Storybook a11y addon, no prefers-reduced-motion
+# handling at the top of src/. This is a documented gap and a candidate
+# improvement for future changes.
+a11y_baseline:
+  radix_ui: false
+  top_level_aria: >-
+    Button: role=button + aria-disabled when as="button", role=button when
+    as="a". MagicLogo / MagicMouseFollower / MagicText: role=img + aria-label +
+    static fallback image.
+  prefers_reduced_motion: true
+  reduced_motion_hook: "src/hooks/useReducedMotion.ts (used by all 5 motion components)"
+  data_theme_attribute: true
+  theme_observer: "src/hooks/useDataTheme.ts (MutationObserver on <html data-theme>)"
+  automated_a11y_tests: false
+
+# Components baseline (snapshot 2026-06-22). Updated as components are added
+# or refactored. sdd-explore and sdd-propose should reference this list when
+# planning work that touches existing components.
+components_baseline:
+  layout:
+    - name: AnimatedBackground
+      path: "src/Background/AnimatedBackground.tsx"
+      notes: "CSS-only animated bubbles; theme-aware overlay via var(--v12-background)"
+  primitives:
+    - name: Button
+      path: "src/Button/Button.tsx"
+      variants: ["primary", "secondary", "muted", "accent", "success", "warning", "error", "info", "ghost"]
+      polymorphic: >-
+        as="button" (default) or as="a" (href required). Discriminated union
+        type narrows href presence to the anchor variant.
+  premium:
+    - name: MagicLogo
+      path: "src/MagicLogo/MagicLogo.tsx"
+      notes: "Canvas particle effect, role=img + aria-label"
+    - name: MagicText
+      path: "src/MagicText/MagicText.tsx"
+      notes: "Canvas particle text effect, role=img + aria-label"
+    - name: MagicMouseFollower
+      path: "src/MagicMouseFollower/MagicMouseFollower.tsx"
+      notes: "Canvas mouse trail effect, role=img + aria-label"
+
+# Hooks baseline (snapshot 2026-06-22). Lowercase directory name.
+hooks_baseline:
+  - name: useDataTheme
+    path: "src/hooks/useDataTheme.ts"
+    notes: "MutationObserver on <html data-theme>; returns 'light' | 'dark' | 'transparent'"
+  - name: useReducedMotion
+    path: "src/hooks/useReducedMotion.ts"
+    notes: "Wraps window.matchMedia('(prefers-reduced-motion: reduce)')"
+
+# Commit / release workflow (snapshot 2026-06-22). Documented in detail in
+# .github/RELEASE.md. The badges in README reflect these values.
+commit_workflow:
+  tool: "commitizen (npm run commit)"
+  adapter: "cz-conventional-changelog"
+  convention: "Conventional Commits (Angular preset)"
+  release_engine: "semantic-release@^24"
+  trigger: "push to main → .github/workflows/release.yml"
+  branches:
+    stable: ["main", "next"]
+    prerelease: ["beta", "alpha"]
+  storybook_deploy: "peaceiris/actions-gh-pages → gh-pages branch on release success"
