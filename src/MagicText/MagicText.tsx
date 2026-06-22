@@ -329,32 +329,75 @@ export function MagicText ({
       attractMode
     }
 
-    // Static fallback when user prefers reduced motion: render the text once, skip RAF.
-    if (reducedMotion) {
-      const ctxLocal = canvas.getContext('2d', { willReadFrequently: true })
-      if (!ctxLocal) return
+    let effect: ParticleLogoEffect | null = null
+    let cleanupResize: (() => void) | null = null
+
+    // The canvas uses w-fit/h-fit which means getBoundingClientRect() can return
+    // 0 before layout. Defer particle effect creation to the next animation
+    // frame so the browser has time to apply layout. ResizeObserver catches
+    // size changes after mount (e.g., when the parent expands or font loads).
+    const initEffect = () => {
       const rect = canvas.getBoundingClientRect()
-      // Fallback when canvas has no layout yet (w-fit/h-fit with no content).
-      const dpr = window.devicePixelRatio || 1
-      const width = rect.width || fontSize * (text.length + 2) * 0.6
-      const height = rect.height || (fontSize || 50) * 1.5
-      canvas.width = width * dpr
-      canvas.height = height * dpr
-      canvas.style.width = `${width}px`
-      canvas.style.height = `${height}px`
-      ctxLocal.scale(dpr, dpr)
-      ctxLocal.imageSmoothingEnabled = true
-      ctxLocal.fillStyle = textColorDetected
-      ctxLocal.font = `bold ${fontSize || 50}px ${fontFamily || 'sans-serif'}`
-      ctxLocal.textAlign = 'center'
-      ctxLocal.textBaseline = 'middle'
-      ctxLocal.fillText(text, rect.width / 2, rect.height / 2)
-      return
+      if (rect.width === 0 || rect.height === 0) {
+        // Canvas still has no layout — try once more after a short delay.
+        requestAnimationFrame(() => {
+          const r2 = canvas.getBoundingClientRect()
+          if (r2.width === 0 || r2.height === 0) return
+          if (reducedMotion) {
+            renderStaticFallback(canvas, config, r2.width, r2.height)
+          } else {
+            effect = new ParticleLogoEffect(canvas, config)
+          }
+        })
+      } else {
+        if (reducedMotion) {
+          renderStaticFallback(canvas, config, rect.width, rect.height)
+        } else {
+          effect = new ParticleLogoEffect(canvas, config)
+        }
+      }
     }
 
-    const effect = new ParticleLogoEffect(canvas, config)
+    // Static fallback when user prefers reduced motion: render the text once.
+    const renderStaticFallback = (
+      c: HTMLCanvasElement,
+      cfg: RequiredConfigProps,
+      w: number,
+      h: number
+    ) => {
+      const ctxLocal = c.getContext('2d', { willReadFrequently: true })
+      if (!ctxLocal) return
+      const dpr = window.devicePixelRatio || 1
+      c.width = w * dpr
+      c.height = h * dpr
+      c.style.width = `${w}px`
+      c.style.height = `${h}px`
+      ctxLocal.scale(dpr, dpr)
+      ctxLocal.imageSmoothingEnabled = true
+      ctxLocal.fillStyle = cfg.color
+      ctxLocal.font = `bold ${cfg.fontSize}px ${cfg.fontFamily}`
+      ctxLocal.textAlign = 'center'
+      ctxLocal.textBaseline = 'middle'
+      ctxLocal.fillText(cfg.text, w / 2, h / 2)
+    }
+
+    // Defer to next animation frame so layout has settled.
+    const rafId = requestAnimationFrame(initEffect)
+
+    // Re-init if the canvas resizes (window resize, container layout shift).
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(() => {
+        if (effect) effect.destroy()
+        effect = null
+        requestAnimationFrame(initEffect)
+      })
+      ro.observe(canvas)
+      cleanupResize = () => ro.disconnect()
+    }
 
     return () => {
+      cancelAnimationFrame(rafId)
+      if (cleanupResize) cleanupResize()
       if (effect) effect.destroy()
     }
   }, [text, particles, dotSize, repulsion, friction, returnSpeed, fontFamily, fontSize, theme, color, glow, trace, attractMode, reducedMotion])
