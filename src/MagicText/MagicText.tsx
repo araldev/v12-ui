@@ -268,6 +268,7 @@ interface MagicLogoProps extends Omit<CanvasHTMLAttributes<HTMLCanvasElement>, '
   glow?: boolean
   trace?: boolean
   attractMode?: boolean
+  ariaLabel?: string
   className?: string
 }
 
@@ -284,12 +285,17 @@ export function MagicText ({
   glow = true,
   trace = true,
   attractMode = false,
+  ariaLabel,
   className,
   ...props
 }: MagicLogoProps): ReactElement {
   const { theme } = useDataTheme()
   const reducedMotion = useReducedMotion()
   const textColorDetected = color || (theme === 'dark' ? '#fff' : '#000')
+
+  const derivedAriaLabel = ariaLabel ?? (
+    text.length > 50 ? text.slice(0, 50) + '...' : text
+  )
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
@@ -347,10 +353,23 @@ export function MagicText ({
   }, [text, particles, dotSize, repulsion, friction, returnSpeed, fontFamily, fontSize, theme, color, glow, trace, attractMode, reducedMotion])
 
   return (
-    <canvas
-      ref={canvasRef}
-      {...props}
-      className={cn('block mx-auto overflow-visible z-0 w-fit h-fit', className)}
-    />
+    <div role="img" aria-label={derivedAriaLabel}>
+      {reducedMotion ? (
+        <img
+          src=""
+          alt={derivedAriaLabel}
+          aria-hidden="true"
+          className={cn('block mx-auto overflow-visible z-0 w-fit h-fit', className)}
+          style={{ background: 'transparent' }}
+        />
+      ) : (
+        <canvas
+          ref={canvasRef}
+          aria-hidden="true"
+          className={cn('block mx-auto overflow-visible z-0 w-fit h-fit', className)}
+          {...props}
+        />
+      )}
+    </div>
   )
 }
