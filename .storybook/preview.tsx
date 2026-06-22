@@ -1,6 +1,7 @@
 import "@/index.css";
 import "@/sotoryBook-safeList.css";
-import type { Preview } from '@storybook/react-vite';
+import { useEffect } from 'react';
+import type { Preview, Decorator } from '@storybook/react-vite';
 
 // Definir temas base personalizados
 const lightTheme = {
@@ -59,29 +60,50 @@ const darkTheme = {
   buttonBorder: '#1ea7fd',
 };
 
-const getTheme = () => {
-  // Verificar si hay un tema guardado en localStorage
-  const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
-  
-  if (savedTheme) {
-    return savedTheme === 'dark' ? darkTheme : lightTheme;
-  }
-  
-  // Si no hay tema guardado, usar prefer-color-scheme
-  const prefersDark = typeof window !== 'undefined' 
-    ? window.matchMedia('(prefers-color-scheme: dark)').matches 
-    : false;
-    
-  if (typeof window !== 'undefined') {
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      window.location.reload();
-    });
-  }
+// Storybook 9 toolbar control — drives <html data-theme="..."> and persists
+// the choice to localStorage.v12-theme. Replaces the previous OS-preference-only
+// mechanism (legacy theme lookup + full-page reload on system-flip, both removed).
+const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Global theme for v12-ui stories',
+    defaultValue: 'system',
+    toolbar: {
+      icon: 'circlehollow',
+      items: [
+        { value: 'light', icon: 'sun', title: 'Light' },
+        { value: 'dark', icon: 'moon', title: 'Dark' },
+        { value: 'system', icon: 'mirror', title: 'System' },
+      ],
+      dynamicTitle: true,
+    },
+  },
+};
 
-  return prefersDark ? darkTheme : lightTheme;
+const withTheme: Decorator = (Story, context) => {
+  const selected = (context.globals.theme ?? 'system') as 'light' | 'dark' | 'system';
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const root = document.documentElement;
+
+    if (selected === 'system') {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    } else {
+      root.setAttribute('data-theme', selected);
+    }
+
+    localStorage.setItem('v12-theme', selected);
+  }, [selected]);
+
+  return <Story {...context} />;
 };
 
 const preview: Preview = {
+  globalTypes,
+  decorators: [withTheme],
   parameters: {
     controls: {
       matchers: {
@@ -95,13 +117,18 @@ const preview: Preview = {
       },
     },
     docs: {
-      theme: getTheme(),
+      theme: lightTheme,
     },
     backgrounds: {
       default: 'auto',
+      // Storybook's canvas chrome (the manager UI surrounding the iframe)
+      // lives OUTSIDE the <html> cascade, so these background swatches must
+      // remain literal hex values — they cannot read the data-theme attribute
+      // we set above (that only affects the story iframe document, not the
+      // surrounding Storybook chrome). See spec A6.5.a.
       values: [
-        { 
-          name: 'auto', 
+        {
+          name: 'auto',
           value: window.matchMedia('(prefers-color-scheme: dark)').matches ? '#1a1a1a' : '#ffffff'
         },
         { name: 'light', value: '#ffffff' },
