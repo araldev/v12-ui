@@ -1,10 +1,8 @@
 import "@/index.css";
 import "@/sotoryBook-safeList.css";
-import { useEffect } from 'react';
-import type { Preview, Decorator } from '@storybook/react-vite';
-import { useGlobals } from 'storybook/internal/preview-api';
+import { themes } from 'storybook/theming';
 
-// Definir temas base personalizados
+// Light theme — used as Storybook manager theme when darkMode = 'light'
 const lightTheme = {
   base: 'light' as const,
   colorPrimary: '#1ea7fd',
@@ -34,93 +32,14 @@ const lightTheme = {
   buttonBorder: '#1ea7fd',
 };
 
+// Dark theme — used as Storybook manager theme when darkMode = 'dark'
 const darkTheme = {
+  ...themes.dark,
   base: 'dark' as const,
-  colorPrimary: '#1ea7fd',
-  colorSecondary: '#585C6D',
-  appBg: '#1a1a1a',
   appHoverBg: '#252525',
-  appContentBg: '#2a2a2a',
-  appPreviewBg: '#222222',
-  appBorderColor: '#404040',
-  appBorderRadius: 4,
-  textColor: '#ffffff',
-  textInverseColor: '#333333',
-  textMutedColor: '#888888',
-  fontBase: '"Inter", "Arial", sans-serif',
-  fontCode: 'monospace',
-  barTextColor: '#ffffff',
-  barSelectedColor: '#1ea7fd',
-  barBg: '#2a2a2a',
-  barHoverColor: '#404040',
-  inputBg: '#2a2a2a',
-  inputBorder: '#404040',
-  inputTextColor: '#ffffff',
-  inputBorderRadius: 4,
-  booleanBg: '#222222',
-  booleanSelectedBg: '#1ea7fd',
-  buttonBg: '#1ea7fd',
-  buttonBorder: '#1ea7fd',
 };
 
-// Storybook 9 toolbar control — drives <html data-theme="..."> and persists
-// the choice to localStorage.v12-theme. Replaces the previous OS-preference-only
-// mechanism (legacy theme lookup + full-page reload on system-flip, both removed).
-const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Global theme for v12-ui stories',
-    defaultValue: 'system',
-    toolbar: {
-      icon: 'circlehollow' as const,
-      items: [
-        { value: 'light', icon: 'sun' as const, title: 'Light' },
-        { value: 'dark', icon: 'moon' as const, title: 'Dark' },
-        { value: 'system', icon: 'mirror' as const, title: 'System' },
-      ],
-      dynamicTitle: true,
-    },
-  },
-};
-
-let currentTheme = localStorage.getItem('v12-theme') as 'light' | 'dark' | 'system' | null === 'dark' ? darkTheme : lightTheme;
-
-const withTheme: Decorator = (Story, context) => {
-  const selected = (context.globals.theme ?? 'system') as 'light' | 'dark' | 'system';
-  const [globals, setGlobals] = useGlobals();
-
-  const resolvedTheme = selected === 'system'
-    ? (window.matchMedia?.('(prefers-color-scheme: dark)').matches 
-      ? 'dark' 
-      : 'light')
-    : selected;
-
-  // Sync the backgrounds global with our theme so Storybook's iframe
-  // background matches the selected theme.
-  useEffect(() => {
-    const currentBg = (globals.backgrounds ?? '') as string;
-    if (currentBg !== resolvedTheme) {
-      setGlobals({ backgrounds: resolvedTheme });
-    }
-
-    currentTheme = resolvedTheme === 'dark' ? darkTheme : lightTheme;
-  }, [resolvedTheme]);
-
-  // Apply data-theme to current document
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    document.documentElement.setAttribute('data-theme', resolvedTheme);
-    localStorage.setItem('v12-theme', selected);
-  }, [resolvedTheme, selected]);
-
-  return <Story {...context} />;
-};
-
-
-const preview: Preview = {
-  globalTypes,
-  decorators: [withTheme],
-
+const preview = {
   parameters: {
     controls: {
       matchers: {
@@ -130,27 +49,27 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ['Introduction','Premium Components', 'Layout' , 'Components', 'Hooks', 'Utilities'],
+        order: ['Introduction', 'Premium Components', 'Layout', 'Components', 'Hooks', 'Utilities'],
       },
     },
-    docs: {
-      // Use a getter so the docs theme reacts to `currentTheme` reassignments
-      // made by the withTheme Decorator. With a plain value, Storybook
-      // captures the theme reference once at module init and never updates.
-      get theme() {
-        return currentTheme
-      },
-    },
-    backgrounds: {
-      options: {
-        light: { name: 'Light', value: '#ffffff' },
-        dark: { name: 'Dark', value: '#1a1a1a' },
-      },
-    },
-  },
 
-  initialGlobals: {
-    backgrounds: 'light',
+    // storybook-dark-mode: applies 'dark' / 'light' class to <html data-theme>
+    // AND sets the manager chrome theme via addons.setConfig under the hood.
+    // The lightTheme / darkTheme objects are passed to the addon.
+    darkMode: {
+      dark: darkTheme,
+      light: lightTheme,
+      // Default to system preference; stored in localStorage by the addon.
+      current: 'light',
+      // Apply dark/light class to <html> in the preview iframe so our
+      // CSS variables (--v12-*) react to the theme.
+      classTarget: 'html',
+      stylePreview: true,
+    },
+
+    // storybook-dark-mode sets `parameters.docs.theme` via addons.setConfig
+    // automatically, so we don't need to set it here.
+    docs: {},
   },
 };
 
