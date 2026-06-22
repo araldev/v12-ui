@@ -78,6 +78,11 @@ function ButtonInner<T extends AllowedTags = 'button'> (
 ): ReactElement {
   const Component = as || 'button'
   const isNativeButton = Component === 'button'
+  const disabledProps = isNativeButton && disabled
+    ? { disabled: true, 'aria-disabled': true }
+    : disabled
+      ? { 'aria-disabled': true }
+      : {}
 
   if (process.env.NODE_ENV !== 'production') {
     if (as === 'a' && !('href' in props)) {
@@ -105,7 +110,7 @@ function ButtonInner<T extends AllowedTags = 'button'> (
       tabIndex={disabled ? -1 : 0}
       onKeyDown={handleKeyDown}
       ref={ref}
-      aria-disabled={disabled}
+      {...disabledProps}
       {...props}
       className={cn(
         button({ variant, border, shadow, rounded, size }),
