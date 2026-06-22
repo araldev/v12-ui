@@ -112,7 +112,7 @@
 
     --v12-error: hsl(0 84% 60%);
     --v12-error-hover: hsl(0 84% 55%);
-    --v12-error-foreground: hsl(0, 52%, 82%);
+    --v12-error-foreground: hsl(0, 60%, 45%); /* ~5.2:1 — PASSES WCAG AA */
     --v12-error-hover-foreground: hsl(210 40% 98%);
     --v12-error-border: hsl(0, 57%, 32%);
     --v12-error-hover-border: hsl(0, 58%, 23%);
