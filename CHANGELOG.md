@@ -1,3 +1,10 @@
+## [0.5.5](https://github.com/araldev/v12-ui/compare/v0.5.4...v0.5.5) (2026-06-23)
+
+
+### Bug Fixes
+
+* **toggle:** change inline-flex to flex to prevent baseline-alignment shift ([383ec5f](https://github.com/araldev/v12-ui/commit/383ec5f3a077c699d14babfb0301342e48952737))
+
 ## [0.5.4](https://github.com/araldev/v12-ui/compare/v0.5.3...v0.5.4) (2026-06-23)
 
 
