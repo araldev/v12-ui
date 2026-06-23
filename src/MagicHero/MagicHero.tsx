@@ -98,21 +98,25 @@ const styles = {
   } satisfies CSSProperties,
   overlay_copy: {
     position: 'absolute' as const,
-    bottom: '20%',
+    bottom: '15%',
     left: '50%',
     transform: 'translate(-50%, 0%)',
-    zIndex: 2,
+    zIndex: 3,
     textAlign: 'center' as const,
     pointerEvents: 'none' as const,
-    width: '100%',
-    height: 'min-content',
+    width: '90%',
+    height: '40%',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    alignItems: 'center' as const,
+    justifyContent: 'center' as const,
+    gap: '0.5em',
   } satisfies CSSProperties,
   overlay_copy_h2: {
     backgroundClip: 'text',
     WebkitBackgroundClip: 'text',
     color: 'transparent',
     WebkitTextFillColor: 'transparent',
-    transformOrigin: 'center top',
     textTransform: 'uppercase' as const,
     fontSize: 'clamp(2rem, 6vw, 5rem)',
     fontWeight: 700,
@@ -120,7 +124,7 @@ const styles = {
     lineHeight: 0.9,
     pointerEvents: 'none' as const,
     width: '100%',
-    height: '100%',
+    textAlign: 'center' as const,
   } satisfies CSSProperties,
 } as const
 
@@ -175,7 +179,8 @@ function MagicHeroInner(
 ): ReactElement {
   const titleRevealMaskId = useId()
 
-  // ----- 8 refs, exact names from the original -----
+  // ----- 7 refs (removed titleMaskRef and titleContainerRef — not needed
+  // anymore since the SVG mask uses declarative <text>, not a path) -----
   const heroRef = useRef<HTMLDivElement>(null)
   const heroImgContainerRef = useRef<HTMLDivElement>(null)
   const heroImgTitleRef = useRef<HTMLDivElement>(null)
@@ -184,8 +189,6 @@ function MagicHeroInner(
   const svgOverlayRef = useRef<HTMLDivElement>(null)
   const overlayCopyRef = useRef<HTMLHeadingElement>(null)
   const overlayCopyContainerRef = useRef<HTMLDivElement>(null)
-  const titleContainerRef = useRef<HTMLDivElement>(null)
-  const titleMaskRef = useRef<SVGPathElement>(null)
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useLayoutEffect(() => {
@@ -197,8 +200,6 @@ function MagicHeroInner(
     const svgOverlay = svgOverlayRef.current
     const overlayCopy = overlayCopyRef.current
     const overlayCopyContainer = overlayCopyContainerRef.current
-    const titleContainer = titleContainerRef.current
-    const titleMask = titleMaskRef.current
 
     if (
       !hero ||
@@ -208,9 +209,7 @@ function MagicHeroInner(
       !fadeOverlay ||
       !svgOverlay ||
       !overlayCopy ||
-      !overlayCopyContainer ||
-      !titleContainer ||
-      !titleMask
+      !overlayCopyContainer
     ) {
       console.warn(
         'MagicHero: GSAP/ScrollTrigger — some elements not found'
@@ -239,45 +238,13 @@ function MagicHeroInner(
       { x: 0, filter: 'blur(0px)', duration: 1 }
     )
 
-    // ----- Calculate SVG path position — EXACT formula from original -----
-    const updateMaskPosition = () => {
-      titleMask.setAttribute('d', svgPath)
-      titleMask.removeAttribute('transform')
+    // ----- The SVG mask uses <text> (not <path>) so it always aligns
+    // with the title text shown in the h2 below. The text is positioned
+    // at the same place as the h2 (bottom 15% center) and uses the
+    // same content and styling. No more misalignment between the
+    // "hole" in the mask and the actual title text. -----
 
-      const titleDimensions = titleContainer.getBoundingClientRect()
-      const titleBoundingBox = titleMask.getBBox()
 
-      const horizontalScaleRatio =
-        titleDimensions.width / titleBoundingBox.width
-      const verticalScaleRatio =
-        titleDimensions.height / titleBoundingBox.height
-
-      const titleScaleFactor = Math.min(
-        horizontalScaleRatio,
-        verticalScaleRatio
-      )
-
-      const titleHorizontalPosition =
-        titleDimensions.left +
-        (titleDimensions.width -
-          titleBoundingBox.width * titleScaleFactor) /
-          2 -
-        titleBoundingBox.x * titleScaleFactor
-
-      const titleVerticalPosition =
-        titleDimensions.top +
-        (titleDimensions.height -
-          titleBoundingBox.height * titleScaleFactor) /
-          2 -
-        titleBoundingBox.y * titleScaleFactor
-
-      titleMask.setAttribute(
-        'transform',
-        `translate(${titleHorizontalPosition}, ${titleVerticalPosition}) scale(${titleScaleFactor})`
-      )
-    }
-
-    updateMaskPosition()
 
     // ----- Main ScrollTrigger — EXACT config from original -----
     const trigger = ScrollTrigger.create({
@@ -290,9 +257,10 @@ function MagicHeroInner(
       scrub: 1,
       invalidateOnRefresh: true,
       pinType: 'transform',
-      onRefresh: updateMaskPosition,
+      onRefresh: () => {
+        // No mask position update needed — text mask is declarative
+      },
       onUpdate: (self) => {
-        updateMaskPosition()
         const scrollProgress = self.progress
 
         // ----- Fade out hero image + scroll hint in first 15% -----
@@ -455,13 +423,38 @@ function MagicHeroInner(
       {/* fade_overlay — gradient that fades in */}
       <div ref={fadeOverlayRef} style={styles.fade_overlay} />
 
-      {/* overlay — SVG mask (fullscreen, path reveals the title) */}
+      {/* overlay — SVG mask with <text> element.
+          The text is positioned at the same place as the h2 below
+          (bottom 15-20% center) so the mask "hole" ALWAYS aligns
+          with the visible title text, regardless of the title content.
+          No more custom SVG path needed — the text IS the mask. */}
       <div ref={svgOverlayRef} style={styles.overlay}>
         <svg width="100%" height="100%">
           <defs>
             <mask id={titleRevealMaskId}>
               <rect width="100%" height="100%" fill="white" />
-              <path ref={titleMaskRef} />
+              <text
+                x="50%"
+                y="50%"
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fontSize="clamp(2rem, 6vw, 5rem)"
+                fontWeight="700"
+                letterSpacing="-0.05rem"
+                fill="black"
+                fontFamily="inherit"
+                style={{ textTransform: 'uppercase' }}
+              >
+                <tspan x="50%" dy="-1.2em">
+                  {quote1}
+                </tspan>
+                <tspan x="50%" dy="1.2em">
+                  {quote2}
+                </tspan>
+                <tspan x="50%" dy="1.2em">
+                  {quote3}
+                </tspan>
+              </text>
             </mask>
           </defs>
           <rect
@@ -473,19 +466,14 @@ function MagicHeroInner(
         </svg>
       </div>
 
-      {/* title_container — invisible FIXED ref for mask position calculation */}
-      <div ref={titleContainerRef} style={styles.title_container} />
-
-      {/* overlay_copy — gradient text revealed at the end */}
+      {/* overlay_copy — gradient text revealed at the end.
+          Uses the SAME layout as the SVG <text> mask above (3 spans,
+          gap-based spacing) so they align perfectly. */}
       <div ref={overlayCopyContainerRef} style={styles.overlay_copy}>
         <h2 ref={overlayCopyRef} style={styles.overlay_copy_h2}>
-          {quote1}
-          <br />
-          <br />
-          {quote2}
-          <br />
-          <br />
-          {quote3}
+          <span style={{ display: 'block' }}>{quote1}</span>
+          <span style={{ display: 'block' }}>{quote2}</span>
+          <span style={{ display: 'block' }}>{quote3}</span>
         </h2>
       </div>
 
