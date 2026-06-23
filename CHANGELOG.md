@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/araldev/v12-ui/compare/v0.5.0...v0.5.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* **ui:** toggle thumb centering and select styling/animation polish ([8beabae](https://github.com/araldev/v12-ui/commit/8beabae84db8acbd91851a1a08e1677d464a5c05))
+
 # [0.5.0](https://github.com/araldev/v12-ui/compare/v0.4.0...v0.5.0) (2026-06-23)
 
 
