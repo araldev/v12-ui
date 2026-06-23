@@ -31,13 +31,14 @@ const toggleTrack = cva(
 )
 
 const toggleThumb = cva(
-  'pointer-events-none inline-block rounded-full bg-white shadow-sm transition-transform duration-200',
+  'pointer-events-none inline-block rounded-full bg-white transition-transform duration-200',
   {
     variants: {
       size: {
-        sm: 'h-3 w-3 translate-x-1',
-        md: 'h-4 w-4 translate-x-1.5',
-        lg: 'h-5 w-5 translate-x-2',
+        // offset = (track_h - thumb_h) / 2 = 4px for all sizes; 4px = translate-x-1
+        sm: 'h-3 w-3 shadow-[0_1px_2px_rgba(0,0,0,0.25)]',
+        md: 'h-4 w-4 shadow-[0_1px_3px_rgba(0,0,0,0.3)]',
+        lg: 'h-5 w-5 shadow-[0_1px_4px_rgba(0,0,0,0.35)]',
       },
     },
     defaultVariants: {
@@ -115,23 +116,15 @@ function ToggleInner(
     className
   )
 
+  // offset = (track_h - thumb_h) / 2 = 4px for all sizes
+  const OFFSET = '4px'
+
   const thumbClasses = cn(
     toggleThumb({ size }),
     reducedMotion ? '' : 'transition-transform duration-200',
-    !reducedMotion && isChecked
-      ? (size === 'sm'
-          ? 'translate-x-[calc(100%+8px)]'
-          : size === 'lg'
-          ? 'translate-x-[calc(100%+16px)]'
-          : 'translate-x-[calc(100%+10px)]')
-      : '',
-    reducedMotion && isChecked
-      ? (size === 'sm'
-          ? '!translate-x-[calc(100%+8px)]'
-          : size === 'lg'
-          ? '!translate-x-[calc(100%+16px)]'
-          : '!translate-x-[calc(100%+10px)]')
-      : ''
+    isChecked
+      ? `translate-x-[calc(100%-${OFFSET})]`
+      : 'translate-x-1'
   )
 
   return (

@@ -25,14 +25,14 @@ const selectTrigger = cva(
     variants: {
       variant: {
         default:
-          'bg-bg-default border border-border-default text-text-default hover:border-border-input-hover',
-        muted: 'bg-bg-muted border border-border-muted text-text-muted hover:border-border-muted',
-        ghost: 'bg-bg-ghost border border-border-ghost text-text-ghost hover:border-border-ghost-hover',
+          'bg-bg-default border border-border-default text-text-default',
+        muted: 'bg-bg-muted border border-border-muted text-text-muted',
+        ghost: 'bg-bg-ghost border border-border-ghost text-text-ghost',
       },
       size: {
-        sm: 'text-sm py-2 px-3 min-h-9',
-        md: 'text-base py-3 px-4 min-h-11',
-        lg: 'text-lg py-4 px-5 min-h-14',
+        sm: 'text-sm py-2 px-3 min-h-9 rounded-md',
+        md: 'text-base py-3 px-4 min-h-11 rounded-lg',
+        lg: 'text-lg py-4 px-5 min-h-14 rounded-xl',
       },
     },
     defaultVariants: {
@@ -43,13 +43,13 @@ const selectTrigger = cva(
 )
 
 const selectDropdown = cva(
-  'absolute z-50 w-full overflow-hidden border border-border-default shadow-shadow-md',
+  'absolute z-50 w-full overflow-hidden border border-border-default',
   {
     variants: {
       variant: {
-        default: 'bg-bg-default',
-        muted: 'bg-bg-muted',
-        ghost: 'bg-bg-ghost',
+        default: 'bg-bg-default shadow-shadow-lg rounded-lg',
+        muted: 'bg-bg-muted shadow-shadow-md rounded-lg',
+        ghost: 'bg-bg-ghost shadow-shadow-md rounded-lg',
       },
     },
     defaultVariants: {
@@ -59,13 +59,14 @@ const selectDropdown = cva(
 )
 
 const selectOption = cva(
-  'cursor-pointer px-4 py-2 text-base transition-colors duration-100',
+  'cursor-pointer px-4 py-3 text-base transition-all duration-150',
   {
     variants: {
       variant: {
-        default: 'text-text-default hover:bg-bg-secondary',
-        muted: 'text-text-muted hover:bg-bg-secondary',
-        ghost: 'text-text-ghost hover:bg-bg-secondary',
+        default:
+          'text-text-default hover:bg-bg-secondary/60',
+        muted: 'text-text-muted hover:bg-bg-secondary/60',
+        ghost: 'text-text-ghost hover:bg-bg-secondary/60',
       },
     },
     defaultVariants: {
@@ -111,10 +112,11 @@ function SelectInner(
   const listboxId = `select-listbox-${generatedId}`
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [internalValue, setInternalValue] = useState(defaultValue ?? '')
   const containerRef = useRef<HTMLDivElement>(null)
 
   const isControlled = value !== undefined
-  const currentValue = isControlled ? value : defaultValue ?? ''
+  const currentValue = isControlled ? value : internalValue
 
   const resolvedOptions = children
     ? ([] as SelectOption[])
@@ -177,10 +179,13 @@ function SelectInner(
   const handleOptionClick = useCallback(
     (option: SelectOption) => {
       if (option.disabled) return
+      if (!isControlled) {
+        setInternalValue(option.value)
+      }
       onChange?.(option.value)
       setIsOpen(false)
     },
-    [onChange]
+    [isControlled, onChange]
   )
 
   const handleOptionMouseEnter = useCallback((index: number) => {
@@ -205,16 +210,27 @@ function SelectInner(
 
   const triggerClasses = cn(
     selectTrigger({ variant, size }),
+    !disabled &&
+      !error &&
+      'hover:border-border-input-hover',
+    !disabled &&
+      !error &&
+      !isOpen &&
+      'active:bg-bg-secondary/40',
     disabled && 'opacity-50 cursor-not-allowed',
-    error && 'border-border-error',
+    error && 'border-border-error ring-2 ring-ring-error/30',
     isOpen && 'ring-2 ring-ring-focus',
     className
   )
 
   const dropdownClasses = cn(
     selectDropdown({ variant }),
-    !reducedMotion && 'transition-all duration-150 ease-out',
-    reducedMotion ? '' : isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+    !reducedMotion && 'transition-all duration-200 ease-out',
+    reducedMotion
+      ? ''
+      : isOpen
+      ? 'opacity-100 scale-100 translate-y-0'
+      : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
   )
 
   return (
@@ -279,7 +295,7 @@ function SelectInner(
             aria-label={placeholder}
             className={cn(
               dropdownClasses,
-              'max-h-60 overflow-y-auto'
+              'max-h-60 overflow-y-auto border-t-2 border-t-border-accent'
             )}
             style={{
               position: 'fixed',
@@ -306,12 +322,36 @@ function SelectInner(
                 onMouseEnter={() => handleOptionMouseEnter(index)}
                 className={cn(
                   selectOption({ variant }),
-                  option.value === currentValue && 'bg-bg-secondary font-medium',
-                  option.disabled && 'opacity-50 cursor-not-allowed',
-                  index === activeIndex && !option.disabled && 'bg-bg-secondary'
+                  option.value === currentValue &&
+                    'bg-bg-accent/10 font-semibold text-text-accent',
+                  option.disabled && 'opacity-40 cursor-not-allowed',
+                  index === activeIndex &&
+                    !option.disabled &&
+                    'bg-bg-secondary/80',
+                  !option.disabled && 'hover:bg-bg-secondary/60'
                 )}
               >
-                {option.label}
+                <span className="flex items-center justify-between">
+                  <span>{option.label}</span>
+                  {option.value === currentValue && (
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="text-text-accent shrink-0 ml-2"
+                    >
+                      <path
+                        d="M2.5 7L5.5 10L11.5 4"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </span>
               </div>
             ))}
           </div>,
