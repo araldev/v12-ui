@@ -7,6 +7,7 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
+    chromatic: { viewports: [1280] },
   },
   component: Select,
   argTypes: {
@@ -60,6 +61,13 @@ export const Default: Story = {
     error: false,
     options: sampleOptions,
   },
+  decorators: [
+    (Story) => (
+      <div className="min-h-48">
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 export const Muted: Story = {
@@ -158,6 +166,39 @@ export const Disabled: Story = {
     disabled: true,
     options: sampleOptions,
   },
+}
+
+export const OpenDropdown: Story = {
+  name: 'Open Dropdown (for animation test)',
+  parameters: {
+    layout: 'padded',
+    docs: {
+      description: {
+        story:
+          'This story renders the select in a tall container (min-h-96) so the dropdown has room to open and the animation is visible. Click the trigger to open.',
+      },
+    },
+  },
+  decorators: [
+    (Story) => (
+      <div className="min-h-96 pt-8">
+        <p className="mb-4 text-sm text-text-muted">
+          Scroll the canvas to test the dropdown stays anchored while scrolling.
+        </p>
+        <div className="w-72">
+          <Story />
+        </div>
+      </div>
+    ),
+  ],
+  render: () => (
+    <Select
+      variant="default"
+      size="md"
+      placeholder="Select a framework"
+      options={sampleOptions}
+    />
+  ),
 }
 
 export const Controlled: Story = {

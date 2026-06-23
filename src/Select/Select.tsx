@@ -41,7 +41,7 @@ const selectTrigger = cva(
   }
 )
 
-const selectDropdown = cva('w-full overflow-hidden border border-border-default', {
+const selectDropdown = cva('w-full border border-border-default', {
   variants: {
     variant: {
       default: 'bg-bg-default shadow-shadow-lg rounded-lg',
@@ -199,15 +199,6 @@ function SelectInner(
 
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [isOpen])
-
-  // Close on scroll of the page (not just this container)
-  useEffect(() => {
-    if (!isOpen) return
-
-    const handleScroll = () => setIsOpen(false)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
   }, [isOpen])
 
   const triggerClasses = cn(
