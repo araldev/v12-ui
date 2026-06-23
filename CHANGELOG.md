@@ -1,3 +1,10 @@
+## [0.5.3](https://github.com/araldev/v12-ui/compare/v0.5.2...v0.5.3) (2026-06-23)
+
+
+### Bug Fixes
+
+* **toggle:** absolute positioning for thumb to fix vertical centering ([0f601bf](https://github.com/araldev/v12-ui/commit/0f601bff87866cdc298a72398f03007f776eccd0))
+
 ## [0.5.2](https://github.com/araldev/v12-ui/compare/v0.5.1...v0.5.2) (2026-06-23)
 
 
