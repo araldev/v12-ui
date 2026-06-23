@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  pull_request:
+    branches: [main, next]
+  push:
+    branches: [main, next]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npx vitest run --reporter=junit --outputFile=junit.xml
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.node-version }}
+          path: junit.xml
