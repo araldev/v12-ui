@@ -10,7 +10,7 @@ import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 const toggleTrack = cva(
-  'relative inline-flex shrink-0 cursor-pointer items-center transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default',
+  'relative inline-flex shrink-0 cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default',
   {
     variants: {
       variant: {
@@ -31,13 +31,13 @@ const toggleTrack = cva(
 )
 
 const toggleThumb = cva(
-  'pointer-events-none inline-block rounded-full bg-white transition-transform duration-200',
+  'pointer-events-none absolute rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,0.3)] transition-[left] duration-200',
   {
     variants: {
       size: {
-        sm: 'h-3 w-3 shadow-[0_1px_2px_rgba(0,0,0,0.25)]',
-        md: 'h-4 w-4 shadow-[0_1px_3px_rgba(0,0,0,0.3)]',
-        lg: 'h-5 w-5 shadow-[0_1px_4px_rgba(0,0,0,0.35)]',
+        sm: 'h-3 w-3',
+        md: 'h-4 w-4',
+        lg: 'h-5 w-5',
       },
     },
     defaultVariants: {
@@ -115,20 +115,18 @@ function ToggleInner(
     className
   )
 
-  // offset = (track_h - thumb_h) / 2 = 4px for all sizes
-  // ON: thumb right edge should be 4px from track right edge
-  // thumb left edge in ON = track_w - thumb_w - 4px
+  // Absolute positioning: inset:0 + margin:auto = vertical center
+  // Horizontal: OFF left=4px, ON left = track_w - thumb_w - 4px
   // sm: 36-12-4=20, md: 44-16-4=24, lg: 56-20-4=32
+  const thumbLeft = isChecked
+    ? (size === 'sm' ? 'left-[20px]' : size === 'lg' ? 'left-[32px]' : 'left-[24px]')
+    : 'left-[4px]'
+
   const thumbClasses = cn(
     toggleThumb({ size }),
-    reducedMotion ? '' : 'transition-transform duration-200',
-    isChecked
-      ? (size === 'sm'
-          ? 'translate-x-[20px]'
-          : size === 'lg'
-          ? 'translate-x-[32px]'
-          : 'translate-x-[24px]')
-      : 'translate-x-1'
+    'inset-y-0 my-auto',
+    reducedMotion ? '' : 'transition-[left] duration-200',
+    thumbLeft
   )
 
   return (
