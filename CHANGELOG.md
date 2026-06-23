@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/araldev/v12-ui/compare/v0.3.2...v0.3.3) (2026-06-23)
+
+
+### Bug Fixes
+
+* **buttons:** shadow-none as default, explicit shadow-default only for status+primary variants ([ab78c62](https://github.com/araldev/v12-ui/commit/ab78c62ef406980fac73f438688b1bfeb8e25c87))
+
 ## [0.3.2](https://github.com/araldev/v12-ui/compare/v0.3.1...v0.3.2) (2026-06-23)
 
 
