@@ -15,7 +15,7 @@ import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 const accordionTrigger = cva(
-  'flex w-full items-center justify-between text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default transition-colors duration-200',
+  'flex w-full items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default transition-colors duration-200',
   {
     variants: {
       variant: {
@@ -25,9 +25,9 @@ const accordionTrigger = cva(
         ghost: 'text-text-ghost hover:text-text-ghost-hover',
       },
       size: {
-        sm: 'text-sm py-2 px-3',
-        md: 'text-base py-3 px-4',
-        lg: 'text-lg py-4 px-5',
+        sm: 'text-sm py-2.5 px-4',
+        md: 'text-base py-3 px-5',
+        lg: 'text-lg py-4 px-6',
       },
     },
     defaultVariants: {
@@ -202,23 +202,23 @@ function AccordionItemInner(
           resolvedDisabled && 'cursor-not-allowed hover:cursor-not-allowed'
         )}
       >
-        <span className="flex-1">{title}</span>
+        <span className="flex-1 font-medium">{title}</span>
         <span
           className={cn(
-            'ml-2 inline-block transition-transform duration-200',
+            'flex-shrink-0 transition-transform duration-200 ease-out',
             effectiveExpanded ? 'rotate-180' : 'rotate-0'
           )}
           aria-hidden="true"
         >
           <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M4 6L8 10L12 6"
+              d="M4.5 6.75L9 11.25L13.5 6.75"
               stroke="currentColor"
               strokeWidth="1.5"
               strokeLinecap="round"
@@ -245,7 +245,8 @@ function AccordionItemInner(
           <div
             className={cn(
               accordionContent({ variant: resolvedVariant, size: resolvedSize }),
-              'pt-2 pb-3'
+              // Indent content relative to trigger with left border accent
+              'pl-5 py-3 border-l-2 border-border-accent/30'
             )}
           >
             {children}

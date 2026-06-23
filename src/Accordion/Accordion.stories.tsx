@@ -48,13 +48,13 @@ export const Default: Story = {
   render: (args) => (
     <Accordion {...args}>
       <AccordionItem title="What is React?">
-        React is a JavaScript library for building user interfaces, maintained by Meta.
+        React is a JavaScript library for building user interfaces, maintained by Meta and a community of individual developers and companies. It lets you compose complex UIs from small, isolated pieces of code called components.
       </AccordionItem>
       <AccordionItem title="What is TypeScript?">
-        TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.
+        TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. It adds optional static typing and class-based object-oriented programming to the language.
       </AccordionItem>
       <AccordionItem title="What is Tailwind CSS?">
-        Tailwind CSS is a utility-first CSS framework for rapidly building custom designs.
+        Tailwind CSS is a utility-first CSS framework for rapidly building custom designs. It is low-level and gives you all the building blocks you need to build designs without opinionated styles.
       </AccordionItem>
     </Accordion>
   ),
@@ -65,10 +65,17 @@ export const Muted: Story = {
     variant: 'muted',
     size: 'md',
   },
+  decorators: [
+    (Story) => (
+      <div className="w-full max-w-md">
+        <Story />
+      </div>
+    ),
+  ],
   render: (args) => (
     <Accordion {...args}>
       <AccordionItem title="First Item">
-        This is the content of the first muted accordion item.
+        This is the content of the first muted accordion item. It uses a softer background color.
       </AccordionItem>
       <AccordionItem title="Second Item">
         This is the content of the second muted accordion item.
