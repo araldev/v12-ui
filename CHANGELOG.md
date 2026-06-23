@@ -1,3 +1,10 @@
+## [0.5.9](https://github.com/araldev/v12-ui/compare/v0.5.8...v0.5.9) (2026-06-23)
+
+
+### Bug Fixes
+
+* **accordion:** indent content, modernize trigger and content styling ([a4614b7](https://github.com/araldev/v12-ui/commit/a4614b760a7d6a855dec35add2588b20332d9e14))
+
 ## [0.5.8](https://github.com/araldev/v12-ui/compare/v0.5.7...v0.5.8) (2026-06-23)
 
 
