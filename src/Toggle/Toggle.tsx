@@ -35,7 +35,6 @@ const toggleThumb = cva(
   {
     variants: {
       size: {
-        // offset = (track_h - thumb_h) / 2 = 4px for all sizes; 4px = translate-x-1
         sm: 'h-3 w-3 shadow-[0_1px_2px_rgba(0,0,0,0.25)]',
         md: 'h-4 w-4 shadow-[0_1px_3px_rgba(0,0,0,0.3)]',
         lg: 'h-5 w-5 shadow-[0_1px_4px_rgba(0,0,0,0.35)]',
@@ -117,13 +116,18 @@ function ToggleInner(
   )
 
   // offset = (track_h - thumb_h) / 2 = 4px for all sizes
-  const OFFSET = '4px'
-
+  // ON: thumb right edge should be 4px from track right edge
+  // thumb left edge in ON = track_w - thumb_w - 4px
+  // sm: 36-12-4=20, md: 44-16-4=24, lg: 56-20-4=32
   const thumbClasses = cn(
     toggleThumb({ size }),
     reducedMotion ? '' : 'transition-transform duration-200',
     isChecked
-      ? `translate-x-[calc(100%-${OFFSET})]`
+      ? (size === 'sm'
+          ? 'translate-x-[20px]'
+          : size === 'lg'
+          ? 'translate-x-[32px]'
+          : 'translate-x-[24px]')
       : 'translate-x-1'
   )
 
