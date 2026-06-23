@@ -1,3 +1,25 @@
+# [0.6.0](https://github.com/araldev/v12-ui/compare/v0.5.9...v0.6.0) (2026-06-23)
+
+
+### Bug Fixes
+
+* **ci:** update @testing-library/react to 16.3.2 for React 19 support ([b34a7a3](https://github.com/araldev/v12-ui/commit/b34a7a3f1c6548d861346cc9d691709cd5f49be5))
+* **MagicHero:** add back SVG mask — fullscreen with path covering section ([ca5a5f4](https://github.com/araldev/v12-ui/commit/ca5a5f4ab9d1460bf647410c7133e789e35b46c0))
+* **MagicHero:** hero content visible from start, SVG mask inverted ([eafe292](https://github.com/araldev/v12-ui/commit/eafe292981777cfbbfa4c15c572cd3a1789d86c5))
+* **MagicHero:** match original — SVG grows, mask hole reveals hero ([1295e1f](https://github.com/araldev/v12-ui/commit/1295e1faa7a42fee4e25c8c52cad5da073e5108b))
+* **MagicHero:** port AnimatedTitle behavior exactly, parameterize all content ([4badf0b](https://github.com/araldev/v12-ui/commit/4badf0bae5788c0e1be6f2299b213d63111da077))
+* **MagicHero:** proper z-index layering, default hero example, reduced motion ([dfed629](https://github.com/araldev/v12-ui/commit/dfed6290a28e03d7f4c4b56941419284e1ca10b8))
+* **MagicHero:** remove SVG mask completely — no more weird rectangle ([75e3ba8](https://github.com/araldev/v12-ui/commit/75e3ba81b0306892a3918471496a572039300913))
+* **MagicHero:** reposition layers, fix scroll hint visibility ([c893a9e](https://github.com/araldev/v12-ui/commit/c893a9e7f8dd222a1deafb9c40396ccb4af17ccc))
+* **MagicHero:** simplify — hero always visible, SVG mask at bottom only ([3b27b41](https://github.com/araldev/v12-ui/commit/3b27b41a4ad505f6a0f24b2ea3fceb94c8e56f5e))
+* **MagicHero:** SVG mask uses <text> instead of <path> — always aligns with title ([6686ca9](https://github.com/araldev/v12-ui/commit/6686ca99dc928bbbcaa8ef60607f26ea18574507))
+
+
+### Features
+
+* **components:** add MagicHero component with GSAP ScrollTrigger animations ([34bd825](https://github.com/araldev/v12-ui/commit/34bd8255f168a20abf1ef595c4731cb5e5b0410d))
+* **MagicHero:** EXACT port of araldev-portfolio AnimatedTitle — 8 refs, identical DOM structure, GSAP logic copied verbatim ([2fc5288](https://github.com/araldev/v12-ui/commit/2fc5288fe9a19caaabdfa9e617a35bdf3f3bfb7f))
+
 ## [0.5.9](https://github.com/araldev/v12-ui/compare/v0.5.8...v0.5.9) (2026-06-23)
 
 
