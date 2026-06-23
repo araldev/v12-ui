@@ -1,3 +1,10 @@
+## [0.5.7](https://github.com/araldev/v12-ui/compare/v0.5.6...v0.5.7) (2026-06-23)
+
+
+### Bug Fixes
+
+* **select:** remove portal, use absolute positioning inside container ([84fe49f](https://github.com/araldev/v12-ui/commit/84fe49ff1b7b85eccba149b262af21680da7d91c))
+
 ## [0.5.6](https://github.com/araldev/v12-ui/compare/v0.5.5...v0.5.6) (2026-06-23)
 
 
