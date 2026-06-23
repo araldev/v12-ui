@@ -58,34 +58,42 @@
     --v12-popover-border: hsl(0 0% 89%);
     --v12-popover-hover-border: hsl(0 0% 78%);
 
+    /* Primary — brand blue, solid fill with subtle colored shadow for depth */
     --v12-primary: hsl(210 90% 56%);
-    --v12-primary-hover: hsl(210 88% 48%);
+    --v12-primary-hover: hsl(210 90% 64%);
     --v12-primary-foreground: hsl(0 0% 100%);
     --v12-primary-hover-foreground: hsl(0 0% 100%);
     --v12-primary-border: hsl(210 90% 56%);
-    --v12-primary-hover-border: hsl(210 88% 48%);
+    --v12-primary-hover-border: hsl(210 90% 64%);
+    /* Primary shadow: subtle colored glow — adds premium depth without being heavy */
+    --v12-primary-shadow: 0 4px 12px -2px hsl(210 90% 56% / 0.3);
 
-    --v12-secondary: hsl(0 0% 96%);
-    --v12-secondary-hover: hsl(0 0% 89%);
-    --v12-secondary-foreground: hsl(0 0% 12%);
-    --v12-secondary-hover-foreground: hsl(0 0% 12%);
-    --v12-secondary-border: hsl(0 0% 89%);
-    --v12-secondary-hover-border: hsl(0 0% 78%);
+    /* Secondary — cool blue-grey, neutral but not generic. Distinct from accent. */
+    --v12-secondary: oklch(96% 0.005 230);
+    --v12-secondary-hover: oklch(92% 0.008 230);
+    --v12-secondary-foreground: oklch(25% 0.03 250);
+    --v12-secondary-hover-foreground: oklch(20% 0.04 250);
+    --v12-secondary-border: oklch(70% 0.04 245);
+    --v12-secondary-hover-border: oklch(60% 0.06 245);
 
+    /* Ghost — transparent bg, visible border. Subtle but findable. */
     --v12-ghost: transparent;
-    --v12-ghost-hover: hsl(0, 0%, 93%);
-    --v12-ghost-foreground: hsl(0, 0%, 0%);
-    --v12-ghost-hover-foreground: hsl(0, 0%, 0%);
-    --v12-ghost-border: hsl(0, 0%, 5%);
-    --v12-ghost-hover-border: hsl(0 0% 24%);
+    --v12-ghost-hover: oklch(94% 0 0);
+    --v12-ghost-foreground: oklch(25% 0.02 250);
+    --v12-ghost-hover-foreground: oklch(20% 0.03 250);
+    --v12-ghost-border: oklch(70% 0.04 245);
+    --v12-ghost-hover-border: oklch(60% 0.06 245);
 
     --v12-muted: hsl(0 0% 96%);
     --v12-muted-foreground: hsl(0 0% 42%);
 
-    --v12-accent: hsl(0 0% 96%);
-    --v12-accent-hover: hsl(0 0% 89%);
-    --v12-accent-foreground: hsl(0 0% 12%);
-    --v12-accent-hover-foreground: hsl(0 0% 12%);
+    /* Accent — brand-secondary tint (magenta/rose). Brand identity without competing with primary blue. */
+    --v12-accent: oklch(96% 0.015 340);
+    --v12-accent-hover: oklch(91% 0.025 340);
+    --v12-accent-foreground: oklch(38% 0.18 2);
+    --v12-accent-hover-foreground: oklch(32% 0.2 2);
+    --v12-accent-border: oklch(68% 0.12 345);
+    --v12-accent-hover-border: oklch(58% 0.16 345);
 
     --v12-input: hsl(0 0% 100%);
     --v12-input-hover: hsl(0 0% 98%);
@@ -199,34 +207,40 @@
     --v12-popover-border: hsl(0 0% 18%);
     --v12-popover-hover-border: hsl(0 0% 24%);
 
-    --v12-primary: hsl(210 90% 56%);
-    --v12-primary-hover: hsl(210 90% 64%);
+    /* Primary — dark mode: lighter blue for visibility on dark bg, subtle glow shadow */
+    --v12-primary: hsl(210 90% 60%);
+    --v12-primary-hover: hsl(210 90% 68%);
     --v12-primary-foreground: hsl(0 0% 100%);
     --v12-primary-hover-foreground: hsl(0 0% 100%);
     --v12-primary-border: hsl(210 90% 56%);
     --v12-primary-hover-border: hsl(210 90% 64%);
-    
-    --v12-secondary: hsl(0 0% 18%);
-    --v12-secondary-hover: hsl(0 0% 24%);
-    --v12-secondary-foreground: hsl(0 0% 96%);
-    --v12-secondary-hover-foreground: hsl(0 0% 96%);
-    --v12-secondary-border: hsl(0 0% 18%);
-    --v12-secondary-hover-border: hsl(0 0% 24%);
+    --v12-primary-shadow: 0 4px 12px -2px hsl(210 90% 56% / 0.4);
+
+    /* Secondary — dark mode: cool blue-grey surface, elevated from background */
+    --v12-secondary: oklch(20% 0.015 245);
+    --v12-secondary-hover: oklch(26% 0.02 245);
+    --v12-secondary-foreground: oklch(88% 0.015 230);
+    --v12-secondary-hover-foreground: oklch(92% 0.02 230);
+    --v12-secondary-border: oklch(35% 0.04 245);
+    --v12-secondary-hover-border: oklch(45% 0.06 245);
 
     --v12-ghost: transparent;
-    --v12-ghost-hover: hsl(0, 0%, 18%);
-    --v12-ghost-foreground: hsl(0, 0%, 95%);
-    --v12-ghost-hover-foreground: hsl(0, 0%, 95%);
-    --v12-ghost-border: hsl(0, 0%, 30%);
-    --v12-ghost-hover-border: hsl(0, 0%, 45%); 
+    --v12-ghost-hover: oklch(20% 0.02 30);
+    --v12-ghost-foreground: oklch(75% 0.02 30);
+    --v12-ghost-hover-foreground: oklch(80% 0.02 30);
+    --v12-ghost-border: oklch(40% 0.05 30);
+    --v12-ghost-hover-border: oklch(55% 0.06 30);
 
     --v12-muted: hsl(0 0% 18%);
     --v12-muted-foreground: hsl(0 0% 65%);
 
-    --v12-accent: hsl(0 0% 24%);
-    --v12-accent-hover: hsl(0 0% 30%);
-    --v12-accent-foreground: hsl(0 0% 96%);
-    --v12-accent-hover-foreground: hsl(0 0% 96%);
+    /* Accent — dark mode: dark magenta tint, brand-secondary family */
+    --v12-accent: oklch(20% 0.04 345);
+    --v12-accent-hover: oklch(26% 0.06 345);
+    --v12-accent-foreground: oklch(88% 0.01 340);
+    --v12-accent-hover-foreground: oklch(92% 0.015 340);
+    --v12-accent-border: oklch(38% 0.08 345);
+    --v12-accent-hover-border: oklch(48% 0.1 345);
 
     /* Status — dark mode: redesigned to match light mode hue family, adapted luminance for dark bg */
     --v12-error: oklch(62% 0.16 15);
@@ -315,34 +329,37 @@
       --v12-popover-border: hsl(0 0% 18%);
       --v12-popover-hover-border: hsl(0 0% 24%);
 
-      --v12-primary: hsl(210 90% 56%);
-      --v12-primary-hover: hsl(210 90% 64%);
+      --v12-primary: hsl(210 90% 60%);
+      --v12-primary-hover: hsl(210 90% 68%);
       --v12-primary-foreground: hsl(0 0% 100%);
       --v12-primary-hover-foreground: hsl(0 0% 100%);
       --v12-primary-border: hsl(210 90% 56%);
       --v12-primary-hover-border: hsl(210 90% 64%);
+      --v12-primary-shadow: 0 4px 12px -2px hsl(210 90% 56% / 0.4);
 
-      --v12-secondary: hsl(0 0% 18%);
-      --v12-secondary-hover: hsl(0 0% 24%);
-      --v12-secondary-foreground: hsl(0 0% 96%);
-      --v12-secondary-hover-foreground: hsl(0 0% 96%);
-      --v12-secondary-border: hsl(0 0% 18%);
-      --v12-secondary-hover-border: hsl(0 0% 24%);
+      --v12-secondary: oklch(20% 0.015 245);
+      --v12-secondary-hover: oklch(26% 0.02 245);
+      --v12-secondary-foreground: oklch(88% 0.015 230);
+      --v12-secondary-hover-foreground: oklch(92% 0.02 230);
+      --v12-secondary-border: oklch(35% 0.04 245);
+      --v12-secondary-hover-border: oklch(45% 0.06 245);
 
       --v12-ghost: transparent;
-      --v12-ghost-hover: hsl(0, 0%, 18%);
-      --v12-ghost-foreground: hsl(0, 0%, 95%);
-      --v12-ghost-hover-foreground: hsl(0, 0%, 95%);
-      --v12-ghost-border: hsl(0, 0%, 30%);
-      --v12-ghost-hover-border: hsl(0, 0%, 45%); 
+      --v12-ghost-hover: oklch(20% 0.02 30);
+      --v12-ghost-foreground: oklch(75% 0.02 30);
+      --v12-ghost-hover-foreground: oklch(80% 0.02 30);
+      --v12-ghost-border: oklch(40% 0.05 30);
+      --v12-ghost-hover-border: oklch(55% 0.06 30);
 
       --v12-muted: hsl(0 0% 18%);
       --v12-muted-foreground: hsl(0 0% 65%);
 
-      --v12-accent: hsl(0 0% 24%);
-      --v12-accent-hover: hsl(0 0% 30%);
-      --v12-accent-foreground: hsl(0 0% 96%);
-      --v12-accent-hover-foreground: hsl(0 0% 96%);
+      --v12-accent: oklch(20% 0.04 345);
+      --v12-accent-hover: oklch(26% 0.06 345);
+      --v12-accent-foreground: oklch(88% 0.01 340);
+      --v12-accent-hover-foreground: oklch(92% 0.015 340);
+      --v12-accent-border: oklch(38% 0.08 345);
+      --v12-accent-hover-border: oklch(48% 0.1 345);
 
       /* Status — dark mode: redesigned to match light mode hue family, adapted luminance for dark bg */
       --v12-error: oklch(62% 0.16 15);
@@ -568,11 +585,12 @@
   --color-focus: var(--v12-ring-focus);
   --color-active: var(--v12-ring-active);
 
+  --shadow-shadow-primary: var(--v12-primary-shadow);
   --shadow-shadow-success: var(--v12-success-shadow);
   --shadow-shadow-warning: var(--v12-warning-shadow);
   --shadow-shadow-error: var(--v12-error-shadow);
   --shadow-shadow-info: var(--v12-info-shadow);
-  
+
   --shadow-shadow-sm: var(--v12-shadow-sm);
   --shadow-shadow: var(--v12-shadow);
   --shadow-shadow-md: var(--v12-shadow-md);

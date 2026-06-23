@@ -20,7 +20,7 @@ const button = cva('size-text-button font-weight-button flex justify-center item
       true: 'border-1'
     },
     shadow: {
-      default: 'shadow-custom-lg',
+      default: 'shadow-shadow-primary',
       success: 'shadow-shadow-success',
       warning: 'shadow-shadow-warning',
       error: 'shadow-shadow-error',
