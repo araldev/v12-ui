@@ -129,16 +129,10 @@ describe('Toggle', () => {
       expect(toggle).toHaveAttribute('aria-checked')
     })
 
-    it('has aria-disabled when disabled', () => {
-      renderToggle({ disabled: true })
-      const toggle = screen.getByRole('switch')
-      expect(toggle).toHaveAttribute('aria-disabled', 'true')
-    })
-
-    it('has aria-disabled when readonly', () => {
+    it('has aria-readonly when readonly', () => {
       renderToggle({ readonly: true })
       const toggle = screen.getByRole('switch')
-      expect(toggle).toHaveAttribute('aria-disabled', 'true')
+      expect(toggle).toHaveAttribute('aria-readonly', 'true')
     })
   })
 

@@ -54,6 +54,9 @@ export type ToggleProps = VariantProps<typeof toggleTrack> & {
   onChange?: (checked: boolean) => void
   className?: string
   children?: React.ReactNode
+  /** Accessible name for the switch. Required when no visible text label is provided. */
+  'aria-label'?: string
+  [key: string]: unknown
 }
 
 function useIsReducedMotion(): boolean {
@@ -72,6 +75,7 @@ function ToggleInner(
     onChange,
     className,
     children,
+    'aria-label': ariaLabel,
   }: ToggleProps,
   ref: React.Ref<HTMLButtonElement>
 ): ReactElement {
@@ -93,10 +97,11 @@ function ToggleInner(
     onChange?.(next)
   }, [disabled, readonly, isChecked, isControlled, onChange])
 
+  // WAI-ARIA switch role only requires Space to toggle (Enter is for links/widgets)
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLButtonElement>) => {
       if (disabled || readonly) return
-      if (e.key === 'Enter' || e.key === ' ') {
+      if (e.key === ' ') {
         e.preventDefault()
         const next = !isChecked
         if (!isControlled) {
@@ -136,7 +141,8 @@ function ToggleInner(
       type="button"
       role="switch"
       aria-checked={isChecked}
-      aria-disabled={disabled ?? readonly ?? undefined}
+      aria-readonly={readonly ?? undefined}
+      aria-label={ariaLabel}
       disabled={disabled}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
