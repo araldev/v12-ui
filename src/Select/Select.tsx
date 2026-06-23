@@ -9,7 +9,6 @@ import {
   type ReactElement,
   type ReactNode,
 } from 'react'
-import { createPortal } from 'react-dom'
 import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -20,7 +19,7 @@ export interface SelectOption {
 }
 
 const selectTrigger = cva(
-  'relative flex w-full items-center justify-between text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default transition-colors duration-200',
+  'w-full flex items-center justify-between text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default transition-colors duration-200',
   {
     variants: {
       variant: {
@@ -42,29 +41,25 @@ const selectTrigger = cva(
   }
 )
 
-const selectDropdown = cva(
-  'absolute z-50 w-full overflow-hidden border border-border-default',
-  {
-    variants: {
-      variant: {
-        default: 'bg-bg-default shadow-shadow-lg rounded-lg',
-        muted: 'bg-bg-muted shadow-shadow-md rounded-lg',
-        ghost: 'bg-bg-ghost shadow-shadow-md rounded-lg',
-      },
+const selectDropdown = cva('w-full overflow-hidden border border-border-default', {
+  variants: {
+    variant: {
+      default: 'bg-bg-default shadow-shadow-lg rounded-lg',
+      muted: 'bg-bg-muted shadow-shadow-md rounded-lg',
+      ghost: 'bg-bg-ghost shadow-shadow-md rounded-lg',
     },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-)
+  },
+  defaultVariants: {
+    variant: 'default',
+  },
+})
 
 const selectOption = cva(
-  'cursor-pointer px-4 py-3 text-base transition-all duration-150',
+  'cursor-pointer px-4 py-3 text-base transition-colors duration-100',
   {
     variants: {
       variant: {
-        default:
-          'text-text-default hover:bg-bg-secondary/60',
+        default: 'text-text-default hover:bg-bg-secondary/60',
         muted: 'text-text-muted hover:bg-bg-secondary/60',
         ghost: 'text-text-ghost hover:bg-bg-secondary/60',
       },
@@ -118,10 +113,7 @@ function SelectInner(
   const isControlled = value !== undefined
   const currentValue = isControlled ? value : internalValue
 
-  const resolvedOptions = children
-    ? ([] as SelectOption[])
-    : options
-
+  const resolvedOptions = children ? [] : options
   const allOptions = resolvedOptions
 
   const selectedOption = allOptions.find((opt) => opt.value === currentValue)
@@ -192,6 +184,7 @@ function SelectInner(
     setActiveIndex(index)
   }, [])
 
+  // Close on click outside
   useEffect(() => {
     if (!isOpen) return
 
@@ -208,29 +201,23 @@ function SelectInner(
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [isOpen])
 
+  // Close on scroll of the page (not just this container)
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleScroll = () => setIsOpen(false)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isOpen])
+
   const triggerClasses = cn(
     selectTrigger({ variant, size }),
-    !disabled &&
-      !error &&
-      'hover:border-border-input-hover',
-    !disabled &&
-      !error &&
-      !isOpen &&
-      'active:bg-bg-secondary/40',
+    !disabled && !error && 'hover:border-border-input-hover',
+    !disabled && !error && !isOpen && 'active:bg-bg-secondary/40',
     disabled && 'opacity-50 cursor-not-allowed',
     error && 'border-border-error ring-2 ring-ring-error/30',
     isOpen && 'ring-2 ring-ring-focus',
     className
-  )
-
-  const dropdownClasses = cn(
-    selectDropdown({ variant }),
-    !reducedMotion && 'transition-all duration-200 ease-out',
-    reducedMotion
-      ? ''
-      : isOpen
-      ? 'opacity-100 scale-100 translate-y-0'
-      : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
   )
 
   return (
@@ -287,76 +274,64 @@ function SelectInner(
         </span>
       )}
 
-      {isOpen &&
-        createPortal(
-          <div
-            id={listboxId}
-            role="listbox"
-            aria-label={placeholder}
-            className={cn(
-              dropdownClasses,
-              'max-h-60 overflow-y-auto border-t-2 border-t-border-accent'
-            )}
-            style={{
-              position: 'fixed',
-              top: containerRef.current
-                ? containerRef.current.getBoundingClientRect().bottom + 4
-                : 0,
-              left: containerRef.current
-                ? containerRef.current.getBoundingClientRect().left
-                : 0,
-              width: containerRef.current
-                ? containerRef.current.getBoundingClientRect().width
-                : '100%',
-            }}
-          >
-            {allOptions.map((option, index) => (
-              <div
-                key={option.value}
-                id={`${listboxId}-option-${index}`}
-                role="option"
-                aria-selected={option.value === currentValue}
-                aria-disabled={option.disabled ?? undefined}
-                data-active={index === activeIndex}
-                onClick={() => handleOptionClick(option)}
-                onMouseEnter={() => handleOptionMouseEnter(index)}
-                className={cn(
-                  selectOption({ variant }),
-                  option.value === currentValue &&
-                    'bg-bg-accent/10 font-semibold text-text-accent',
-                  option.disabled && 'opacity-40 cursor-not-allowed',
-                  index === activeIndex &&
-                    !option.disabled &&
-                    'bg-bg-secondary/80',
-                  !option.disabled && 'hover:bg-bg-secondary/60'
+      {isOpen && (
+        <div
+          id={listboxId}
+          role="listbox"
+          aria-label={placeholder}
+          className={cn(
+            selectDropdown({ variant }),
+            'absolute z-50 mt-1 max-h-60 overflow-y-auto border-t-2 border-t-border-accent',
+            !reducedMotion && 'animate-dropdown-in',
+            reducedMotion && 'opacity-100'
+          )}
+        >
+          {allOptions.map((option, index) => (
+            <div
+              key={option.value}
+              id={`${listboxId}-option-${index}`}
+              role="option"
+              aria-selected={option.value === currentValue}
+              aria-disabled={option.disabled ?? undefined}
+              data-active={index === activeIndex}
+              onClick={() => handleOptionClick(option)}
+              onMouseEnter={() => handleOptionMouseEnter(index)}
+              className={cn(
+                selectOption({ variant }),
+                option.value === currentValue &&
+                  'bg-bg-accent/10 font-semibold text-text-accent',
+                option.disabled && 'opacity-40 cursor-not-allowed',
+                index === activeIndex &&
+                  !option.disabled &&
+                  'bg-bg-secondary/80',
+                !option.disabled && 'hover:bg-bg-secondary/60'
+              )}
+            >
+              <span className="flex items-center justify-between">
+                <span>{option.label}</span>
+                {option.value === currentValue && (
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-text-accent shrink-0 ml-2"
+                  >
+                    <path
+                      d="M2.5 7L5.5 10L11.5 4"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 )}
-              >
-                <span className="flex items-center justify-between">
-                  <span>{option.label}</span>
-                  {option.value === currentValue && (
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="text-text-accent shrink-0 ml-2"
-                    >
-                      <path
-                        d="M2.5 7L5.5 10L11.5 4"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </span>
-              </div>
-            ))}
-          </div>,
-          document.body
-        )}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
