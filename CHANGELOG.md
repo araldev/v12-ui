@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/araldev/v12-ui/compare/v0.4.0...v0.5.0) (2026-06-23)
+
+
+### Features
+
+* **components:** add Accordion, Select, Toggle with Vitest tests and CI ([314324a](https://github.com/araldev/v12-ui/commit/314324a3fc61f6390a6e0438774b1ef29fd8bbd1))
+
 # [0.4.0](https://github.com/araldev/v12-ui/compare/v0.3.3...v0.4.0) (2026-06-23)
 
 
