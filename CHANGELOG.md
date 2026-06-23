@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/araldev/v12-ui/compare/v0.3.3...v0.4.0) (2026-06-23)
+
+
+### Features
+
+* **buttons:** metallic wave effect for all status variants with own color tint ([d5dd346](https://github.com/araldev/v12-ui/commit/d5dd34609ffa5665d4297eda84506f6be48e7424))
+
 ## [0.3.3](https://github.com/araldev/v12-ui/compare/v0.3.2...v0.3.3) (2026-06-23)
 
 
