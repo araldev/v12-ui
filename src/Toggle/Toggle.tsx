@@ -10,7 +10,7 @@ import { cn } from '../utils/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 const toggleTrack = cva(
-  'relative inline-flex shrink-0 cursor-pointer transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default',
+  'relative inline-flex shrink-0 cursor-pointer overflow-hidden transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring-focus focus-visible:ring-offset-2 focus-visible:ring-offset-bg-default',
   {
     variants: {
       variant: {
