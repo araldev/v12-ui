@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/araldev/v12-ui/compare/v0.3.1...v0.3.2) (2026-06-23)
+
+
+### Bug Fixes
+
+* **buttons:** explicit shadow utilities in [@layer](https://github.com/layer) utilities for reliable generation ([05c0c7f](https://github.com/araldev/v12-ui/commit/05c0c7f51a3d04fb7d85d41dc8d54da89e4fb29d))
+
 ## [0.3.1](https://github.com/araldev/v12-ui/compare/v0.3.0...v0.3.1) (2026-06-23)
 
 
