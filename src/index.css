@@ -58,15 +58,15 @@
     --v12-popover-border: hsl(0 0% 89%);
     --v12-popover-hover-border: hsl(0 0% 78%);
 
-    /* Primary — vibrant brand blue with slate/metallic inner highlight */
-    --v12-primary: oklch(54% 0.22 248);
-    --v12-primary-hover: oklch(62% 0.24 248);
+    /* Primary — polished metallic: solid base + gradient sheen overlay + bevel drop shadow */
+    --v12-primary: linear-gradient(to bottom, oklch(70% 0.16 248) 0%, oklch(54% 0.22 248) 40%, oklch(48% 0.22 248) 100%);
+    --v12-primary-hover: linear-gradient(to bottom, oklch(78% 0.18 248) 0%, oklch(64% 0.24 248) 40%, oklch(58% 0.24 248) 100%);
     --v12-primary-foreground: oklch(98% 0 0);
     --v12-primary-hover-foreground: oklch(98% 0 0);
-    --v12-primary-border: oklch(50% 0.2 248);
-    --v12-primary-hover-border: oklch(58% 0.22 248);
-    /* Primary shadow: slate/metallic bevel — top highlight + bottom depth */
-    --v12-primary-shadow: 0 4px 12px -2px oklch(50% 0.2 248 / 0.3), inset 0 1px 0 oklch(98% 0 0 / 0.2), inset 0 -1px 0 oklch(0% 0 0 / 0.15);
+    --v12-primary-border: oklch(50% 0.18 248);
+    --v12-primary-hover-border: oklch(60% 0.2 248);
+    /* Primary shadow: strong bevel with inset top highlight + drop */
+    --v12-primary-shadow: 0 6px 16px -2px oklch(40% 0.18 248 / 0.4), inset 0 1px 1px oklch(99% 0 0 / 0.3), inset 0 -1px 1px oklch(0% 0 0 / 0.2);
 
     /* Secondary — cool blue-grey, neutral but not generic. Distinct from accent. */
     --v12-secondary: oklch(96% 0.005 230);
@@ -87,13 +87,14 @@
     --v12-muted: hsl(0 0% 96%);
     --v12-muted-foreground: hsl(0 0% 42%);
 
-    /* Accent — brand-secondary tint (magenta/rose). Brand identity without competing with primary blue. */
-    --v12-accent: oklch(96% 0.015 340);
-    --v12-accent-hover: oklch(91% 0.025 340);
+    /* Accent — brand-secondary tint (magenta/rose). Brand identity, subtle surface with shadow */
+    --v12-accent: linear-gradient(to bottom, oklch(88% 0.04 340) 0%, oklch(72% 0.1 340) 100%);
+    --v12-accent-hover: linear-gradient(to bottom, oklch(82% 0.06 340) 0%, oklch(66% 0.12 340) 100%);
     --v12-accent-foreground: oklch(38% 0.18 2);
     --v12-accent-hover-foreground: oklch(32% 0.2 2);
-    --v12-accent-border: oklch(68% 0.12 345);
-    --v12-accent-hover-border: oklch(58% 0.16 345);
+    --v12-accent-border: oklch(62% 0.1 340);
+    --v12-accent-hover-border: oklch(52% 0.14 340);
+    --v12-accent-shadow: 0 4px 12px -2px oklch(45% 0.15 340 / 0.35), inset 0 1px 1px oklch(99% 0 0 / 0.25), inset 0 -1px 1px oklch(0% 0 0 / 0.15);
 
     --v12-input: hsl(0 0% 100%);
     --v12-input-hover: hsl(0 0% 98%);
@@ -110,7 +111,7 @@
     --v12-error-hover-foreground: oklch(98% 0 0);
     --v12-error-border: oklch(40% 0.18 15);
     --v12-error-hover-border: oklch(34% 0.18 15);
-    --v12-error-shadow: 0 4px 10px -2px oklch(52% 0.22 15 / 0.25);
+    --v12-error-shadow: 0 4px 12px -2px oklch(52% 0.22 15 / 0.3), inset 0 1px 1px oklch(99% 0 0 / 0.2);
 
     /* Warning: rich amber (hue 70), warm and urgent without being alarming */
     --v12-warning: oklch(55% 0.2 70);
@@ -119,7 +120,7 @@
     --v12-warning-hover-foreground: oklch(98% 0 0);
     --v12-warning-border: oklch(42% 0.16 70);
     --v12-warning-hover-border: oklch(35% 0.16 70);
-    --v12-warning-shadow: 0 4px 10px -2px oklch(55% 0.2 70 / 0.25);
+    --v12-warning-shadow: 0 4px 12px -2px oklch(55% 0.2 70 / 0.3), inset 0 1px 1px oklch(99% 0 0 / 0.2);
 
     /* Success: forest green (hue 145), serious and trustworthy */
     --v12-success: oklch(50% 0.18 145);
@@ -128,7 +129,7 @@
     --v12-success-hover-foreground: oklch(98% 0 0);
     --v12-success-border: oklch(38% 0.14 145);
     --v12-success-hover-border: oklch(32% 0.14 145);
-    --v12-success-shadow: 0 4px 10px -2px oklch(50% 0.18 145 / 0.25);
+    --v12-success-shadow: 0 4px 12px -2px oklch(50% 0.18 145 / 0.3), inset 0 1px 1px oklch(99% 0 0 / 0.2);
 
     /* Info: deep sky blue (hue 248), calm and authoritative */
     --v12-info: oklch(52% 0.18 248);
@@ -137,7 +138,7 @@
     --v12-info-hover-foreground: oklch(98% 0 0);
     --v12-info-border: oklch(40% 0.14 248);
     --v12-info-hover-border: oklch(34% 0.14 248);
-    --v12-info-shadow: 0 4px 10px -2px oklch(52% 0.18 248 / 0.25);
+    --v12-info-shadow: 0 4px 12px -2px oklch(52% 0.18 248 / 0.3), inset 0 1px 1px oklch(99% 0 0 / 0.2);
 
     --v12-ring-disabled: hsl(0 0% 65%);
     --v12-ring-focus: hsl(340, 73%, 52%);
@@ -590,6 +591,7 @@
   --shadow-shadow-warning: var(--v12-warning-shadow);
   --shadow-shadow-error: var(--v12-error-shadow);
   --shadow-shadow-info: var(--v12-info-shadow);
+  --shadow-shadow-accent: var(--v12-accent-shadow);
 
   --shadow-shadow-sm: var(--v12-shadow-sm);
   --shadow-shadow: var(--v12-shadow);

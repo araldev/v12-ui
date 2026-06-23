@@ -25,7 +25,8 @@ const button = cva('size-text-button font-weight-button flex justify-center item
       success: 'shadow-shadow-success',
       warning: 'shadow-shadow-warning',
       error: 'shadow-shadow-error',
-      info: 'shadow-shadow-info'
+      info: 'shadow-shadow-info',
+      accent: 'shadow-shadow-accent'
     },
     rounded: {
       none: 'rounded-none',
@@ -47,7 +48,7 @@ const button = cva('size-text-button font-weight-button flex justify-center item
     { variant: 'primary', border: true, shadow: 'default', className: 'border-border-primary hover:border-border-primary-hover' },
     { variant: 'secondary', border: true, className: 'border-border-secondary hover:border-border-secondary-hover' },
     { variant: 'muted', border: true, className: 'border-border-muted' },
-    { variant: 'accent', border: true, className: 'border-border-accent hover:border-border-accent-hover' },
+    { variant: 'accent', border: true, shadow: 'accent', className: 'border-border-accent hover:border-border-accent-hover' },
     { variant: 'success', border: true, shadow: 'default', className: 'border-border-success hover:border-border-success-hover' },
     { variant: 'warning', border: true, shadow: 'default', className: 'border-border-warning hover:border-border-warning-hover' },
     { variant: 'error', border: true, shadow: 'default', className: 'border-border-error hover:border-border-error-hover' },
