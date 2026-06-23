@@ -1,3 +1,10 @@
+## [0.5.2](https://github.com/araldev/v12-ui/compare/v0.5.1...v0.5.2) (2026-06-23)
+
+
+### Bug Fixes
+
+* **toggle:** use fixed px values for thumb ON position ([692a8ac](https://github.com/araldev/v12-ui/commit/692a8aceebf0a79bc1adcf808d0de398c6ffcce0))
+
 ## [0.5.1](https://github.com/araldev/v12-ui/compare/v0.5.0...v0.5.1) (2026-06-23)
 
 
