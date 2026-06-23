@@ -636,6 +636,26 @@
   .size-text-button {
     font-size: var(--v12-font-size-button-responsive);
   }
+
+  /* Button variant shadows — explicit to ensure Tailwind generates them */
+  .shadow-shadow-primary {
+    box-shadow: var(--v12-primary-shadow);
+  }
+  .shadow-shadow-success {
+    box-shadow: var(--v12-success-shadow);
+  }
+  .shadow-shadow-warning {
+    box-shadow: var(--v12-warning-shadow);
+  }
+  .shadow-shadow-error {
+    box-shadow: var(--v12-error-shadow);
+  }
+  .shadow-shadow-info {
+    box-shadow: var(--v12-info-shadow);
+  }
+  .shadow-none {
+    box-shadow: none;
+  }
 }
 
 /*
