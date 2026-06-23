@@ -58,15 +58,19 @@
     --v12-popover-border: hsl(0 0% 89%);
     --v12-popover-hover-border: hsl(0 0% 78%);
 
-    /* Primary — polished metallic: solid base + gradient sheen overlay + bevel drop shadow */
-    --v12-primary: linear-gradient(to bottom, oklch(70% 0.16 248) 0%, oklch(54% 0.22 248) 40%, oklch(48% 0.22 248) 100%);
-    --v12-primary-hover: linear-gradient(to bottom, oklch(78% 0.18 248) 0%, oklch(64% 0.24 248) 40%, oklch(58% 0.24 248) 100%);
+    /* Primary — metallic: solid color base + pseudo-element layers for the 3-layer chrome effect */
+    --v12-primary: oklch(40% 0.2 248);
+    --v12-primary-hover: oklch(48% 0.22 248);
     --v12-primary-foreground: oklch(98% 0 0);
     --v12-primary-hover-foreground: oklch(98% 0 0);
-    --v12-primary-border: oklch(50% 0.18 248);
-    --v12-primary-hover-border: oklch(60% 0.2 248);
-    /* Primary shadow: strong bevel with inset top highlight + drop */
-    --v12-primary-shadow: 0 6px 16px -2px oklch(40% 0.18 248 / 0.4), inset 0 1px 1px oklch(99% 0 0 / 0.3), inset 0 -1px 1px oklch(0% 0 0 / 0.2);
+    --v12-primary-border: oklch(35% 0.18 248);
+    --v12-primary-hover-border: oklch(42% 0.2 248);
+    /* Primary shadow: deep drop + outer rim for metallic frame feel */
+    --v12-primary-shadow: 0 8px 20px -2px oklch(35% 0.2 248 / 0.45);
+    /* Layer tokens for the metallic 3-layer effect (used by ::before/::after) */
+    --v12-primary-outer: linear-gradient(to bottom, oklch(20% 0.18 248) 0%, oklch(58% 0.18 248) 100%);
+    --v12-primary-inner: linear-gradient(to bottom, oklch(78% 0.14 220) 0%, oklch(28% 0.18 248) 50%, oklch(78% 0.14 220) 100%);
+    --v12-primary-face: linear-gradient(to bottom, oklch(72% 0.18 248) 0%, oklch(48% 0.22 248) 100%);
 
     /* Secondary — cool blue-grey, neutral but not generic. Distinct from accent. */
     --v12-secondary: oklch(96% 0.005 230);
@@ -87,14 +91,28 @@
     --v12-muted: hsl(0 0% 96%);
     --v12-muted-foreground: hsl(0 0% 42%);
 
-    /* Accent — brand-secondary tint (magenta/rose). Brand identity, subtle surface with shadow */
-    --v12-accent: linear-gradient(to bottom, oklch(88% 0.04 340) 0%, oklch(72% 0.1 340) 100%);
-    --v12-accent-hover: linear-gradient(to bottom, oklch(82% 0.06 340) 0%, oklch(66% 0.12 340) 100%);
-    --v12-accent-foreground: oklch(38% 0.18 2);
-    --v12-accent-hover-foreground: oklch(32% 0.2 2);
-    --v12-accent-border: oklch(62% 0.1 340);
-    --v12-accent-hover-border: oklch(52% 0.14 340);
-    --v12-accent-shadow: 0 4px 12px -2px oklch(45% 0.15 340 / 0.35), inset 0 1px 1px oklch(99% 0 0 / 0.25), inset 0 -1px 1px oklch(0% 0 0 / 0.15);
+    /* Accent — gold/bronze metallic: 3-layer gradient simulating warm metal surface */
+    --v12-accent: linear-gradient(to bottom,
+      oklch(88% 0.06 50) 0%,
+      oklch(75% 0.14 45) 2%,
+      oklch(62% 0.16 40) 18%,
+      oklch(50% 0.14 38) 50%,
+      oklch(62% 0.16 40) 82%,
+      oklch(88% 0.06 50) 100%
+    );
+    --v12-accent-hover: linear-gradient(to bottom,
+      oklch(92% 0.07 50) 0%,
+      oklch(80% 0.16 45) 2%,
+      oklch(68% 0.18 40) 18%,
+      oklch(56% 0.16 38) 50%,
+      oklch(68% 0.18 40) 82%,
+      oklch(92% 0.07 50) 100%
+    );
+    --v12-accent-foreground: oklch(25% 0.1 30);
+    --v12-accent-hover-foreground: oklch(20% 0.12 30);
+    --v12-accent-border: oklch(55% 0.12 40);
+    --v12-accent-hover-border: oklch(48% 0.14 38);
+    --v12-accent-shadow: 0 6px 16px -2px oklch(35% 0.12 40 / 0.4), inset 0 1px 1px oklch(90% 0.08 50 / 0.35), inset 0 -1px 1px oklch(25% 0.08 30 / 0.25);
 
     --v12-input: hsl(0 0% 100%);
     --v12-input-hover: hsl(0 0% 98%);
@@ -208,14 +226,17 @@
     --v12-popover-border: hsl(0 0% 18%);
     --v12-popover-hover-border: hsl(0 0% 24%);
 
-    /* Primary — dark mode: vibrant blue with slate highlight */
-    --v12-primary: oklch(62% 0.22 248);
-    --v12-primary-hover: oklch(70% 0.24 248);
+    /* Primary — dark mode metallic */
+    --v12-primary: oklch(50% 0.2 248);
+    --v12-primary-hover: oklch(58% 0.22 248);
     --v12-primary-foreground: oklch(98% 0 0);
     --v12-primary-hover-foreground: oklch(98% 0 0);
-    --v12-primary-border: oklch(58% 0.2 248);
-    --v12-primary-hover-border: oklch(66% 0.22 248);
-    --v12-primary-shadow: 0 4px 12px -2px oklch(58% 0.2 248 / 0.4), inset 0 1px 0 oklch(98% 0 0 / 0.15), inset 0 -1px 0 oklch(0% 0 0 / 0.2);
+    --v12-primary-border: oklch(45% 0.18 248);
+    --v12-primary-hover-border: oklch(52% 0.2 248);
+    --v12-primary-shadow: 0 8px 20px -2px oklch(40% 0.18 248 / 0.55);
+    --v12-primary-outer: linear-gradient(to bottom, oklch(15% 0.16 248) 0%, oklch(50% 0.16 248) 100%);
+    --v12-primary-inner: linear-gradient(to bottom, oklch(70% 0.12 220) 0%, oklch(22% 0.18 248) 50%, oklch(70% 0.12 220) 100%);
+    --v12-primary-face: linear-gradient(to bottom, oklch(65% 0.18 248) 0%, oklch(42% 0.22 248) 100%);
 
     /* Secondary — dark mode: cool blue-grey surface, elevated from background */
     --v12-secondary: oklch(20% 0.015 245);
@@ -330,13 +351,16 @@
       --v12-popover-border: hsl(0 0% 18%);
       --v12-popover-hover-border: hsl(0 0% 24%);
 
-      --v12-primary: oklch(62% 0.22 248);
-      --v12-primary-hover: oklch(70% 0.24 248);
+      --v12-primary: oklch(50% 0.2 248);
+      --v12-primary-hover: oklch(58% 0.22 248);
       --v12-primary-foreground: oklch(98% 0 0);
       --v12-primary-hover-foreground: oklch(98% 0 0);
-      --v12-primary-border: oklch(58% 0.2 248);
-      --v12-primary-hover-border: oklch(66% 0.22 248);
-      --v12-primary-shadow: 0 4px 12px -2px oklch(58% 0.2 248 / 0.4), inset 0 1px 0 oklch(98% 0 0 / 0.15), inset 0 -1px 0 oklch(0% 0 0 / 0.2);
+      --v12-primary-border: oklch(45% 0.18 248);
+      --v12-primary-hover-border: oklch(52% 0.2 248);
+      --v12-primary-shadow: 0 8px 20px -2px oklch(40% 0.18 248 / 0.55);
+      --v12-primary-outer: linear-gradient(to bottom, oklch(15% 0.16 248) 0%, oklch(50% 0.16 248) 100%);
+      --v12-primary-inner: linear-gradient(to bottom, oklch(70% 0.12 220) 0%, oklch(22% 0.18 248) 50%, oklch(70% 0.12 220) 100%);
+      --v12-primary-face: linear-gradient(to bottom, oklch(65% 0.18 248) 0%, oklch(42% 0.22 248) 100%);
 
       --v12-secondary: oklch(20% 0.015 245);
       --v12-secondary-hover: oklch(26% 0.02 245);
@@ -682,5 +706,311 @@
   [class*='text-hover-'] {
     transition: none !important;
     text-shadow: none !important;
+  }
+}
+
+/* ============================================================================
+ * Metallic Button Effect — Dark chrome with wave-animated colored glow
+ *
+ * Structure (z-stack):
+ *   ::before   = outer conic-gradient glow (wave-animated via background-position)
+ *   ::after    = inner bevel ring (dark with subtle highlight)
+ *   button     = own-color-tinted dark face gradient with text-shadow
+ *
+ * Each variant keeps its own subtle color tint on the dark face:
+ * - primary → cool blue tint
+ * - accent  → warm magenta tint
+ * - success → green tint
+ * - warning → amber tint
+ * - error   → red tint
+ * - info    → sky blue tint
+ *
+ * Animation: conic-gradient with linear-gradient overlay, animated via
+ * background-position for a flowing wave effect (similar to Metal Buttons
+ * shine). Smoother than transform rotation.
+ * ============================================================================ */
+
+@keyframes metallic-wave {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Selector: ALL button variants that should get the metallic treatment */
+button.bg-bg-primary,
+button.bg-bg-accent,
+button.bg-bg-success,
+button.bg-bg-warning,
+button.bg-bg-error,
+button.bg-bg-info,
+a.bg-bg-primary,
+a.bg-bg-accent,
+a.bg-bg-success,
+a.bg-bg-warning,
+a.bg-bg-error,
+a.bg-bg-info {
+  position: relative;
+  isolation: isolate;
+  padding-top: 0.55rem !important;
+  padding-bottom: 0.75rem !important;
+  overflow: visible;
+  transition:
+    transform 250ms cubic-bezier(0.1, 0.4, 0.2, 1),
+    box-shadow 400ms ease-out,
+    filter 250ms ease-out;
+  will-change: transform;
+  border: none !important;
+}
+
+/* Layer 1 — Outer fluid glow (::before) */
+button.bg-bg-primary::before,
+button.bg-bg-accent::before,
+button.bg-bg-success::before,
+button.bg-bg-warning::before,
+button.bg-bg-error::before,
+button.bg-bg-info::before,
+a.bg-bg-primary::before,
+a.bg-bg-accent::before,
+a.bg-bg-success::before,
+a.bg-bg-warning::before,
+a.bg-bg-error::before,
+a.bg-bg-info::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  z-index: -2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--v12-glow-color) 0%,
+    transparent 25%,
+    var(--v12-glow-color) 50%,
+    transparent 75%,
+    var(--v12-glow-color) 100%
+  );
+  background-size: 200% 100%;
+  animation: metallic-wave 4s linear infinite;
+  filter: blur(6px);
+  opacity: 0.75;
+}
+
+/* Layer 2 — Inner bezel ring (::after) */
+button.bg-bg-primary::after,
+button.bg-bg-accent::after,
+button.bg-bg-success::after,
+button.bg-bg-warning::after,
+button.bg-bg-error::after,
+button.bg-bg-info::after,
+a.bg-bg-primary::after,
+a.bg-bg-accent::after,
+a.bg-bg-success::after,
+a.bg-bg-warning::after,
+a.bg-bg-error::after,
+a.bg-bg-info::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(to bottom,
+    oklch(10% 0.01 250) 0%,
+    oklch(6% 0.01 250) 100%
+  );
+  box-shadow:
+    inset 0 1px 1px oklch(90% 0.03 250 / 0.18),
+    inset 0 -1px 1px oklch(0% 0 0 / 0.6);
+}
+
+/* ============ Per-variant: own glow color + own subtle face tint ============ */
+
+/* Primary — blue tint */
+button.bg-bg-primary,
+a.bg-bg-primary {
+  --v12-glow-color: oklch(82% 0.16 230);
+  background: linear-gradient(to bottom,
+    oklch(20% 0.05 248) 0%,
+    oklch(26% 0.09 248) 50%,
+    oklch(18% 0.06 248) 100%
+  ) !important;
+  color: oklch(98% 0.01 230) !important;
+  text-shadow: 0 -1px 0 oklch(0% 0 0 / 1), 0 1px 1px oklch(82% 0.16 230 / 0.35);
+  box-shadow:
+    0 6px 20px -4px oklch(0% 0 0 / 0.55),
+    0 3px 10px -2px oklch(55% 0.14 248 / 0.4);
+}
+
+/* Accent — magenta tint */
+button.bg-bg-accent,
+a.bg-bg-accent {
+  --v12-glow-color: oklch(80% 0.2 340);
+  background: linear-gradient(to bottom,
+    oklch(20% 0.08 340) 0%,
+    oklch(28% 0.14 340) 50%,
+    oklch(18% 0.09 340) 100%
+  ) !important;
+  color: oklch(96% 0.05 340) !important;
+  text-shadow: 0 -1px 0 oklch(0% 0 0 / 1), 0 1px 1px oklch(80% 0.2 340 / 0.4);
+  box-shadow:
+    0 6px 20px -4px oklch(0% 0 0 / 0.55),
+    0 3px 10px -2px oklch(55% 0.18 340 / 0.4);
+}
+
+/* Success — green tint */
+button.bg-bg-success,
+a.bg-bg-success {
+  --v12-glow-color: oklch(82% 0.18 145);
+  background: linear-gradient(to bottom,
+    oklch(20% 0.05 145) 0%,
+    oklch(26% 0.09 145) 50%,
+    oklch(18% 0.06 145) 100%
+  ) !important;
+  color: oklch(96% 0.05 145) !important;
+  text-shadow: 0 -1px 0 oklch(0% 0 0 / 1), 0 1px 1px oklch(82% 0.18 145 / 0.4);
+  box-shadow:
+    0 6px 20px -4px oklch(0% 0 0 / 0.55),
+    0 3px 10px -2px oklch(55% 0.16 145 / 0.4);
+}
+
+/* Warning — amber tint */
+button.bg-bg-warning,
+a.bg-bg-warning {
+  --v12-glow-color: oklch(85% 0.18 75);
+  background: linear-gradient(to bottom,
+    oklch(22% 0.05 70) 0%,
+    oklch(30% 0.1 70) 50%,
+    oklch(20% 0.06 70) 100%
+  ) !important;
+  color: oklch(98% 0.04 80) !important;
+  text-shadow: 0 -1px 0 oklch(0% 0 0 / 1), 0 1px 1px oklch(85% 0.18 75 / 0.4);
+  box-shadow:
+    0 6px 20px -4px oklch(0% 0 0 / 0.55),
+    0 3px 10px -2px oklch(55% 0.16 75 / 0.4);
+}
+
+/* Error — red tint */
+button.bg-bg-error,
+a.bg-bg-error {
+  --v12-glow-color: oklch(80% 0.2 15);
+  background: linear-gradient(to bottom,
+    oklch(20% 0.07 15) 0%,
+    oklch(28% 0.13 15) 50%,
+    oklch(18% 0.08 15) 100%
+  ) !important;
+  color: oklch(96% 0.05 15) !important;
+  text-shadow: 0 -1px 0 oklch(0% 0 0 / 1), 0 1px 1px oklch(80% 0.2 15 / 0.4);
+  box-shadow:
+    0 6px 20px -4px oklch(0% 0 0 / 0.55),
+    0 3px 10px -2px oklch(55% 0.18 15 / 0.4);
+}
+
+/* Info — sky blue tint */
+button.bg-bg-info,
+a.bg-bg-info {
+  --v12-glow-color: oklch(82% 0.16 235);
+  background: linear-gradient(to bottom,
+    oklch(20% 0.05 248) 0%,
+    oklch(26% 0.09 248) 50%,
+    oklch(18% 0.06 248) 100%
+  ) !important;
+  color: oklch(96% 0.03 235) !important;
+  text-shadow: 0 -1px 0 oklch(0% 0 0 / 1), 0 1px 1px oklch(82% 0.16 235 / 0.35);
+  box-shadow:
+    0 6px 20px -4px oklch(0% 0 0 / 0.55),
+    0 3px 10px -2px oklch(55% 0.14 235 / 0.4);
+}
+
+/* ============ Hover — brighten the glow ============ */
+button.bg-bg-primary:hover::before,
+button.bg-bg-accent:hover::before,
+button.bg-bg-success:hover::before,
+button.bg-bg-warning:hover::before,
+button.bg-bg-error:hover::before,
+button.bg-bg-info:hover::before,
+a.bg-bg-primary:hover::before,
+a.bg-bg-accent:hover::before,
+a.bg-bg-success:hover::before,
+a.bg-bg-warning:hover::before,
+a.bg-bg-error:hover::before,
+a.bg-bg-info:hover::before {
+  opacity: 0.95;
+  filter: blur(8px);
+}
+
+/* ============ Press — slight downward shift + reduce shadow ============ */
+button.bg-bg-primary:active,
+button.bg-bg-accent:active,
+button.bg-bg-success:active,
+button.bg-bg-warning:active,
+button.bg-bg-error:active,
+button.bg-bg-info:active,
+a.bg-bg-primary:active,
+a.bg-bg-accent:active,
+a.bg-bg-success:active,
+a.bg-bg-warning:active,
+a.bg-bg-error:active,
+a.bg-bg-info:active {
+  transform: translateY(2px) scale(0.99);
+}
+
+/* ============ Disabled state — kill the chrome ============ */
+button.bg-bg-primary[disabled],
+button.bg-bg-accent[disabled],
+button.bg-bg-success[disabled],
+button.bg-bg-warning[disabled],
+button.bg-bg-error[disabled],
+button.bg-bg-info[disabled],
+button.bg-bg-primary[aria-disabled="true"],
+button.bg-bg-accent[aria-disabled="true"],
+button.bg-bg-success[aria-disabled="true"],
+button.bg-bg-warning[aria-disabled="true"],
+button.bg-bg-error[aria-disabled="true"],
+button.bg-bg-info[aria-disabled="true"],
+a.bg-bg-primary[aria-disabled="true"],
+a.bg-bg-accent[aria-disabled="true"],
+a.bg-bg-success[aria-disabled="true"],
+a.bg-bg-warning[aria-disabled="true"],
+a.bg-bg-error[aria-disabled="true"],
+a.bg-bg-info[aria-disabled="true"] {
+  filter: grayscale(0.75) opacity(0.55);
+  text-shadow: none;
+}
+button.bg-bg-primary[disabled]::before,
+button.bg-bg-accent[disabled]::before,
+button.bg-bg-success[disabled]::before,
+button.bg-bg-warning[disabled]::before,
+button.bg-bg-error[disabled]::before,
+button.bg-bg-info[disabled]::before,
+button.bg-bg-primary[aria-disabled="true"]::before,
+button.bg-bg-accent[aria-disabled="true"]::before,
+button.bg-bg-success[aria-disabled="true"]::before,
+button.bg-bg-warning[aria-disabled="true"]::before,
+button.bg-bg-error[aria-disabled="true"]::before,
+button.bg-bg-info[aria-disabled="true"]::before,
+a.bg-bg-primary[aria-disabled="true"]::before,
+a.bg-bg-accent[aria-disabled="true"]::before,
+a.bg-bg-success[aria-disabled="true"]::before,
+a.bg-bg-warning[aria-disabled="true"]::before,
+a.bg-bg-error[aria-disabled="true"]::before,
+a.bg-bg-info[aria-disabled="true"]::before {
+  animation: none;
+  opacity: 0.25;
+}
+
+/* ============ Respect prefers-reduced-motion ============ */
+@media (prefers-reduced-motion: reduce) {
+  button.bg-bg-primary::before,
+  button.bg-bg-accent::before,
+  button.bg-bg-success::before,
+  button.bg-bg-warning::before,
+  button.bg-bg-error::before,
+  button.bg-bg-info::before,
+  a.bg-bg-primary::before,
+  a.bg-bg-accent::before,
+  a.bg-bg-success::before,
+  a.bg-bg-warning::before,
+  a.bg-bg-error::before,
+  a.bg-bg-info::before {
+    animation: none;
   }
 }
