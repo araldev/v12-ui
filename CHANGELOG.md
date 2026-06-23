@@ -1,3 +1,10 @@
+## [0.5.4](https://github.com/araldev/v12-ui/compare/v0.5.3...v0.5.4) (2026-06-23)
+
+
+### Bug Fixes
+
+* **toggle:** add overflow-hidden to track to contain thumb shadow ([3795750](https://github.com/araldev/v12-ui/commit/3795750f977948f4eb5857769f99dea2aff5af83))
+
 ## [0.5.3](https://github.com/araldev/v12-ui/compare/v0.5.2...v0.5.3) (2026-06-23)
 
 
