@@ -1,3 +1,41 @@
+# [0.3.0](https://github.com/araldev/v12-ui/compare/v0.2.5...v0.3.0) (2026-06-23)
+
+
+### Bug Fixes
+
+* **button, storybook, css:** address 4 reported issues ([9beef00](https://github.com/araldev/v12-ui/commit/9beef006e0f67edf66c723c1f55e6c614e151152))
+* **button:** add native disabled attribute alongside aria-disabled for button elements ([b70f1dd](https://github.com/araldev/v12-ui/commit/b70f1dd295e1586b33244668f9c3a3dd578a3e35))
+* **button:** correct hover:border-{variant}-hover typo in 8 compound variants ([ae906ed](https://github.com/araldev/v12-ui/commit/ae906edfe37424a80d22dd0ba622e617554e94aa))
+* **button:** replace fixed widths with min-width in size variants ([8593e05](https://github.com/araldev/v12-ui/commit/8593e05feb4082c079ccd6074fa86cfcb134282a))
+* **button:** resolve error variant WCAG AA contrast ([df232fc](https://github.com/araldev/v12-ui/commit/df232fc9e761bb72adb5bf4b36e8f343a09d438e))
+* **magic-logo:** add canvas accessibility role=img aria-label and static fallback ([6349c82](https://github.com/araldev/v12-ui/commit/6349c82121a25cfa6530a1b2c4e3f4f1edcd822c))
+* **magic-mouse-follower:** add canvas accessibility role=img aria-label and static fallback ([7f68f02](https://github.com/araldev/v12-ui/commit/7f68f02efe846ed7efdcd4a3edaea2f915240ff7))
+* **magic-text:** add canvas accessibility role=img aria-label and static fallback ([a77c5c9](https://github.com/araldev/v12-ui/commit/a77c5c9da5d0357c72dd477c05b5712006c10307))
+* **magic-text:** re-init canvas on resize and defer init to next frame ([051d662](https://github.com/araldev/v12-ui/commit/051d662f23275ea7ba64b4e25b8bd92e00e9ed8b))
+* **magic-text:** remove console.log dev artifact ([a95b2de](https://github.com/araldev/v12-ui/commit/a95b2de9ad6824e12b3e78fc0f3772df03168657))
+* **magic-text:** resolve alpha detection, retina centering, and reduced-motion fallback ([fc8de02](https://github.com/araldev/v12-ui/commit/fc8de02028aad827d189002b2393f889af39bb55)), closes [#333](https://github.com/araldev/v12-ui/issues/333) [#4fc3f7](https://github.com/araldev/v12-ui/issues/4fc3f7)
+* **magic-text:** resolve IndexSizeError when canvas has no layout ([3178ded](https://github.com/araldev/v12-ui/commit/3178ded970da4b75155d5162dea1e093ce0e8c28))
+* **storybook:** add appHoverBg to light/dark themes ([fd9ac29](https://github.com/araldev/v12-ui/commit/fd9ac291d50ce597e12785edd116a6d482664e71))
+* **storybook:** remove addon-onboarding and inject iframe background via style ([a993d93](https://github.com/araldev/v12-ui/commit/a993d93cf1918cf5af20b7fb8e3362ab87f2da54))
+* **storybook:** sync globals.backgrounds with custom theme toolbar ([610f706](https://github.com/araldev/v12-ui/commit/610f70690bf7fa4bcdcdc009eab4d0f1400cea09))
+* **storybook:** use getter so docs theme reacts to runtime changes ([9ef9ece](https://github.com/araldev/v12-ui/commit/9ef9ece242fed69e0071f3e4534d8b14c6a6e87c))
+* **storybook:** use postMessage to bridge theme from preview to manager ([4c05120](https://github.com/araldev/v12-ui/commit/4c05120cff2970392b71e015077d56fd8d2f1f35))
+* **text:** wire CSS-only reduced-motion for hover transitions ([a77c234](https://github.com/araldev/v12-ui/commit/a77c234597d5526cde5b6069477e008dce7d04d5))
+* **theme-tokens:** define orphan border-default and add missing utility tokens ([c20c240](https://github.com/araldev/v12-ui/commit/c20c2402eabf48482f7f9f3bf5a03507657e1d31))
+
+
+### Features
+
+* **a11y:** wire reduced-motion fallback in 5 motion components ([6110129](https://github.com/araldev/v12-ui/commit/611012907cd96ae64fc76a731d3b7a78ca64d2a5))
+* **api:** export Stack from public barrel ([82fd958](https://github.com/araldev/v12-ui/commit/82fd95810631cbb13dff90c1d3f5b7a7fe565aa1))
+* **hooks:** add useReducedMotion hook ([4c82dc5](https://github.com/araldev/v12-ui/commit/4c82dc50b5ca068b4d952c6093b4322f5564a8b4))
+* **storybook:** bridge storybook-dark-mode to data-theme ([382a792](https://github.com/araldev/v12-ui/commit/382a79236f9d189f421ddbb34c899129e5352750))
+* **storybook:** theme toolbar control and preview decorator ([fd07d97](https://github.com/araldev/v12-ui/commit/fd07d97ce6549cfcad2789fd338c6801d8db3585))
+* **storybook:** use storybook-dark-mode addon for theme switching ([c4dee93](https://github.com/araldev/v12-ui/commit/c4dee9320c2422a957ecdaac711cbff413efa1b7))
+* **storybook:** wire manager.ts so chrome theme tracks toolbar ([a36c0e4](https://github.com/araldev/v12-ui/commit/a36c0e446833b54a4cbe4fadb9139d8b8ebd7d1a))
+* **theme-tokens:** dark-mode overrides for status shadows ([af369db](https://github.com/araldev/v12-ui/commit/af369db641bef6456b1702b30b9f779256e15bf1))
+* **theme-tokens:** extend brand ramps to 950 ([03b323a](https://github.com/araldev/v12-ui/commit/03b323a754d891631dae6c2a01aa0e942725c6cb))
+
 ## [0.2.5](https://github.com/araldev/v12-ui/compare/v0.2.4...v0.2.5) (2025-08-11)
 
 
