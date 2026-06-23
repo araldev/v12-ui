@@ -1,3 +1,10 @@
+## [0.5.8](https://github.com/araldev/v12-ui/compare/v0.5.7...v0.5.8) (2026-06-23)
+
+
+### Bug Fixes
+
+* **select:** dropdown stays anchored on scroll, animation visible in stories ([4e2bd51](https://github.com/araldev/v12-ui/commit/4e2bd5174beabac12cabfa32756cb07294dce86f))
+
 ## [0.5.7](https://github.com/araldev/v12-ui/compare/v0.5.6...v0.5.7) (2026-06-23)
 
 
