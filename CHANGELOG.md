@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/araldev/v12-ui/compare/v0.3.0...v0.3.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* **buttons:** primary slate/metallic effect, remove shadow from muted/secondary/ghost ([1745014](https://github.com/araldev/v12-ui/commit/17450144bac1845d0ec165fc2c06dcde42706471))
+
 # [0.3.0](https://github.com/araldev/v12-ui/compare/v0.2.5...v0.3.0) (2026-06-23)
 
 
