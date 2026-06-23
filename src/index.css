@@ -94,37 +94,42 @@
     --v12-input-border: hsl(0 0% 89%);
     --v12-input-hover-border: hsl(0 0% 78%);
 
-    --v12-success: hsl(142 76% 36%);
-    --v12-success-hover: hsl(142 76% 31%);
-    --v12-success-foreground: hsl(210 40% 98%);
-    --v12-success-hover-foreground: hsl(210 40% 98%);
-    --v12-success-border: hsl(142, 86%, 20%);
-    --v12-success-hover-border: hsl(143, 89%, 14%);
-    --v12-success-shadow: 0 4px 10px -2px hsl(142 76% 36% / 0.2);
+    /* Status — redesigned for WCAG AA (light mode). All bg+foreground combos ≥4.5:1, UI elements ≥3:1 */
+    /* Error: warm red-orange (hue 15), modern, avoids pure-red harshness */
+    --v12-error: oklch(52% 0.22 15);
+    --v12-error-hover: oklch(46% 0.22 15);
+    --v12-error-foreground: oklch(98% 0 0);
+    --v12-error-hover-foreground: oklch(98% 0 0);
+    --v12-error-border: oklch(40% 0.18 15);
+    --v12-error-hover-border: oklch(34% 0.18 15);
+    --v12-error-shadow: 0 4px 10px -2px oklch(52% 0.22 15 / 0.25);
 
-    --v12-warning: hsl(38 92% 50%);
-    --v12-warning-hover: hsl(38 92% 45%);
-    --v12-warning-foreground: hsl(0 0% 100%);
-    --v12-warning-hover-foreground: hsl(0 0% 100%);
-    --v12-warning-border: hsl(38, 93%, 27%);
-    --v12-warning-hover-border: hsl(38, 93%, 17%);
-    --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.2);
+    /* Warning: rich amber (hue 70), warm and urgent without being alarming */
+    --v12-warning: oklch(55% 0.2 70);
+    --v12-warning-hover: oklch(48% 0.2 70);
+    --v12-warning-foreground: oklch(98% 0 0);
+    --v12-warning-hover-foreground: oklch(98% 0 0);
+    --v12-warning-border: oklch(42% 0.16 70);
+    --v12-warning-hover-border: oklch(35% 0.16 70);
+    --v12-warning-shadow: 0 4px 10px -2px oklch(55% 0.2 70 / 0.25);
 
-    --v12-error: hsl(0 84% 60%);
-    --v12-error-hover: hsl(0 84% 55%);
-    --v12-error-foreground: hsl(0, 60%, 45%); /* ~5.2:1 — PASSES WCAG AA */
-    --v12-error-hover-foreground: hsl(210 40% 98%);
-    --v12-error-border: hsl(0, 57%, 32%);
-    --v12-error-hover-border: hsl(0, 58%, 23%);
-    --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.2);
+    /* Success: forest green (hue 145), serious and trustworthy */
+    --v12-success: oklch(50% 0.18 145);
+    --v12-success-hover: oklch(44% 0.18 145);
+    --v12-success-foreground: oklch(98% 0 0);
+    --v12-success-hover-foreground: oklch(98% 0 0);
+    --v12-success-border: oklch(38% 0.14 145);
+    --v12-success-hover-border: oklch(32% 0.14 145);
+    --v12-success-shadow: 0 4px 10px -2px oklch(50% 0.18 145 / 0.25);
 
-    --v12-info: hsl(199 89% 48%);
-    --v12-info-hover: hsl(199 89% 43%);
-    --v12-info-foreground: hsl(210 40% 98%);
-    --v12-info-hover-foreground: hsl(210 40% 98%);
-    --v12-info-border: hsl(199, 82%, 29%);
-    --v12-info-hover-border: hsl(199, 79%, 19%);
-    --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.2);
+    /* Info: deep sky blue (hue 248), calm and authoritative */
+    --v12-info: oklch(52% 0.18 248);
+    --v12-info-hover: oklch(46% 0.18 248);
+    --v12-info-foreground: oklch(98% 0 0);
+    --v12-info-hover-foreground: oklch(98% 0 0);
+    --v12-info-border: oklch(40% 0.14 248);
+    --v12-info-hover-border: oklch(34% 0.14 248);
+    --v12-info-shadow: 0 4px 10px -2px oklch(52% 0.18 248 / 0.25);
 
     --v12-ring-disabled: hsl(0 0% 65%);
     --v12-ring-focus: hsl(340, 73%, 52%);
@@ -143,14 +148,14 @@
     --v12-text-shadow-black-title: 0px 2px 4px rgba(0, 0, 0, .3);
     --v12-text-shadow-white-p: 0px 1px 2px rgba(255, 255, 255, .2);
     --v12-text-shadow-white-title: 0px 2px 4px rgba(255, 255, 255, .3);
-    --v12-text-shadow-success-p: 0px 1px 2px hsl(142 76% 36% / 0.2);
-    --v12-text-shadow-success-title: 0px 2px 4px hsl(142 76% 36% / 0.3);
-    --v12-text-shadow-warning-p: 0px 1px 2px hsl(38 92% 50% / 0.2);
-    --v12-text-shadow-warning-title: 0px 2px 4px hsl(38 92% 50% / 0.3);
-    --v12-text-shadow-error-p: 0px 1px 2px hsl(0 80% 63% / 0.2);
-    --v12-text-shadow-error-title: 0px 2px 4px hsl(0 80% 63% / 0.3);
-    --v12-text-shadow-info-p: 0px 1px 2px hsl(199 89% 48% / 0.2);
-    --v12-text-shadow-info-title: 0px 2px 4px hsl(199 89% 48% / 0.3);
+    --v12-text-shadow-success-p: 0px 1px 2px oklch(50% 0.18 145 / 0.25);
+    --v12-text-shadow-success-title: 0px 2px 4px oklch(50% 0.18 145 / 0.35);
+    --v12-text-shadow-warning-p: 0px 1px 2px oklch(55% 0.2 70 / 0.25);
+    --v12-text-shadow-warning-title: 0px 2px 4px oklch(55% 0.2 70 / 0.35);
+    --v12-text-shadow-error-p: 0px 1px 2px oklch(52% 0.22 15 / 0.25);
+    --v12-text-shadow-error-title: 0px 2px 4px oklch(52% 0.22 15 / 0.35);
+    --v12-text-shadow-info-p: 0px 1px 2px oklch(52% 0.18 248 / 0.25);
+    --v12-text-shadow-info-title: 0px 2px 4px oklch(52% 0.18 248 / 0.35);
 
     --v12-font-size-small-responsive: clamp(.5rem, .9vw + 0.3rem, 0.75rem);
     --v12-font-weight-small: 400;
@@ -223,34 +228,34 @@
     --v12-accent-foreground: hsl(0 0% 96%);
     --v12-accent-hover-foreground: hsl(0 0% 96%);
 
-    /* Status — dark mode: desaturated backgrounds + white foreground for contrast */
-    --v12-error: hsl(0 65% 48%);
-    --v12-error-hover: hsl(0 65% 40%);
-    --v12-error-foreground: hsl(0 0% 100%);
-    --v12-error-hover-foreground: hsl(0 0% 100%);
-    --v12-error-border: hsl(0 55% 32%);
-    --v12-error-hover-border: hsl(0 55% 25%);
+    /* Status — dark mode: redesigned to match light mode hue family, adapted luminance for dark bg */
+    --v12-error: oklch(62% 0.16 15);
+    --v12-error-hover: oklch(55% 0.16 15);
+    --v12-error-foreground: oklch(98% 0 0);
+    --v12-error-hover-foreground: oklch(98% 0 0);
+    --v12-error-border: oklch(48% 0.12 15);
+    --v12-error-hover-border: oklch(40% 0.12 15);
 
-    --v12-warning: hsl(25 80% 52%);
-    --v12-warning-hover: hsl(25 80% 44%);
-    --v12-warning-foreground: hsl(0 0% 100%);
-    --v12-warning-hover-foreground: hsl(0 0% 100%);
-    --v12-warning-border: hsl(25 65% 35%);
-    --v12-warning-hover-border: hsl(25 65% 27%);
+    --v12-warning: oklch(65% 0.16 70);
+    --v12-warning-hover: oklch(58% 0.16 70);
+    --v12-warning-foreground: oklch(15% 0 0);
+    --v12-warning-hover-foreground: oklch(15% 0 0);
+    --v12-warning-border: oklch(52% 0.12 70);
+    --v12-warning-hover-border: oklch(44% 0.12 70);
 
-    --v12-success: hsl(142 60% 38%);
-    --v12-success-hover: hsl(142 60% 30%);
-    --v12-success-foreground: hsl(0 0% 100%);
-    --v12-success-hover-foreground: hsl(0 0% 100%);
-    --v12-success-border: hsl(142 50% 26%);
-    --v12-success-hover-border: hsl(142 50% 19%);
+    --v12-success: oklch(62% 0.14 145);
+    --v12-success-hover: oklch(55% 0.14 145);
+    --v12-success-foreground: oklch(98% 0 0);
+    --v12-success-hover-foreground: oklch(98% 0 0);
+    --v12-success-border: oklch(48% 0.1 145);
+    --v12-success-hover-border: oklch(40% 0.1 145);
 
-    --v12-info: hsl(199 70% 45%);
-    --v12-info-hover: hsl(199 70% 37%);
-    --v12-info-foreground: hsl(0 0% 100%);
-    --v12-info-hover-foreground: hsl(0 0% 100%);
-    --v12-info-border: hsl(199 60% 30%);
-    --v12-info-hover-border: hsl(199 60% 23%);
+    --v12-info: oklch(62% 0.14 248);
+    --v12-info-hover: oklch(55% 0.14 248);
+    --v12-info-foreground: oklch(98% 0 0);
+    --v12-info-hover-foreground: oklch(98% 0 0);
+    --v12-info-border: oklch(48% 0.1 248);
+    --v12-info-hover-border: oklch(40% 0.1 248);
 
     --v12-input: hsl(0 0% 18%);
     --v12-input-hover: hsl(0 0% 24%);
@@ -273,11 +278,11 @@
     --v12-brand-secondary-950: hsl(340 70% 16%);
     --v12-brand-tertiary-950: hsl(0 0% 2%);
 
-    /* Status shadow dark overrides — alpha 0.4 vs light 0.2 keeps parity against --v12-background (hsl(0 0% 4%)) */
-    --v12-success-shadow: 0 4px 10px -2px hsl(142 76% 36% / 0.4);
-    --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.4);
-    --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.4);
-    --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.4);
+    /* Status shadow dark overrides — alpha 0.35 vs light 0.25 keeps parity against dark bg */
+    --v12-success-shadow: 0 4px 10px -2px oklch(50% 0.18 145 / 0.35);
+    --v12-warning-shadow: 0 4px 10px -2px oklch(55% 0.2 70 / 0.35);
+    --v12-error-shadow: 0 4px 10px -2px oklch(52% 0.22 15 / 0.35);
+    --v12-info-shadow: 0 4px 10px -2px oklch(52% 0.18 248 / 0.35);
 
     /* Bubbles (theme-invariant — same values as :root per OQ-2) */
     --v12-bubble-1-a: hsl(211 100% 29%);
@@ -339,34 +344,34 @@
       --v12-accent-foreground: hsl(0 0% 96%);
       --v12-accent-hover-foreground: hsl(0 0% 96%);
 
-      /* Status — dark mode: desaturated backgrounds + white foreground for contrast */
-      --v12-error: hsl(0 65% 48%);
-      --v12-error-hover: hsl(0 65% 40%);
-      --v12-error-foreground: hsl(0 0% 100%);
-      --v12-error-hover-foreground: hsl(0 0% 100%);
-      --v12-error-border: hsl(0 55% 32%);
-      --v12-error-hover-border: hsl(0 55% 25%);
+      /* Status — dark mode: redesigned to match light mode hue family, adapted luminance for dark bg */
+      --v12-error: oklch(62% 0.16 15);
+      --v12-error-hover: oklch(55% 0.16 15);
+      --v12-error-foreground: oklch(98% 0 0);
+      --v12-error-hover-foreground: oklch(98% 0 0);
+      --v12-error-border: oklch(48% 0.12 15);
+      --v12-error-hover-border: oklch(40% 0.12 15);
 
-      --v12-warning: hsl(25 80% 52%);
-      --v12-warning-hover: hsl(25 80% 44%);
-      --v12-warning-foreground: hsl(0 0% 100%);
-      --v12-warning-hover-foreground: hsl(0 0% 100%);
-      --v12-warning-border: hsl(25 65% 35%);
-      --v12-warning-hover-border: hsl(25 65% 27%);
+      --v12-warning: oklch(65% 0.16 70);
+      --v12-warning-hover: oklch(58% 0.16 70);
+      --v12-warning-foreground: oklch(15% 0 0);
+      --v12-warning-hover-foreground: oklch(15% 0 0);
+      --v12-warning-border: oklch(52% 0.12 70);
+      --v12-warning-hover-border: oklch(44% 0.12 70);
 
-      --v12-success: hsl(142 60% 38%);
-      --v12-success-hover: hsl(142 60% 30%);
-      --v12-success-foreground: hsl(0 0% 100%);
-      --v12-success-hover-foreground: hsl(0 0% 100%);
-      --v12-success-border: hsl(142 50% 26%);
-      --v12-success-hover-border: hsl(142 50% 19%);
+      --v12-success: oklch(62% 0.14 145);
+      --v12-success-hover: oklch(55% 0.14 145);
+      --v12-success-foreground: oklch(98% 0 0);
+      --v12-success-hover-foreground: oklch(98% 0 0);
+      --v12-success-border: oklch(48% 0.1 145);
+      --v12-success-hover-border: oklch(40% 0.1 145);
 
-      --v12-info: hsl(199 70% 45%);
-      --v12-info-hover: hsl(199 70% 37%);
-      --v12-info-foreground: hsl(0 0% 100%);
-      --v12-info-hover-foreground: hsl(0 0% 100%);
-      --v12-info-border: hsl(199 60% 30%);
-      --v12-info-hover-border: hsl(199 60% 23%);
+      --v12-info: oklch(62% 0.14 248);
+      --v12-info-hover: oklch(55% 0.14 248);
+      --v12-info-foreground: oklch(98% 0 0);
+      --v12-info-hover-foreground: oklch(98% 0 0);
+      --v12-info-border: oklch(48% 0.1 248);
+      --v12-info-hover-border: oklch(40% 0.1 248);
 
       --v12-input: hsl(0 0% 18%);
       --v12-input-hover: hsl(0 0% 24%);
@@ -389,11 +394,11 @@
       --v12-brand-secondary-950: hsl(340 70% 16%);
       --v12-brand-tertiary-950: hsl(0 0% 2%);
 
-      /* Status shadow system-mode parity (same alpha-0.4 overrides as [data-theme="dark"]) */
-      --v12-success-shadow: 0 4px 10px -2px hsl(142 76% 36% / 0.4);
-      --v12-warning-shadow: 0 4px 10px -2px hsl(38 92% 50% / 0.4);
-      --v12-error-shadow: 0 4px 10px -2px hsl(0 80% 63% / 0.4);
-      --v12-info-shadow: 0 4px 10px -2px hsl(199 89% 48% / 0.4);
+      /* Status shadow system-mode parity (same alpha-0.35 overrides as [data-theme="dark"]) */
+      --v12-success-shadow: 0 4px 10px -2px oklch(50% 0.18 145 / 0.35);
+      --v12-warning-shadow: 0 4px 10px -2px oklch(55% 0.2 70 / 0.35);
+      --v12-error-shadow: 0 4px 10px -2px oklch(52% 0.22 15 / 0.35);
+      --v12-info-shadow: 0 4px 10px -2px oklch(52% 0.18 248 / 0.35);
 
       /* Bubbles (theme-invariant — system-mode parity) */
       --v12-bubble-1-a: hsl(211 100% 29%);
