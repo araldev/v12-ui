@@ -17,9 +17,9 @@ export interface MagicHeroProps {
   // CONTENT
   // ----------------------------------------------------------------
 
-  /** Optional SVG path for the title shape. When provided, the SVG
-   *  mask grows during scroll — its path-shaped "hole" reveals the
-   *  gradient overlay and the hero behind it. */
+  /** Optional SVG path for the title shape. When provided, adds a
+   *  decorative SVG mask reveal effect at the bottom of the section.
+   *  The mask does NOT cover the hero (which is always visible). */
   svgPath?: string
 
   /** Hero image src (renders as a circular avatar with bottom fade). */
@@ -46,7 +46,7 @@ export interface MagicHeroProps {
   /** Background color of the entire hero section. */
   backgroundColor?: string
 
-  /** Color of the SVG mask (the dark fill behind the path). */
+  /** Color of the SVG mask (the dark fill). */
   maskColor?: string
 
   /** First stop of the fade-overlay gradient. */
@@ -75,26 +75,16 @@ export interface MagicHeroProps {
 }
 
 /**
- * MagicHero — scroll-driven hero with SVG mask reveal + gradient overlay.
+ * MagicHero — scroll-driven hero with optional SVG mask + gradient overlay.
  *
- * Behavior (matches the original araldev-portfolio AnimatedTitle):
- *   1. Hero (image + scroll hint) visible at start.
- *   2. As user scrolls, the SVG mask grows from scale 1 to scale ~350.
- *      The mask has a path-shaped HOLE. As the SVG grows, the hole
- *      grows. Through the hole you see the gradient overlay AND the
- *      hero behind it.
- *   3. The mask fill (`maskColor`) covers everything outside the hole.
- *      When the SVG is huge, the hole is huge, so almost the entire
- *      screen shows what's behind.
- *   4. Gradient overlay fades in 25-65% of scroll.
- *   5. Gradient text (quote) reveals 60-85%.
+ * Layered (back to front):
+ *   z-1   .hero      image + scroll hint (always visible)
+ *   z-1   .fade      gradient overlay (opacity 0→1)
+ *   z-2   .mask      SVG with path-shaped mask (bottom area only)
+ *   z-2   .copy      gradient text (revealed last)
  *
- * Layering (back to front):
- *   section    z-1   background
- *   .hero      z-1   image + scroll hint (always visible)
- *   .fade      z-1   gradient overlay (opacity 0→1)
- *   .mask      z-1   SVG with path-shaped hole (grows 1→350)
- *   .copy      z-2   gradient text (revealed last)
+ * The hero is NEVER covered by the SVG mask. The mask is positioned
+ * at the bottom of the section (where the gradient text appears).
  */
 function MagicHeroInner(
   {
@@ -127,7 +117,6 @@ function MagicHeroInner(
   const fadeOverlayRef = useRef<HTMLDivElement>(null)
   const svgOverlayRef = useRef<HTMLDivElement>(null)
   const overlayCopyRef = useRef<HTMLHeadingElement>(null)
-  const titleContainerRef = useRef<HTMLDivElement>(null)
   const titleMaskRef = useRef<SVGPathElement>(null)
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -138,7 +127,6 @@ function MagicHeroInner(
     const fadeOverlay = fadeOverlayRef.current
     const svgOverlay = svgOverlayRef.current
     const overlayCopy = overlayCopyRef.current
-    const titleContainer = titleContainerRef.current
     const titleMask = titleMaskRef.current
 
     if (
@@ -148,7 +136,6 @@ function MagicHeroInner(
       !fadeOverlay ||
       !svgOverlay ||
       !overlayCopy ||
-      !titleContainer ||
       !titleMask
     ) {
       return
@@ -171,56 +158,34 @@ function MagicHeroInner(
       { x: 0, filter: 'blur(0px)', duration: 1 }
     )
 
-    // Set the path if provided
-    if (svgPath) {
-      titleMask.setAttribute('d', svgPath)
-    }
-
-    // Calculate path position so it covers the entire section.
-    // The path is HUGE from the start, so the mask "hole" is HUGE,
-    // making the hero visible through the mask at all times.
+    // Position the SVG mask path so it covers the entire section.
+    // We use a FIXED assumption about the path size (typical text shape
+    // is ~100x50 in SVG units) to avoid getBBox() returning 0x0 on
+    // first render before the SVG has been laid out.
     const updateMaskPosition = () => {
       if (!svgPath) return
-      titleMask.setAttribute('d', svgPath)
-      titleMask.removeAttribute('transform')
+      const sectionRect = hero.getBoundingClientRect()
+      // Typical text-shaped SVG path is ~100x50 in user units
+      const ASSUMED_PATH_WIDTH = 100
+      const ASSUMED_PATH_HEIGHT = 50
+      // Scale so the path covers the entire section
+      const scaleX = (sectionRect.width * 1.5) / ASSUMED_PATH_WIDTH
+      const scaleY = (sectionRect.height * 1.5) / ASSUMED_PATH_HEIGHT
+      const titleScaleFactor = Math.max(scaleX, scaleY)
 
-      const sectionDimensions = hero.getBoundingClientRect()
-      const titleBoundingBox = titleMask.getBBox()
-
-      if (
-        titleBoundingBox.width === 0 ||
-        titleBoundingBox.height === 0
-      ) {
-        return
-      }
-
-      // Make the path HUGE — cover the entire section.
-      // The SVG element will be scaled further by GSAP during scroll.
-      // At scroll=0: SVG scale=1, path covers section → hero visible.
-      // At scroll=1: SVG scale=350, path covers 350x section → hero still visible.
-      const horizontalScaleRatio =
-        (sectionDimensions.width * 2) / titleBoundingBox.width
-      const verticalScaleRatio =
-        (sectionDimensions.height * 2) / titleBoundingBox.height
-      const titleScaleFactor = Math.max(
-        horizontalScaleRatio,
-        verticalScaleRatio
-      )
-
+      // Center the path in the section
       const titleHorizontalPosition =
-        sectionDimensions.left +
-        (sectionDimensions.width -
-          titleBoundingBox.width * titleScaleFactor) /
-          2 -
-        titleBoundingBox.x * titleScaleFactor
-
+        sectionRect.left +
+        (sectionRect.width -
+          ASSUMED_PATH_WIDTH * titleScaleFactor) /
+          2
       const titleVerticalPosition =
-        sectionDimensions.top +
-        (sectionDimensions.height -
-          titleBoundingBox.height * titleScaleFactor) /
-          2 -
-        titleBoundingBox.y * titleScaleFactor
+        sectionRect.top +
+        (sectionRect.height -
+          ASSUMED_PATH_HEIGHT * titleScaleFactor) /
+          2
 
+      titleMask.setAttribute('d', svgPath)
       titleMask.setAttribute(
         'transform',
         `translate(${titleHorizontalPosition}, ${titleVerticalPosition}) scale(${titleScaleFactor})`
@@ -255,28 +220,21 @@ function MagicHeroInner(
         if (scrollProgress <= 0.85) {
           const normalizedProgress = scrollProgress * (1 / 0.85)
 
-          // Hero content scales down slightly as it fades
           const heroScale = 1 - 0.5 * normalizedProgress
           gsap.set(heroContent, { scale: heroScale })
 
-          // SVG mask grows from 1 to 350 (matches original behavior).
-          // The path is already huge (covers entire section), so the
-          // mask "hole" is always huge. As the SVG grows, the hole
-          // grows beyond the section, making the dark mask fill
-          // (which is outside the viewport) invisible. The hero
-          // stays visible through the hole at all times.
-          const initialOverlayScale = 1
-          const finalOverlayScale = 350
+          // SVG mask grows from 1 to 10 (visible effect)
           const overlayScale =
-            initialOverlayScale +
-            (finalOverlayScale - initialOverlayScale) *
-              Math.pow(normalizedProgress, 0.5) // ease-out
+            1 + 9 * Math.pow(normalizedProgress, 0.5)
           gsap.set(svgOverlay, { scale: overlayScale })
 
           // Fade overlay (gradient) fades in starting at 25% scroll
           let fadeOverlayOpacity = 0
           if (scrollProgress >= 0.25) {
-            fadeOverlayOpacity = Math.min(1, (scrollProgress - 0.25) * (1 / 0.4))
+            fadeOverlayOpacity = Math.min(
+              1,
+              (scrollProgress - 0.25) * (1 / 0.4)
+            )
           }
           gsap.set(fadeOverlay, { opacity: fadeOverlayOpacity })
         }
@@ -349,14 +307,14 @@ function MagicHeroInner(
         zIndex: 1,
       }}
     >
-      {/* z-1: hero content (children + image + scroll hint) */}
+      {/* z-1: hero content (children + image + scroll hint) — ALWAYS VISIBLE */}
       <div
         ref={heroContentRef}
-        className="absolute top-0 left-0 w-screen h-full flex items-center justify-center"
-        style={{ maxWidth: '100%' }}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        style={{ zIndex: 1 }}
       >
         {children ? (
-          <div className="absolute inset-0 pointer-events-none">{children}</div>
+          children
         ) : (
           <div
             className="absolute"
@@ -366,7 +324,6 @@ function MagicHeroInner(
               transform: 'translate(-50%, -50%)',
               width: `${imageWidth}px`,
               height: 'auto',
-              zIndex: 1,
             }}
           >
             {imageSrc ? (
@@ -402,7 +359,7 @@ function MagicHeroInner(
         {/* "Scroll Down" hint */}
         <div
           ref={heroImgCopyRef}
-          className="absolute flex flex-col items-center"
+          className="absolute flex flex-col items-center pointer-events-none"
           style={{
             bottom: '2%',
             left: '50%',
@@ -410,8 +367,6 @@ function MagicHeroInner(
             willChange: 'opacity',
             fontSize: '0.65rem',
             gap: '10px',
-            width: '100%',
-            zIndex: 9,
             animation:
               'magicHeroBounce 1s ease-in-out both infinite alternate',
           }}
@@ -422,6 +377,7 @@ function MagicHeroInner(
               fontSize: '0.75rem',
               lineHeight: 1,
               opacity: 0.7,
+              color: 'white',
             }}
           >
             {scrollDownText}
@@ -432,7 +388,7 @@ function MagicHeroInner(
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ opacity: 0.7 }}
+            style={{ opacity: 0.7, color: 'white' }}
           >
             <path
               d="M8 3V13M8 13L4 9M8 13L12 9"
@@ -445,29 +401,20 @@ function MagicHeroInner(
         </div>
       </div>
 
-      {/* z-1: fade overlay (gradient that fades in on scroll) */}
-      <div
-        ref={fadeOverlayRef}
-        className="absolute top-0 left-0 w-screen h-full"
-        style={{
-          maxWidth: '100%',
-          background: `linear-gradient(90deg, ${gradientStart} 0%, ${gradientEnd} 100%)`,
-          willChange: 'opacity',
-        }}
-      />
-
-      {/* z-1: SVG overlay (dark with path-shaped mask).
-          Only renders if svgPath is provided.
-          The path is HUGE (covers the entire section) so the mask
-          "hole" reveals the hero behind. The SVG itself grows from
-          scale 1 to scale 350 during scroll. */}
+      {/* z-2: SVG overlay (decorative mask at the bottom only).
+          Positioned at the bottom-center where the gradient text appears.
+          Does NOT cover the hero at the top. */}
       {svgPath && (
         <div
           ref={svgOverlayRef}
-          className="absolute top-0 left-0 w-full h-full"
+          className="absolute left-1/2 -translate-x-1/2"
           style={{
-            zIndex: 1,
-            transformOrigin: '50% 50%',
+            bottom: '5%',
+            width: '80%',
+            height: '50%',
+            zIndex: 2,
+            transformOrigin: 'center center',
+            pointerEvents: 'none',
           }}
         >
           <svg width="100%" height="100%">
@@ -494,7 +441,7 @@ function MagicHeroInner(
           bottom: '20%',
           left: '50%',
           transform: 'translate(-50%, 0%)',
-          zIndex: 2,
+          zIndex: 3,
           textAlign: 'center',
           pointerEvents: 'none',
           width: '100%',
@@ -528,6 +475,18 @@ function MagicHeroInner(
           {quote3}
         </h2>
       </div>
+
+      {/* z-3: fade overlay (gradient that fades in on scroll) */}
+      <div
+        ref={fadeOverlayRef}
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          zIndex: 3,
+          background: `linear-gradient(90deg, ${gradientStart} 0%, ${gradientEnd} 100%)`,
+          willChange: 'opacity',
+          mixBlendMode: 'screen',
+        }}
+      />
 
       <style>{`
         @keyframes magicHeroBounce {
