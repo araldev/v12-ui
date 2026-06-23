@@ -13,78 +13,41 @@ import { cn } from '../utils/utils'
 gsap.registerPlugin(ScrollTrigger)
 
 export interface MagicHeroProps {
-  // ----------------------------------------------------------------
-  // CONTENT
-  // ----------------------------------------------------------------
-
-  /** Optional SVG path for the title shape. When provided, adds a
-   *  decorative SVG mask reveal effect at the bottom of the section.
-   *  The mask does NOT cover the hero (which is always visible). */
   svgPath?: string
-
-  /** Hero image src (renders as a circular avatar with bottom fade). */
   imageSrc?: string
-
-  /** Alt text for the hero image. */
   imageAlt?: string
-
-  /** Text shown next to the scroll-down arrow. */
   scrollDownText?: string
-
-  /** Three-line quote that reveals at the end of the scroll. */
   quote1?: string
   quote2?: string
   quote3?: string
-
-  /** Custom hero content (replaces the default avatar slot). */
   children?: ReactNode
 
-  // ----------------------------------------------------------------
-  // COLORS
-  // ----------------------------------------------------------------
-
-  /** Background color of the entire hero section. */
   backgroundColor?: string
-
-  /** Color of the SVG mask (the dark fill). */
   maskColor?: string
-
-  /** First stop of the fade-overlay gradient. */
   gradientStart?: string
-
-  /** Second stop of the fade-overlay gradient. */
   gradientEnd?: string
-
-  /** Color of the gradient text that reveals last. */
   quoteColorFrom?: string
   quoteColorAccent?: string
   quoteColorTo?: string
 
-  // ----------------------------------------------------------------
-  // LAYOUT
-  // ----------------------------------------------------------------
-
-  /** Multiplier for scroll pin distance. Default 1.5. */
   pinMultiplier?: number
-
-  /** Width of the hero image in px. */
   imageWidth?: number
-
-  /** Class name. */
   className?: string
 }
 
 /**
  * MagicHero — scroll-driven hero with optional SVG mask + gradient overlay.
  *
- * Layered (back to front):
- *   z-1   .hero      image + scroll hint (always visible)
- *   z-1   .fade      gradient overlay (opacity 0→1)
- *   z-2   .mask      SVG with path-shaped mask (bottom area only)
- *   z-2   .copy      gradient text (revealed last)
+ * Z-index layering (back to front):
+ *   z-1  section background
+ *   z-2  hero content (image + scroll hint) — ALWAYS VISIBLE
+ *   z-3  SVG mask (positioned in middle, doesn't cover scroll hint)
+ *   z-4  gradient text (revealed last)
+ *   z-5  gradient overlay (fades in, semi-transparent)
  *
- * The hero is NEVER covered by the SVG mask. The mask is positioned
- * at the bottom of the section (where the gradient text appears).
+ * The hero + scroll hint are NEVER covered by the mask. The mask sits
+ * in the middle of the section. The gradient overlay is the LAST layer
+ * and fades in semi-transparent so the hero remains partially visible.
  */
 function MagicHeroInner(
   {
@@ -158,43 +121,11 @@ function MagicHeroInner(
       { x: 0, filter: 'blur(0px)', duration: 1 }
     )
 
-    // Position the SVG mask path so it covers the entire section.
-    // We use a FIXED assumption about the path size (typical text shape
-    // is ~100x50 in SVG units) to avoid getBBox() returning 0x0 on
-    // first render before the SVG has been laid out.
-    const updateMaskPosition = () => {
-      if (!svgPath) return
-      const sectionRect = hero.getBoundingClientRect()
-      // Typical text-shaped SVG path is ~100x50 in user units
-      const ASSUMED_PATH_WIDTH = 100
-      const ASSUMED_PATH_HEIGHT = 50
-      // Scale so the path covers the entire section
-      const scaleX = (sectionRect.width * 1.5) / ASSUMED_PATH_WIDTH
-      const scaleY = (sectionRect.height * 1.5) / ASSUMED_PATH_HEIGHT
-      const titleScaleFactor = Math.max(scaleX, scaleY)
-
-      // Center the path in the section
-      const titleHorizontalPosition =
-        sectionRect.left +
-        (sectionRect.width -
-          ASSUMED_PATH_WIDTH * titleScaleFactor) /
-          2
-      const titleVerticalPosition =
-        sectionRect.top +
-        (sectionRect.height -
-          ASSUMED_PATH_HEIGHT * titleScaleFactor) /
-          2
-
+    // Set the path if provided (no getBBox dependency)
+    if (svgPath) {
       titleMask.setAttribute('d', svgPath)
-      titleMask.setAttribute(
-        'transform',
-        `translate(${titleHorizontalPosition}, ${titleVerticalPosition}) scale(${titleScaleFactor})`
-      )
     }
 
-    updateMaskPosition()
-
-    // Main ScrollTrigger
     const trigger = ScrollTrigger.create({
       id: 'magic-hero-trigger',
       trigger: hero,
@@ -205,9 +136,7 @@ function MagicHeroInner(
       scrub: 1,
       invalidateOnRefresh: true,
       pinType: 'transform',
-      onRefresh: updateMaskPosition,
       onUpdate: (self) => {
-        if (svgPath) updateMaskPosition()
         const scrollProgress = self.progress
 
         // 1) Fade out hero content + scroll hint in the first 15%
@@ -223,17 +152,16 @@ function MagicHeroInner(
           const heroScale = 1 - 0.5 * normalizedProgress
           gsap.set(heroContent, { scale: heroScale })
 
-          // SVG mask grows from 1 to 10 (visible effect)
-          const overlayScale =
-            1 + 9 * Math.pow(normalizedProgress, 0.5)
+          // SVG mask scales subtly (1 → 2) for decorative effect
+          const overlayScale = 1 + normalizedProgress
           gsap.set(svgOverlay, { scale: overlayScale })
 
-          // Fade overlay (gradient) fades in starting at 25% scroll
+          // Gradient overlay fades in starting at 25% (max 70% opacity)
           let fadeOverlayOpacity = 0
           if (scrollProgress >= 0.25) {
             fadeOverlayOpacity = Math.min(
-              1,
-              (scrollProgress - 0.25) * (1 / 0.4)
+              0.7,
+              (scrollProgress - 0.25) * (1 / 0.4) * 0.7
             )
           }
           gsap.set(fadeOverlay, { opacity: fadeOverlayOpacity })
@@ -307,11 +235,11 @@ function MagicHeroInner(
         zIndex: 1,
       }}
     >
-      {/* z-1: hero content (children + image + scroll hint) — ALWAYS VISIBLE */}
+      {/* z-2: hero content (children + image + scroll hint) — ALWAYS VISIBLE */}
       <div
         ref={heroContentRef}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ zIndex: 1 }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 2 }}
       >
         {children ? (
           children
@@ -356,17 +284,18 @@ function MagicHeroInner(
           </div>
         )}
 
-        {/* "Scroll Down" hint */}
+        {/* "Scroll Down" hint — positioned ABOVE the SVG mask area */}
         <div
           ref={heroImgCopyRef}
           className="absolute flex flex-col items-center pointer-events-none"
           style={{
-            bottom: '2%',
+            bottom: '3%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             willChange: 'opacity',
             fontSize: '0.65rem',
             gap: '10px',
+            zIndex: 10,
             animation:
               'magicHeroBounce 1s ease-in-out both infinite alternate',
           }}
@@ -376,8 +305,10 @@ function MagicHeroInner(
               textTransform: 'uppercase',
               fontSize: '0.75rem',
               lineHeight: 1,
-              opacity: 0.7,
+              opacity: 0.8,
               color: 'white',
+              textShadow: '0 1px 3px rgba(0,0,0,0.8)',
+              letterSpacing: '0.1em',
             }}
           >
             {scrollDownText}
@@ -388,7 +319,11 @@ function MagicHeroInner(
             viewBox="0 0 16 16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ opacity: 0.7, color: 'white' }}
+            style={{
+              opacity: 0.8,
+              color: 'white',
+              filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.8))',
+            }}
           >
             <path
               d="M8 3V13M8 13L4 9M8 13L12 9"
@@ -401,20 +336,19 @@ function MagicHeroInner(
         </div>
       </div>
 
-      {/* z-2: SVG overlay (decorative mask at the bottom only).
-          Positioned at the bottom-center where the gradient text appears.
-          Does NOT cover the hero at the top. */}
+      {/* z-3: SVG overlay (decorative mask in the middle area).
+          Positioned between hero (top) and scroll hint (bottom).
+          Smaller area so it doesn't interfere with other elements. */}
       {svgPath && (
         <div
           ref={svgOverlayRef}
-          className="absolute left-1/2 -translate-x-1/2"
+          className="absolute left-1/2 -translate-x-1/2 pointer-events-none"
           style={{
-            bottom: '5%',
-            width: '80%',
-            height: '50%',
-            zIndex: 2,
+            top: '30%',
+            width: '70%',
+            height: '30%',
+            zIndex: 3,
             transformOrigin: 'center center',
-            pointerEvents: 'none',
           }}
         >
           <svg width="100%" height="100%">
@@ -434,16 +368,15 @@ function MagicHeroInner(
         </div>
       )}
 
-      {/* z-2: overlay copy (gradient text revealed last) */}
+      {/* z-4: gradient text (revealed last) */}
       <div
-        className="absolute"
+        className="absolute pointer-events-none"
         style={{
-          bottom: '20%',
+          bottom: '15%',
           left: '50%',
           transform: 'translate(-50%, 0%)',
-          zIndex: 3,
+          zIndex: 4,
           textAlign: 'center',
-          pointerEvents: 'none',
           width: '100%',
           height: 'min-content',
         }}
@@ -476,15 +409,14 @@ function MagicHeroInner(
         </h2>
       </div>
 
-      {/* z-3: fade overlay (gradient that fades in on scroll) */}
+      {/* z-5: gradient overlay (fades in semi-transparent on top) */}
       <div
         ref={fadeOverlayRef}
-        className="absolute top-0 left-0 w-full h-full"
+        className="absolute top-0 left-0 w-full h-full pointer-events-none"
         style={{
-          zIndex: 3,
-          background: `linear-gradient(90deg, ${gradientStart} 0%, ${gradientEnd} 100%)`,
+          zIndex: 5,
+          background: `linear-gradient(180deg, transparent 0%, transparent 40%, ${gradientStart} 70%, ${gradientEnd} 100%)`,
           willChange: 'opacity',
-          mixBlendMode: 'screen',
         }}
       />
 
