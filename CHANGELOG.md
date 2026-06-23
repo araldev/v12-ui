@@ -1,3 +1,10 @@
+## [0.5.6](https://github.com/araldev/v12-ui/compare/v0.5.5...v0.5.6) (2026-06-23)
+
+
+### Bug Fixes
+
+* **a11y:** improve Toggle accessibility — aria-readonly, aria-label, remove Enter key ([ba237b3](https://github.com/araldev/v12-ui/commit/ba237b316cc1c5d4b99b6f57087f9913b41841ce))
+
 ## [0.5.5](https://github.com/araldev/v12-ui/compare/v0.5.4...v0.5.5) (2026-06-23)
 
 
