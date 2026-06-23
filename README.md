@@ -12,11 +12,12 @@
 
 ## Features
 
-- **7 components** — Button, Stack, Text, AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower
+- **10 components** — Button, Stack, Text, AnimatedBackground, MagicText, MagicLogo, MagicMouseFollower, Accordion, Select, Toggle
 - **2 hooks** — `useDataTheme`, `useReducedMotion`
 - **Polymorphic components** — Button renders as `<button>` or `<a>`, Text and Stack render as any HTML tag
 - **Automatic dark mode** — reads `data-theme` on `<html>`; falls back to `prefers-color-scheme`
 - **Canvas particle effects** — MagicText, MagicLogo, MagicMouseFollower animate canvas-based particles with spring physics and mouse interaction
+- **Accessibility-first components** — Accordion (WAI-ARIA accordion pattern, arrow-key nav), Select (WAI-ARIA combobox + listbox), Toggle (WAI-ARIA switch)
 - **Reduced motion support** — all animation components respect `prefers-reduced-motion: reduce`
 - **Themeable via CSS variables** — override `--v12-*` tokens in your own stylesheet
 - **Tailwind CSS v4** — uses Tailwind v4 `@theme` directive; semantic color tokens map to utility classes
@@ -50,6 +51,9 @@ function Demo() {
 | Button             | Polymorphic button with variants   | [→](https://araldev.github.io/v12-ui/?path=/docs/components-button--docs) |
 | Stack              | Flexbox layout container           | [→](https://araldev.github.io/v12-ui/?path=/docs/components-stack--docs) |
 | Text               | Polymorphic text with variants     | [→](https://araldev.github.io/v12-ui/?path=/docs/components-text--docs) |
+| Accordion          | WAI-ARIA accordion with arrow-key nav, CVA variants | [→](https://araldev.github.io/v12-ui/?path=/docs/components-accordion--docs) |
+| Select             | WAI-ARIA combobox with keyboard nav, dropdown animation | [→](https://araldev.github.io/v12-ui/?path=/docs/components-select--docs) |
+| Toggle             | WAI-ARIA switch with success-state, CVA sizes | [→](https://araldev.github.io/v12-ui/?path=/docs/components-toggle--docs) |
 | AnimatedBackground | Canvas-based light-source animation | [→](https://araldev.github.io/v12-ui/?path=/docs/components-animatedbackground--docs) |
 | MagicText          | Text assembled from animated particles | [→](https://araldev.github.io/v12-ui/?path=/docs/components-magictext--docs) |
 | MagicLogo          | Logo image disassembled into particles | [→](https://araldev.github.io/v12-ui/?path=/docs/components-magiclogo--docs) |
