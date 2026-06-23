@@ -14,13 +14,12 @@ gsap.registerPlugin(ScrollTrigger)
 
 export interface MagicHeroProps {
   // ----------------------------------------------------------------
-  // CONTENT — all fully modifiable
+  // CONTENT
   // ----------------------------------------------------------------
 
-  /** Optional SVG path for the title reveal effect. If provided, the
-   *  hero content will be hidden by a dark mask at scroll start, then
-   *  revealed through the path-shaped hole. If omitted, the hero is
-   *  always visible and only the gradient overlay + text reveal. */
+  /** Optional SVG path for the title shape. When provided, the SVG
+   *  mask grows during scroll — its path-shaped "hole" reveals the
+   *  gradient overlay and the hero behind it. */
   svgPath?: string
 
   /** Hero image src (renders as a circular avatar with bottom fade). */
@@ -32,13 +31,12 @@ export interface MagicHeroProps {
   /** Text shown next to the scroll-down arrow. */
   scrollDownText?: string
 
-  /** Three-line quote that reveals at the end of the scroll with a
-   *  gradient background. */
+  /** Three-line quote that reveals at the end of the scroll. */
   quote1?: string
   quote2?: string
   quote3?: string
 
-  /** Custom hero content. If provided, replaces the default avatar slot. */
+  /** Custom hero content (replaces the default avatar slot). */
   children?: ReactNode
 
   // ----------------------------------------------------------------
@@ -77,24 +75,29 @@ export interface MagicHeroProps {
 }
 
 /**
- * MagicHero — scroll-driven hero with optional SVG mask reveal + gradient
- * overlay + gradient text.
+ * MagicHero — scroll-driven hero with SVG mask reveal + gradient overlay.
  *
- * Faithful port of araldev-portfolio's AnimatedTitle. Key fix vs the
- * original: the SVG mask starts SMALL (covering only the title area)
- * so the hero content (image + scroll hint) is visible from the start.
+ * Behavior (matches the original araldev-portfolio AnimatedTitle):
+ *   1. Hero (image + scroll hint) visible at start.
+ *   2. As user scrolls, the SVG mask grows from scale 1 to scale ~350.
+ *      The mask has a path-shaped HOLE. As the SVG grows, the hole
+ *      grows. Through the hole you see the gradient overlay AND the
+ *      hero behind it.
+ *   3. The mask fill (`maskColor`) covers everything outside the hole.
+ *      When the SVG is huge, the hole is huge, so almost the entire
+ *      screen shows what's behind.
+ *   4. Gradient overlay fades in 25-65% of scroll.
+ *   5. Gradient text (quote) reveals 60-85%.
  *
- * Layered (back to front):
- *   section   z-1   background (#111117)
- *   .hero     z-1   children + image + scroll hint (always visible)
- *   .fade     z-1   gradient (opacity 0→1)
- *   .mask     z-1   dark rect with path-shaped hole (scale 0→1, starts small)
- *   .title    z-2   FIXED invisible ref (w:300 h:250)
- *   .copy     z-2   gradient text (revealed 60-85%)
+ * Layering (back to front):
+ *   section    z-1   background
+ *   .hero      z-1   image + scroll hint (always visible)
+ *   .fade      z-1   gradient overlay (opacity 0→1)
+ *   .mask      z-1   SVG with path-shaped hole (grows 1→350)
+ *   .copy      z-2   gradient text (revealed last)
  */
 function MagicHeroInner(
   {
-    // content
     svgPath,
     imageSrc,
     imageAlt = '',
@@ -103,8 +106,6 @@ function MagicHeroInner(
     quote2 = 'that',
     quote3 = 'moves',
     children,
-
-    // colors
     backgroundColor = '#111117',
     maskColor = '#111117',
     gradientStart = '#00C9FF',
@@ -112,8 +113,6 @@ function MagicHeroInner(
     quoteColorFrom = '#111117',
     quoteColorAccent = '#8fc6ff',
     quoteColorTo = '#5a9cff',
-
-    // layout
     pinMultiplier = 1.5,
     imageWidth = 350,
     className,
@@ -177,12 +176,15 @@ function MagicHeroInner(
       titleMask.setAttribute('d', svgPath)
     }
 
+    // Calculate path position so it covers the entire section.
+    // The path is HUGE from the start, so the mask "hole" is HUGE,
+    // making the hero visible through the mask at all times.
     const updateMaskPosition = () => {
       if (!svgPath) return
       titleMask.setAttribute('d', svgPath)
       titleMask.removeAttribute('transform')
 
-      const titleDimensions = titleContainer.getBoundingClientRect()
+      const sectionDimensions = hero.getBoundingClientRect()
       const titleBoundingBox = titleMask.getBBox()
 
       if (
@@ -192,25 +194,29 @@ function MagicHeroInner(
         return
       }
 
+      // Make the path HUGE — cover the entire section.
+      // The SVG element will be scaled further by GSAP during scroll.
+      // At scroll=0: SVG scale=1, path covers section → hero visible.
+      // At scroll=1: SVG scale=350, path covers 350x section → hero still visible.
       const horizontalScaleRatio =
-        titleDimensions.width / titleBoundingBox.width
+        (sectionDimensions.width * 2) / titleBoundingBox.width
       const verticalScaleRatio =
-        titleDimensions.height / titleBoundingBox.height
-      const titleScaleFactor = Math.min(
+        (sectionDimensions.height * 2) / titleBoundingBox.height
+      const titleScaleFactor = Math.max(
         horizontalScaleRatio,
         verticalScaleRatio
       )
 
       const titleHorizontalPosition =
-        titleDimensions.left +
-        (titleDimensions.width -
+        sectionDimensions.left +
+        (sectionDimensions.width -
           titleBoundingBox.width * titleScaleFactor) /
           2 -
         titleBoundingBox.x * titleScaleFactor
 
       const titleVerticalPosition =
-        titleDimensions.top +
-        (titleDimensions.height -
+        sectionDimensions.top +
+        (sectionDimensions.height -
           titleBoundingBox.height * titleScaleFactor) /
           2 -
         titleBoundingBox.y * titleScaleFactor
@@ -253,18 +259,18 @@ function MagicHeroInner(
           const heroScale = 1 - 0.5 * normalizedProgress
           gsap.set(heroContent, { scale: heroScale })
 
-          // SVG mask scales from TINY (0.01) to NORMAL (1)
-          // Original starts at 350 and shrinks to 1 — but that covers
-          // the hero content with dark color. We invert: start small,
-          // grow to normal. At scale 0.01 the path "hole" is tiny, so
-          // the hero content shows through normally (mask hole is small).
-          // As scroll progresses, the hole grows and reveals the title.
-          const initialOverlayScale = 0.01
-          const finalOverlayScale = 1
+          // SVG mask grows from 1 to 350 (matches original behavior).
+          // The path is already huge (covers entire section), so the
+          // mask "hole" is always huge. As the SVG grows, the hole
+          // grows beyond the section, making the dark mask fill
+          // (which is outside the viewport) invisible. The hero
+          // stays visible through the hole at all times.
+          const initialOverlayScale = 1
+          const finalOverlayScale = 350
           const overlayScale =
             initialOverlayScale +
             (finalOverlayScale - initialOverlayScale) *
-              normalizedProgress
+              Math.pow(normalizedProgress, 0.5) // ease-out
           gsap.set(svgOverlay, { scale: overlayScale })
 
           // Fade overlay (gradient) fades in starting at 25% scroll
@@ -343,13 +349,12 @@ function MagicHeroInner(
         zIndex: 1,
       }}
     >
-      {/* z-1: hero content (children + image + scroll hint) — ALWAYS VISIBLE */}
+      {/* z-1: hero content (children + image + scroll hint) */}
       <div
         ref={heroContentRef}
         className="absolute top-0 left-0 w-screen h-full flex items-center justify-center"
         style={{ maxWidth: '100%' }}
       >
-        {/* Custom children override the default avatar slot */}
         {children ? (
           <div className="absolute inset-0 pointer-events-none">{children}</div>
         ) : (
@@ -394,7 +399,7 @@ function MagicHeroInner(
           </div>
         )}
 
-        {/* "Scroll Down" hint at the bottom */}
+        {/* "Scroll Down" hint */}
         <div
           ref={heroImgCopyRef}
           className="absolute flex flex-col items-center"
@@ -451,7 +456,11 @@ function MagicHeroInner(
         }}
       />
 
-      {/* z-1: SVG overlay (dark with path-shaped mask) — only renders if svgPath provided */}
+      {/* z-1: SVG overlay (dark with path-shaped mask).
+          Only renders if svgPath is provided.
+          The path is HUGE (covers the entire section) so the mask
+          "hole" reveals the hero behind. The SVG itself grows from
+          scale 1 to scale 350 during scroll. */}
       {svgPath && (
         <div
           ref={svgOverlayRef}
@@ -476,23 +485,6 @@ function MagicHeroInner(
             />
           </svg>
         </div>
-      )}
-
-      {/* z-2: title container (invisible FIXED ref for mask position) */}
-      {svgPath && (
-        <div
-          ref={titleContainerRef}
-          className="fixed"
-          style={{
-            top: '20%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '300px',
-            height: '250px',
-            zIndex: 2,
-            pointerEvents: 'none',
-          }}
-        />
       )}
 
       {/* z-2: overlay copy (gradient text revealed last) */}
